@@ -1,23 +1,23 @@
 import * as z from 'zod'
 
-export const QuantidadeSchema = z.object({
+const QuantidadeSchema = z.object({
   comercial: z.number().optional().nullable(),
   tributavel: z.number().optional().nullable(),
 })
 
-export const UnidadeSchema = z.object({
+const UnidadeSchema = z.object({
   comercial: z.string().optional().nullable(),
   tributavel: z.string().optional().nullable(),
   comercialId: z.number().optional().nullable(),
   tributavelId: z.number().optional().nullable(),
 })
 
-export const PercentuaisOrigemSchema = z.object({
+const PercentuaisOrigemSchema = z.object({
   codigoUf: z.string().optional(),
   percentualOrigUf: z.number().optional(),
 })
 
-export const CombustivelSchema = z.object({
+const CombustivelSchema = z.object({
   codigoAnp: z.string().optional(),
   descricaoAnp: z.string().optional(),
   percentualGlp: z.number().optional(),
