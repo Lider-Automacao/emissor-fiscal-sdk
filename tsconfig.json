@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "alwaysStrict": false,
+    "target": "es2022",
+    "module": "commonjs",
+    "lib": [
+      "es2024",
+      "dom",
+      "dom.iterable"
+    ],
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "rootDir": "./",
+    "baseUrl": "./src",
+    "importHelpers": true,
+    "outDir": "./dist",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    },
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  },
+  "types": [
+    "vitest/globals",
+    "vitest/importMeta"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "prisma/generated/*"
+  ]
+}

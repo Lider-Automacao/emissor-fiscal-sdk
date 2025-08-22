@@ -1,0 +1,1577 @@
+openapi: 3.0.3
+info:
+  title: Emissor Fiscal
+  description: Emissor de NFC-e e NF-e
+  contact:
+    name: Lider Automação
+    url: https://liderautomacao.com
+  license:
+    name: Apache-2.0
+    url: http://www.apache.org/licenses/
+  version: 1.0.0
+servers:
+  - description: Local
+    url: http://localhost:0/
+  - description: Local
+    url: http://localhost:9000/
+paths:
+  /nfce/emitir:
+    description: emitir nfce
+    post:
+      tags:
+        - NFC-e
+      summary: Emitir NFC-e
+      operationId: PostNfce
+      requestBody:
+        description: Input
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Input"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Output"
+components:
+  schemas:
+    ICMS15:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        baseCalculoMono:
+          type: number
+          format: double
+        aliquotaAdRem:
+          type: number
+          format: double
+        baseCalculoMonoRetencao:
+          type: number
+          format: double
+        valorIcmsMono:
+          type: number
+          format: double
+        aliquotaAdRemRetencao:
+          type: number
+          format: double
+        valorIcmsMonoRetencao:
+          type: number
+          format: double
+        reducaoAdRem:
+          type: object
+          properties:
+            percentualReducaoAdRem:
+              type: number
+              format: double
+            motivoReducaoAdRem:
+              type: number
+              format: double
+    ICMS900:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        baseCalculo:
+          type: object
+          properties:
+            modalidadeDeterminacao:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+            percentualReducao:
+              type: number
+              format: double
+        aliquota:
+          type: number
+          format: double
+        valor:
+          type: number
+          format: double
+        substituicaoTributaria:
+          type: object
+          properties:
+            BaseCalculo:
+              type: object
+              properties:
+                modalidadeDeterminacao:
+                  type: integer
+                  format: int32
+                valor:
+                  type: number
+                  format: double
+                percentualReducao:
+                  type: number
+                  format: double
+            margemValorAdicionado:
+              type: number
+              format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+            fundoCombatePobreza:
+              type: object
+              properties:
+                aliquota:
+                  type: number
+                  format: double
+                valorBaseCalculo:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+        creditoSimplesNacional:
+          type: object
+          properties:
+            percentual:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+    ICMS41:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        desoneracao:
+          type: object
+          properties:
+            motivo:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+            deduzItem:
+              type: boolean
+    ICMS02:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        baseCalculoMono:
+          type: number
+          format: double
+        aliquotaAdRem:
+          type: number
+          format: double
+        valorIcmsMono:
+          type: number
+          format: double
+    ICMS20:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        aliquota:
+          type: number
+          format: double
+        baseCalculo:
+          type: object
+          properties:
+            modalidadeDeterminacao:
+              type: integer
+              format: int32
+            percentualReducao:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+        desoneracao:
+          type: object
+          properties:
+            motivo:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+            deduzItem:
+              type: boolean
+        FundoCombatePobreza:
+          type: object
+          properties:
+            aliquota:
+              type: number
+              format: double
+            valorBaseCalculo:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+        valor:
+          type: number
+          format: double
+    ICMS60:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        substituicaoTributaria:
+          type: object
+          properties:
+            valorBaseCalculo:
+              type: number
+              format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+            fundoCombatePobreza:
+              type: object
+              properties:
+                valorBaseCalculo:
+                  type: number
+                  format: double
+                aliquota:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+            ufDestino:
+              type: object
+              properties:
+                valorBaseCalculo:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+        valor:
+          type: number
+          format: double
+        efetivo:
+          type: object
+          properties:
+            baseCalculo:
+              type: object
+              properties:
+                valor:
+                  type: number
+                  format: double
+                percentualReducao:
+                  type: number
+                  format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+    ICMS61:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        baseCalculoMonoRetido:
+          type: number
+          format: double
+        aliquotaAdRemRetido:
+          type: number
+          format: double
+        valorIcmsMonoRetido:
+          type: number
+          format: double
+    ICMS70:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        baseCalculo:
+          type: object
+          properties:
+            modalidadeDeterminacao:
+              type: integer
+              format: int32
+            percentualReducao:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+        aliquota:
+          type: number
+          format: double
+        valor:
+          type: number
+          format: double
+        FundoCombatePobreza:
+          type: object
+          properties:
+            valorBaseCalculo:
+              type: number
+              format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+        substituicaoTributaria:
+          type: object
+          properties:
+            BaseCalculo:
+              type: object
+              properties:
+                modalidadeDeterminacao:
+                  type: integer
+                  format: int32
+                percentualReducao:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+            margemValorAdicionado:
+              type: number
+              format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+            fundoCombatePobreza:
+              type: object
+              properties:
+                valorBaseCalculo:
+                  type: number
+                  format: double
+                aliquota:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+        desoneracao:
+          type: object
+          properties:
+            motivo:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+            deduzItem:
+              type: boolean
+    ICMS50:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        desoneracao:
+          type: object
+          properties:
+            motivo:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+            deduzItem:
+              type: boolean
+    ICMS51:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        baseCalculo:
+          type: object
+          properties:
+            modalidadeDeterminacao:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+            percentualReducao:
+              type: number
+              format: double
+        aliquota:
+          type: number
+          format: double
+        valor:
+          type: number
+          format: double
+        diferimento:
+          type: object
+          properties:
+            percentual:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+            valorIcmsDevido:
+              type: number
+              format: double
+        fundoCombatePobreza:
+          type: object
+          properties:
+            valorBaseCalculo:
+              type: number
+              format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+            diferimento:
+              type: object
+              properties:
+                percentual:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+                valorIcmsDevido:
+                  type: number
+                  format: double
+        codigoBeneficioFiscalRBC:
+          type: string
+    ICMS102:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+    ICMS300:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+    ICMS400:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+    ICMS201:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        substituicaoTributaria:
+          type: object
+          properties:
+            aliquota:
+              type: number
+              format: double
+            baseCalculo:
+              type: object
+              properties:
+                modalidadeDeterminacao:
+                  type: integer
+                  format: int32
+                valor:
+                  type: number
+                  format: double
+                percentualReducao:
+                  type: number
+                  format: double
+            margemValorAdicionado:
+              type: number
+              format: double
+            fundoCombatePobreza:
+              type: object
+              properties:
+                aliquota:
+                  type: number
+                  format: double
+                valorBaseCalculo:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+            valor:
+              type: number
+              format: double
+        creditoSimplesNacional:
+          type: object
+          properties:
+            percentual:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+    ICMS203:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        substituicaoTributaria:
+          type: object
+          properties:
+            baseCalculo:
+              type: object
+              properties:
+                modalidadeDeterminacao:
+                  type: integer
+                  format: int32
+                valor:
+                  type: number
+                  format: double
+                percentualReducao:
+                  type: number
+                  format: double
+            margemValorAdicionado:
+              type: number
+              format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+            fundoCombatePobreza:
+              type: object
+              properties:
+                aliquota:
+                  type: number
+                  format: double
+                valorBaseCalculo:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+    ICMS40:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        desoneracao:
+          type: object
+          properties:
+            motivo:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+            deduzItem:
+              type: boolean
+    ICMS90:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        baseCalculo:
+          type: object
+          properties:
+            modalidadeDeterminacao:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+            percentualReducao:
+              type: number
+              format: double
+        aliquota:
+          type: number
+          format: double
+        valor:
+          type: number
+          format: double
+        fundoCombatePobreza:
+          type: object
+          properties:
+            valorBaseCalculo:
+              type: number
+              format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+        substituicaoTributaria:
+          type: object
+          properties:
+            BaseCalculo:
+              type: object
+              properties:
+                modalidadeDeterminacao:
+                  type: integer
+                  format: int32
+                valor:
+                  type: number
+                  format: double
+                percentualReducao:
+                  type: number
+                  format: double
+            margemValorAdicionado:
+              type: number
+              format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+            fundoCombatePobreza:
+              type: object
+              properties:
+                valorBaseCalculo:
+                  type: number
+                  format: double
+                aliquota:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+            ufDevido:
+              type: string
+        desoneracao:
+          type: object
+          properties:
+            motivo:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+            deduzItem:
+              type: boolean
+        baseOperacaoPropria:
+          type: number
+          format: double
+    ICMS101:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        creditoSimplesNacional:
+          type: object
+          properties:
+            percentual:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+    ICMS202:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        SubstituicaoTributaria:
+          type: object
+          properties:
+            baseCalculo:
+              type: object
+              properties:
+                modalidadeDeterminacao:
+                  type: integer
+                  format: int32
+                valor:
+                  type: number
+                  format: double
+                percentualReducao:
+                  type: number
+                  format: double
+            margemValorAdicionado:
+              type: number
+              format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+            fundoCombatePobreza:
+              type: object
+              properties:
+                aliquota:
+                  type: number
+                  format: double
+                valorBaseCalculo:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+    ICMS10:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        aliquota:
+          type: number
+          format: double
+        baseCalculo:
+          type: object
+          properties:
+            modalidadeDeterminacao:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+            percentualReducao:
+              type: number
+              format: double
+        substituicaoTributaria:
+          type: object
+          properties:
+            aliquota:
+              type: number
+              format: double
+            BaseCalculo:
+              type: object
+              properties:
+                modalidadeDeterminacao:
+                  type: integer
+                  format: int32
+                valor:
+                  type: number
+                  format: double
+                percentualReducao:
+                  type: number
+                  format: double
+            margemValorAdicionado:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+            fundoCombatePobreza:
+              type: object
+              properties:
+                aliquota:
+                  type: number
+                  format: double
+                valorBaseCalculo:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+            ufDevido:
+              type: string
+        fundoCombatePobreza:
+          type: object
+          properties:
+            aliquota:
+              type: number
+              format: double
+            valorBaseCalculo:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+        valor:
+          type: number
+          format: double
+        baseOperacaoPropria:
+          type: number
+          format: double
+    Output:
+      type: object
+      properties:
+        id:
+          type: string
+        lote:
+          type: string
+        status:
+          type: string
+        xmlOriginal:
+          type: string
+        xmlAssinado:
+          type: string
+        protocolo:
+          type: string
+        evento:
+          type: string
+        confirmada:
+          type: boolean
+        processada:
+          type: boolean
+        cancelada:
+          type: boolean
+        codigoStatus:
+          type: integer
+          format: int32
+        mensagem:
+          type: string
+        alertas:
+          type: string
+        erroValidacao:
+          type: string
+        erroValidacaoCompleto:
+          type: string
+        erroRegrasdeNegocios:
+          type: string
+    ICMS53:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        baseCalculoMono:
+          type: number
+          format: double
+        aliquotaAdRem:
+          type: number
+          format: double
+        percentualDiferimento:
+          type: number
+          format: double
+        valorIcmsMonoOperacao:
+          type: number
+          format: double
+        valorIcmsDiferido:
+          type: number
+          format: double
+        valorIcmsMono:
+          type: number
+          format: double
+    ICMS103:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+    ICMS500:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        substituicaoTributaria:
+          type: object
+          properties:
+            valorBaseCalculo:
+              type: number
+              format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+            fundoCombatePobreza:
+              type: object
+              properties:
+                aliquota:
+                  type: number
+                  format: double
+                valorBaseCalculo:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+        valor:
+          type: number
+          format: double
+        Efetivo:
+          type: object
+          properties:
+            baseCalculo:
+              type: object
+              properties:
+                valor:
+                  type: number
+                  format: double
+                percentualReducao:
+                  type: number
+                  format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+    ICMS30:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        substituicaoTributaria:
+          type: object
+          properties:
+            BaseCalculo:
+              type: object
+              properties:
+                modalidadeDeterminacao:
+                  type: integer
+                  format: int32
+                valor:
+                  type: number
+                  format: double
+                percentualReducao:
+                  type: number
+                  format: double
+            margemValorAdicionado:
+              type: number
+              format: double
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+            fundoCombatePobreza:
+              type: object
+              properties:
+                valorBaseCalculo:
+                  type: number
+                  format: double
+                aliquota:
+                  type: number
+                  format: double
+                valor:
+                  type: number
+                  format: double
+        desoneracao:
+          type: object
+          properties:
+            motivo:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+            deduzItem:
+              type: boolean
+    Input:
+      type: object
+      properties:
+        nfce:
+          type: object
+          properties:
+            ambiente:
+              type: integer
+              format: int32
+            modelo:
+              type: integer
+              format: int32
+            numero:
+              type: integer
+              format: int32
+            serie:
+              type: integer
+              format: int32
+            finalidade:
+              type: integer
+              format: int32
+            natureza:
+              type: string
+            dataEmissao:
+              type: string
+              format: date-time
+            dataSaidaEntrada:
+              type: string
+              format: date-time
+            dataContingencia:
+              type: string
+              format: date-time
+            justificativaContingencia:
+              type: string
+            saida:
+              type: boolean
+            versaoProcesso:
+              type: string
+            presencial:
+              type: integer
+              format: int32
+            tipoImpressao:
+              type: integer
+              format: int32
+            tipoEmissao:
+              type: integer
+              format: int32
+            identificacaoDestino:
+              type: integer
+              format: int32
+            codigoMunicipio:
+              type: integer
+              format: int32
+            consumidorFinal:
+              type: boolean
+            emitente:
+              type: object
+              properties:
+                documento:
+                  type: string
+                razao:
+                  type: string
+                fantasia:
+                  type: string
+                inscicaoEstadual:
+                  type: string
+                inscicaoMunicipal:
+                  type: string
+                regimeTributario:
+                  type: integer
+                  format: int32
+                idCSC:
+                  type: string
+                csc:
+                  type: string
+                endereco:
+                  type: object
+                  properties:
+                    logradouro:
+                      type: string
+                    numero:
+                      type: string
+                    complemento:
+                      type: string
+                    bairro:
+                      type: string
+                    municipioCodigo:
+                      type: integer
+                      format: int32
+                    municipioNome:
+                      type: string
+                    cep:
+                      type: integer
+                      format: int32
+                    paisCodigo:
+                      type: integer
+                      format: int32
+                    paisNome:
+                      type: string
+                    fone:
+                      type: string
+            destinatario:
+              type: object
+              properties:
+                documento:
+                  type: string
+                codigoEstrangeiro:
+                  type: string
+                inscricaoMunicipal:
+                  type: string
+                indicadorInscricaoEstadual:
+                  type: integer
+                  format: int32
+                inscricaoEstadual:
+                  type: string
+                inscricaoSuframa:
+                  type: string
+                nome:
+                  type: string
+                endereco:
+                  type: object
+                  properties:
+                    logradouro:
+                      type: string
+                    numero:
+                      type: string
+                    complemento:
+                      type: string
+                    bairro:
+                      type: string
+                    municipioCodigo:
+                      type: integer
+                      format: int32
+                    municipioNome:
+                      type: string
+                    cep:
+                      type: integer
+                      format: int32
+                    paisCodigo:
+                      type: integer
+                      format: int32
+                    paisNome:
+                      type: string
+                    fone:
+                      type: string
+            itens:
+              type: array
+              items:
+                type: object
+                properties:
+                  controleItem:
+                    type: integer
+                    format: int32
+                  codigo:
+                    type: string
+                  codigoBarras:
+                    type: string
+                  descricao:
+                    type: string
+                  ncm:
+                    type: string
+                  cest:
+                    type: string
+                  cfop:
+                    type: string
+                  valorBruto:
+                    type: number
+                    format: double
+                  tributos:
+                    type: object
+                    properties:
+                      icms:
+                        type: object
+                        oneOf:
+                          - $ref: "#/components/schemas/ICMS00"
+                          - $ref: "#/components/schemas/ICMS02"
+                          - $ref: "#/components/schemas/ICMS10"
+                          - $ref: "#/components/schemas/ICMS15"
+                          - $ref: "#/components/schemas/ICMS20"
+                          - $ref: "#/components/schemas/ICMS30"
+                          - $ref: "#/components/schemas/ICMS40"
+                          - $ref: "#/components/schemas/ICMS41"
+                          - $ref: "#/components/schemas/ICMS50"
+                          - $ref: "#/components/schemas/ICMS51"
+                          - $ref: "#/components/schemas/ICMS53"
+                          - $ref: "#/components/schemas/ICMS60"
+                          - $ref: "#/components/schemas/ICMS61"
+                          - $ref: "#/components/schemas/ICMS70"
+                          - $ref: "#/components/schemas/ICMS90"
+                          - $ref: "#/components/schemas/ICMS101"
+                          - $ref: "#/components/schemas/ICMS102"
+                          - $ref: "#/components/schemas/ICMS103"
+                          - $ref: "#/components/schemas/ICMS201"
+                          - $ref: "#/components/schemas/ICMS202"
+                          - $ref: "#/components/schemas/ICMS203"
+                          - $ref: "#/components/schemas/ICMS300"
+                          - $ref: "#/components/schemas/ICMS400"
+                          - $ref: "#/components/schemas/ICMS500"
+                          - $ref: "#/components/schemas/ICMS900"
+                      pis:
+                        type: object
+                        properties:
+                          cst:
+                            type: string
+                          baseCalculo:
+                            type: number
+                            format: double
+                          aliquota:
+                            type: number
+                            format: double
+                          valor:
+                            type: number
+                            format: double
+                          quantidadeVendida:
+                            type: number
+                            format: double
+                          aliquotaReais:
+                            type: number
+                            format: double
+                          substituicaoTributaria:
+                            type: object
+                            properties:
+                              baseCalculo:
+                                type: number
+                                format: double
+                              aliquota:
+                                type: number
+                                format: double
+                              quantidadeVendida:
+                                type: number
+                                format: double
+                              aliquotaReais:
+                                type: number
+                                format: double
+                              valor:
+                                type: number
+                                format: double
+                      cofins:
+                        type: object
+                        properties:
+                          cst:
+                            type: string
+                          baseCalculo:
+                            type: number
+                            format: double
+                          aliquota:
+                            type: number
+                            format: double
+                          valor:
+                            type: number
+                            format: double
+                          quantidadeVendida:
+                            type: number
+                            format: double
+                          aliquotaReais:
+                            type: number
+                            format: double
+                          substituicaoTributaria:
+                            type: object
+                            properties:
+                              baseCalculo:
+                                type: number
+                                format: double
+                              aliquota:
+                                type: number
+                                format: double
+                              quantidadeVendida:
+                                type: number
+                                format: double
+                              aliquotaReais:
+                                type: number
+                                format: double
+                              valor:
+                                type: number
+                                format: double
+                      valorAproximadoTributos:
+                        type: number
+                        format: double
+                  compoeTotal:
+                    type: boolean
+                  codigoBeneficioFiscal:
+                    type: string
+                  exTipi:
+                    type: string
+                  valorFrete:
+                    type: number
+                    format: double
+                  valorSeguro:
+                    type: number
+                    format: double
+                  valorDesconto:
+                    type: number
+                    format: double
+                  valorOutros:
+                    type: number
+                    format: double
+                  unidade:
+                    type: object
+                    properties:
+                      comercial:
+                        type: string
+                      tributavel:
+                        type: string
+                  quantidade:
+                    type: object
+                    properties:
+                      comercial:
+                        type: number
+                        format: double
+                      tributavel:
+                        type: number
+                        format: double
+                  valorUnitario:
+                    type: object
+                    properties:
+                      comercial:
+                        type: number
+                        format: double
+                      tributavel:
+                        type: number
+                        format: double
+                  informacoesComplementares:
+                    type: string
+                  combustivel:
+                    type: object
+                    properties:
+                      codigoAnp:
+                        type: integer
+                        format: int32
+                      descricaoAnp:
+                        type: string
+                      percentualGlp:
+                        type: number
+                        format: double
+                      percentualGnn:
+                        type: number
+                        format: double
+                      percentualGni:
+                        type: number
+                        format: double
+                      percentualMistura:
+                        type: number
+                        format: double
+                      valorPartida:
+                        type: number
+                        format: double
+                      codigoAutorizacao:
+                        type: string
+                      faturamentoTemperaturaAmbiente:
+                        type: number
+                        format: double
+                      estadoConsumo:
+                        type: string
+                      origemCombustivel:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            indicadorImportacao:
+                              type: string
+                            codigoUf:
+                              type: integer
+                              format: int32
+                            percentualOrigUf:
+                              type: number
+                              format: double
+            total:
+              type: object
+              properties:
+                baseCalculoIcms:
+                  type: number
+                  format: double
+                valorIcms:
+                  type: number
+                  format: double
+                valorFcp:
+                  type: number
+                  format: double
+                valorFcpSt:
+                  type: number
+                  format: double
+                baseCalculoIrrf:
+                  type: number
+                  format: double
+                valorIrrfRetido:
+                  type: number
+                  format: double
+                valorFcpStRetido:
+                  type: number
+                  format: double
+                baseCalculoMono:
+                  type: number
+                  format: double
+                valorIcmsMono:
+                  type: number
+                  format: double
+                baseCalculoMonoRetencao:
+                  type: number
+                  format: double
+                valorIcmsMonoRetencao:
+                  type: number
+                  format: double
+                baseCalculoMonoRetido:
+                  type: number
+                  format: double
+                valorIcmsMonoRetido:
+                  type: number
+                  format: double
+                valorIcmsDesonerado:
+                  type: number
+                  format: double
+                baseCalculoIcmsSt:
+                  type: number
+                  format: double
+                valorIcmsSt:
+                  type: number
+                  format: double
+                valorProdutosServicos:
+                  type: number
+                  format: double
+                valorFrete:
+                  type: number
+                  format: double
+                valorSeguro:
+                  type: number
+                  format: double
+                valorDesconto:
+                  type: number
+                  format: double
+                valorIi:
+                  type: number
+                  format: double
+                valorIpi:
+                  type: number
+                  format: double
+                valorIpiDevolvido:
+                  type: number
+                  format: double
+                valorPis:
+                  type: number
+                  format: double
+                valorCofins:
+                  type: number
+                  format: double
+                valorOutros:
+                  type: number
+                  format: double
+                valorNFCe:
+                  type: number
+                  format: double
+                valorAproximadoTributos:
+                  type: number
+                  format: double
+                valorPisRetido:
+                  type: number
+                  format: double
+                valorCofinsRetido:
+                  type: number
+                  format: double
+                valorCsllRetido:
+                  type: number
+                  format: double
+                baseCalculoRetencao:
+                  type: number
+                  format: double
+                valorPrevidenciaRetido:
+                  type: number
+                  format: double
+                valorIcmsEstadoDestino:
+                  type: number
+                  format: double
+                valorIcmsEstadoRemetente:
+                  type: number
+                  format: double
+            pagamento:
+              type: object
+              properties:
+                troco:
+                  type: number
+                  format: double
+                itens:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      aVista:
+                        type: boolean
+                      meio:
+                        type: string
+                      descricaoMeio:
+                        type: string
+                      valor:
+                        type: number
+                        format: double
+                      dataHora:
+                        type: string
+                        format: date-time
+                      cnpjTransacional:
+                        type: string
+                      ufTransacional:
+                        type: string
+                      cartao:
+                        type: object
+                        properties:
+                          tipoIntegracao:
+                            type: integer
+                            format: int32
+                          cnpjCredenciadora:
+                            type: string
+                          bandeiraOperadora:
+                            type: string
+                          numeroAutorizacao:
+                            type: string
+                          cnpjBeneficiario:
+                            type: string
+                          idTerminal:
+                            type: string
+        configuracoes:
+          type: object
+          properties:
+            logo:
+              type: string
+            sistema:
+              type: string
+            site:
+              type: string
+            certificado:
+              type: object
+              properties:
+                arquivoBase64:
+                  type: string
+                senha:
+                  type: string
+            email:
+              type: object
+              properties:
+                host:
+                  type: string
+                password:
+                  type: string
+                port:
+                  type: string
+                userName:
+                  type: string
+    ICMS00:
+      type: object
+      properties:
+        origem:
+          type: string
+        cst:
+          type: string
+        baseCalculo:
+          type: object
+          properties:
+            modalidadeDeterminacao:
+              type: integer
+              format: int32
+            valor:
+              type: number
+              format: double
+        FundoCombatePobreza:
+          type: object
+          properties:
+            aliquota:
+              type: number
+              format: double
+            valor:
+              type: number
+              format: double
+        aliquota:
+          type: number
+          format: double
+        valor:
+          type: number
+          format: double
