@@ -10,7 +10,8 @@ zPT.config(zPT.locales.pt())
 interface EmissorFiscalErrorDetails {
   statusCode?: number;
   apiResponse?: any;
-  details?: any;
+  message: string;
+  description?: string | any;
 }
 
 export class EmissorFiscalError extends Error {
@@ -26,24 +27,11 @@ export class EmissorFiscalError extends Error {
     Object.setPrototypeOf(this, EmissorFiscalError.prototype);
   }
 
-  static fromApiResponse(error: AxiosError): EmissorFiscalError {
-    const status = error.response?.status;
-
-    const data = error.response?.data || {
-      statusCode: status ?? 500,
-      message: 'No response data available'
-    };
-
-    let message = 'Unknown error in the API request.';
-
-    return new EmissorFiscalError(message, error, data);
-  }
-
   static fromValidation(message: string, validationDetails: string | any): EmissorFiscalError {
     return new EmissorFiscalError(
       `Validation error: ${message}`,
       null,
-      { details: validationDetails }
+      { statusCode: HttpStatusCode.NotAcceptable, message, description: validationDetails, }
     );
   }
 
@@ -53,10 +41,83 @@ export class EmissorFiscalError extends Error {
       exception,
       {
         statusCode: HttpStatusCode.NotAcceptable,
-        details: flattenError(exception)
+        message,
+        description: flattenError(exception)
       }
     );
   }
+
+  static fromApiResponse(error: AxiosError): EmissorFiscalError {
+
+    const status = error.response?.status || HttpStatusCode.InternalServerError;
+
+    if (error.code === 'ECONNREFUSED') {
+      return new EmissorFiscalError(error.message, error, {
+        statusCode: HttpStatusCode.ServiceUnavailable,
+        apiResponse: error.response?.data,
+        message: 'Connection to fiscal service refused',
+        description: 'Serviço de emissão fiscal indisponível. Tente novamente mais tarde.',
+      });
+    }
+
+    if (error.code === 'ENOTFOUND') {
+      return new EmissorFiscalError(error.message, error, {
+        statusCode: HttpStatusCode.ServiceUnavailable,
+        apiResponse: error.response?.data,
+        message: 'Fiscal service host not found (DNS error)',
+        description: 'Serviço de emissão fiscal indisponível. Tente novamente mais tarde.',
+      });
+    }
+
+    if (status < HttpStatusCode.InternalServerError) {
+      const data = error.response?.data || {
+        statusCode: status,
+      };
+
+      const { detail, message, unit } = data as any;
+
+      return new EmissorFiscalError(unit, error, {
+        statusCode: status,
+        apiResponse: data,
+        message: unit ?? message ?? error.message,
+        description: detail,
+      });
+    }
+
+    const message = error.message || HttpStatusCode[status].toString() || 'Unknown error in the API request.';
+    switch (status) {
+      case HttpStatusCode.InternalServerError:
+        return new EmissorFiscalError(error.message, error, {
+          statusCode: status,
+          apiResponse: error.response?.data,
+          message,
+          description: 'Serviço de NFC-e encontrou problemas para processar a NFC-e. Entre em contato com o suporte'
+        });
+      case HttpStatusCode.ServiceUnavailable:
+        return new EmissorFiscalError(error.message, error, {
+          statusCode: status,
+          apiResponse: error.response?.data,
+          message,
+          description: 'O serviço de NFC-e está temporariamente indisponível. Tente novamente mais tarde'
+        });
+      case HttpStatusCode.GatewayTimeout:
+        return new EmissorFiscalError(error.message, error, {
+          statusCode: status,
+          apiResponse: error.response?.data,
+          message,
+          description: 'O servidor de NFC-e demorou muito para responder. Aguarde e tente novamente'
+        });
+      default:
+        return new EmissorFiscalError(error.message, error, {
+          statusCode: status,
+          apiResponse: error.response?.data,
+          message,
+          description: 'Serviço de NFC-e encontrou problemas para processar a NFC-e. Entre em contato com o suporte'
+        });
+    }
+  }
+
+
 }
 
 
