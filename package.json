@@ -1,19 +1,21 @@
 {
   "name": "@liderautomacao/emisor-fiscal-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
+  "description": "Um pacote npm com TypeScript.",
   "repository": {
     "type": "git",
     "url": "https://github.com/Lider-Automacao/emisor-fiscal-sdk.git"
   },
-  "description": "Um pacote npm com TypeScript.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "",
+  "license": "ISC",
   "keywords": [
     "api",
     "fiscal",
     "sdk",
     "typescript"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "scripts": {
     "version": "npm version patch",
     "build": "tsc",
@@ -22,8 +24,6 @@
     "test:e2e": "vitest --passWithNoTests --config vitest.config.e2e.mts",
     "coverage": "vitest run --coverage"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@raicamposs/toolkit": "^1.0.4",
     "axios": "^1.11.0",
