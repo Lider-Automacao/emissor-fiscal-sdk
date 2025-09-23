@@ -1,37 +1,44 @@
-import { EmissorFiscalApi } from "@/api/emissor-fiscal-api.service";
-import { EnvioCancelamento, EnvioConsulta, EnvioImpressao, EnvioInutilizacao } from "@/models";
-import { CalculaRequest } from "@/use-cases/nfce";
+import { EmissorFiscalApi } from "../api/emissor-fiscal-api.service";
+import { EnvioCancelamento, EnvioConsulta, EnvioImpressao, EnvioInutilizacao, EnvioNfeApi } from "../models";
+import { CalculaNfe, CalculaNfeRequest, CancelarNfe, ConsultarNfe, EmitirNfe, GerarNfe, ImprimirNfe, InutilizarNfe } from "../use-cases";
 
 export class NfeService {
 
   constructor(private api: EmissorFiscalApi) { }
 
-  public async calcular(request: CalculaRequest) {
-    throw new Error("Method not implemented.");
+  public async calcular(request: CalculaNfeRequest) {
+    const usecase = new CalculaNfe(this.api)
+    return usecase.executa(request);
   }
 
   public async cancelar(request: EnvioCancelamento) {
-    throw new Error("Method not implemented.");
+    const usecase = new CancelarNfe(this.api)
+    return usecase.executa(request);
   }
 
   public async consultar(request: EnvioConsulta) {
-    throw new Error("Method not implemented.");
+    const usecase = new ConsultarNfe(this.api)
+    return usecase.executa(request);
   }
 
-  public async emitir(request: unknown) {
-    throw new Error("Method not implemented.");
+  public async emitir(request: EnvioNfeApi) {
+    const usecase = new EmitirNfe(this.api)
+    return usecase.executa(request);
   }
 
-  public async gerar(request: unknown) {
-    throw new Error("Method not implemented.");
+  public async gerar(request: EnvioNfeApi) {
+    const usecase = new GerarNfe(this.api)
+    return usecase.executa(request);
   }
 
   public async imprimir(request: EnvioImpressao) {
-    throw new Error("Method not implemented.");
+    const usecase = new ImprimirNfe(this.api)
+    return usecase.executa(request);
   }
 
   public async inutilizar(request: EnvioInutilizacao) {
-    throw new Error("Method not implemented.");
+    const usecase = new InutilizarNfe(this.api)
+    return usecase.executa(request);
   }
 
 }

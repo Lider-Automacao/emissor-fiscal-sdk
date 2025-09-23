@@ -1,14 +1,14 @@
-import { EmissorFiscalApi } from "@/api/emissor-fiscal-api.service";
-import { NfceItemPropsSchema } from "@/dtos/nfce-item-props";
-import { Nfce } from "@/models";
-import { EmissorFiscalError } from "@/utils/errors/emissor-fiscal.error";
 import z from "zod";
+import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
+import { NfceItemPropsSchema } from "../../dtos/nfce-item-props";
+import { Nfce } from "../../models";
+import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
 const RequestSchema = z.array(NfceItemPropsSchema)
 
-export type CalculaRequest = z.infer<typeof RequestSchema>
-export type CalculaResponse = Pick<Nfce, 'itens' | 'total'>
+export type CalculaNfceRequest = z.infer<typeof RequestSchema>
+export type CalculaNfceResponse = Pick<Nfce, 'itens' | 'total'>
 
 export class CalculaNfce {
   private api: EmissorFiscalApi
@@ -17,13 +17,13 @@ export class CalculaNfce {
     this.api = api;
   }
 
-  async executa(request: CalculaRequest): Promise<CalculaResponse> {
+  async executa(request: CalculaNfceRequest): Promise<CalculaNfceResponse> {
     const parsedData = RequestSchema.safeParse(request);
 
     if (!parsedData.success) {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);
     }
 
-    return this.api.post<CalculaRequest, CalculaResponse>('/nfce/calcular', parsedData.data);
+    return this.api.post<CalculaNfceRequest, CalculaNfceResponse>('/nfce/calcular', parsedData.data);
   }
 }

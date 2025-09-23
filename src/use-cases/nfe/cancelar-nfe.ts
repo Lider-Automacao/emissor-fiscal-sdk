@@ -1,22 +1,22 @@
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { EnvioInutilizacao, EnvioInutilizacaoSchema, RetornoInutilizacao } from "../../models";
+import { EnvioCancalamentoSchema, EnvioCancelamento, RetornoCancelamento } from "../../models";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
-export class InutilizarNfce {
+export class CancelarNfe {
   private api: EmissorFiscalApi
 
   constructor(api: EmissorFiscalApi) {
     this.api = api;
   }
 
-  async executa(request: EnvioInutilizacao): Promise<Array<RetornoInutilizacao>> {
-    const parsedData = EnvioInutilizacaoSchema.safeParse(request);
+  async executa(request: EnvioCancelamento): Promise<RetornoCancelamento> {
+    const parsedData = EnvioCancalamentoSchema.safeParse(request);
 
     if (!parsedData.success) {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);
     }
 
-    return this.api.post('/nfce/inutilizar', parsedData.data);
+    return this.api.post('/nfe/cancelar', parsedData.data);
   }
 }

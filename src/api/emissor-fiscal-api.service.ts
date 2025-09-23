@@ -19,15 +19,16 @@ export class EmissorFiscalApi {
     });
   }
 
+  getClient(): AxiosInstance {
+    return this.client;
+  }
+
   async post<T, U>(path: string, data: T, config?: AxiosRequestConfig<any> | undefined): Promise<U> {
     try {
       const response = await this.client.post<U>(path, data, config);
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        throw EmissorFiscalError.fromApiResponse(error);
-      }
-      throw new EmissorFiscalError(`Error making POST request to ${path}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw this.handleError(error, path, 'POST');
     }
   }
 
@@ -36,10 +37,7 @@ export class EmissorFiscalApi {
       const response = await this.client.get<T>(path, config);
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        throw EmissorFiscalError.fromApiResponse(error);
-      }
-      throw new EmissorFiscalError(`Error making GET request to ${path}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw this.handleError(error, path, 'GET');
     }
   }
 
@@ -48,10 +46,7 @@ export class EmissorFiscalApi {
       const response = await this.client.put<U>(path, data, config);
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        throw EmissorFiscalError.fromApiResponse(error);
-      }
-      throw new EmissorFiscalError(`Error making PUT request to ${path}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw this.handleError(error, path, 'PUT');
     }
   }
 
@@ -61,16 +56,15 @@ export class EmissorFiscalApi {
       const response = await this.client.delete<T>(path, config);
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        throw EmissorFiscalError.fromApiResponse(error);
-      }
-      throw new EmissorFiscalError(`Error making DELETE request to ${path}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw this.handleError(error, path, 'DELETE');
     }
   }
 
-  getClient(): AxiosInstance {
-    return this.client;
+  private handleError(error: unknown, path: string, method: string): EmissorFiscalError {
+    if (axios.isAxiosError(error)) {
+      return EmissorFiscalError.fromApiResponse(error);
+    }
+    return new EmissorFiscalError(`Error making ${method} request to ${path}: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
-
 }
 

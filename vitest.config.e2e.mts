@@ -5,13 +5,18 @@ import { compilerOptions, exclude } from './tsconfig.json'
 export default defineConfig({
   build: {
     outDir: compilerOptions.outDir,
-  }, plugins: [
+  },
+  plugins: [
     tsConfigPaths(),
-
   ],
   test: {
     globals: true,
     exclude: [...exclude, '.idea', '.git', '.cache'],
-    include: ['**/(*.)?spec.{js,ts}'],
+    include: ['**/(*.)?(e2e-test|e2e-spec).{js,ts}'],
+    coverage: {
+      provider: 'v8',
+      reportsDirectory: './coverage',
+      reporter: ['text', 'json', 'html'],
+    },
   },
 })

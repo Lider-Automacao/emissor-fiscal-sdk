@@ -1,6 +1,7 @@
-import { EmissorFiscalApi } from "@/api/emissor-fiscal-api.service";
-import { EnvioNfceApi, EnvioNfceApiSchema } from "@/models";
-import { EmissorFiscalError } from "@/utils/errors/emissor-fiscal.error";
+import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
+import { EnvioNfceApi, EnvioNfceApiSchema } from "../../models";
+import { Xml } from "../../types";
+import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
 export class GerarNfce {
@@ -10,13 +11,13 @@ export class GerarNfce {
     this.api = api;
   }
 
-  async executa(request: EnvioNfceApi): Promise<string> {
+  async executa(request: EnvioNfceApi): Promise<Xml> {
     const parsedData = EnvioNfceApiSchema.safeParse(request);
 
     if (!parsedData.success) {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);
     }
 
-    return this.api.post<EnvioNfceApi, string>('/nfce/gerar', parsedData.data);
+    return this.api.post<EnvioNfceApi, Xml>('/nfce/gerar', parsedData.data);
   }
 }

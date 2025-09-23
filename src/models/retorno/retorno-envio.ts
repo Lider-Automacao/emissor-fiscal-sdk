@@ -1,6 +1,6 @@
 import z from 'zod'
 
-export const RetornoNfceApiSchema = z.object({
+export const RetornoEnvioApiSchema = z.object({
   data: z.date(),
   dataContigencia: z.date().optional().nullable(),
   protocolo: z.string(),
@@ -12,4 +12,4 @@ export const RetornoNfceApiSchema = z.object({
   serie: z.number(),
 })
 
-export type RetornoNfceApi = z.infer<typeof RetornoNfceApiSchema>
+export type RetornoEnvioApi = z.infer<typeof RetornoEnvioApiSchema>

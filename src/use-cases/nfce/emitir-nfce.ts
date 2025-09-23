@@ -1,6 +1,6 @@
-import { EmissorFiscalApi } from "@/api/emissor-fiscal-api.service";
-import { EnvioNfceApi, EnvioNfceApiSchema, RetornoNfceApi } from "@/models";
-import { EmissorFiscalError } from "@/utils/errors/emissor-fiscal.error";
+import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
+import { EnvioNfceApi, EnvioNfceApiSchema, RetornoEnvioApi } from "../../models";
+import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
 export class EmitirNfce {
@@ -10,7 +10,7 @@ export class EmitirNfce {
     this.api = api;
   }
 
-  async executa(request: EnvioNfceApi): Promise<RetornoNfceApi> {
+  async executa(request: EnvioNfceApi): Promise<RetornoEnvioApi> {
     const parsedData = EnvioNfceApiSchema.safeParse(request);
 
     if (!parsedData.success) {

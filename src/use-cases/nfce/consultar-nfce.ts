@@ -1,6 +1,6 @@
-import { EmissorFiscalApi } from "@/api/emissor-fiscal-api.service";
-import { EnvioConsulta, EnvioConsultaSchema, RetornoConsulta } from "@/models";
-import { EmissorFiscalError } from "@/utils/errors/emissor-fiscal.error";
+import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
+import { EnvioConsulta, EnvioConsultaSchema, RetornoConsulta } from "../../models";
+import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
 export class ConsultarNfce {

@@ -3,7 +3,7 @@ import { EnvioInutilizacao, EnvioInutilizacaoSchema, RetornoInutilizacao } from 
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
-export class InutilizarNfce {
+export class InutilizarNfe {
   private api: EmissorFiscalApi
 
   constructor(api: EmissorFiscalApi) {
@@ -17,6 +17,6 @@ export class InutilizarNfce {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);
     }
 
-    return this.api.post('/nfce/inutilizar', parsedData.data);
+    return this.api.post('/nfe/inutilizar', parsedData.data);
   }
 }
