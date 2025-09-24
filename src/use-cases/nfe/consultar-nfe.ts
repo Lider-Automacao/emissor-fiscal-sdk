@@ -1,3 +1,4 @@
+import { coalesce } from "@raicamposs/toolkit";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
 import { EnvioConsulta, EnvioConsultaSchema, RetornoConsulta } from "../../models";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
@@ -17,6 +18,16 @@ export class ConsultarNfe {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);
     }
 
-    return this.api.post('/nfe/consultar', parsedData.data);
+    const response = await this.api.post<EnvioConsulta, RetornoConsulta>('/nfe/consultar', parsedData.data);
+
+    const { dados } = parsedData.data;
+
+    return {
+      data: response.data,
+      status: response.status,
+      chave: coalesce(response.chave, dados.chaveAcesso),
+      xml: coalesce(response.xml, dados.xml),
+      protocolo: coalesce(response.protocolo, dados.protocolo),
+    }
   }
 }

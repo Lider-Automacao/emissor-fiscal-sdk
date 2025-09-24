@@ -4,8 +4,8 @@ import { NullishString } from '../../types'
 export const RetornoConsultaSchema = z.object({
   data: z.date(),
   status: z.string(),
-  protocolo: NullishString,
-  chave: NullishString,
+  protocolo: z.string(),
+  chave: z.string(),
   xml: NullishString,
 })
 

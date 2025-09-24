@@ -7,7 +7,7 @@ const envSchema = z.object({
 })
 
 export class Environments {
-  private env: z.infer<typeof envSchema>
+  private readonly env: z.infer<typeof envSchema>
 
   constructor() {
     if (process.env.NODE_ENV === 'test') {
