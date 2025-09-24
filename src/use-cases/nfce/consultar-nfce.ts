@@ -4,7 +4,7 @@ import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
 export class ConsultarNfce {
-  private api: EmissorFiscalApi
+  private readonly api: EmissorFiscalApi
 
   constructor(api: EmissorFiscalApi) {
     this.api = api;

@@ -4,19 +4,23 @@ import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
 export class ImprimirNfce {
-  private api: EmissorFiscalApi
+  private readonly api: EmissorFiscalApi
 
   constructor(api: EmissorFiscalApi) {
     this.api = api;
   }
 
-  async executa(request: EnvioImpressao): Promise<Array<Buffer>> {
+  async executa(request: EnvioImpressao): Promise<Buffer> {
     const parsedData = EnvioImpressaoSchema.safeParse(request);
 
     if (!parsedData.success) {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);
     }
 
-    return this.api.post('/nfce/imprimir', parsedData.data);
+    const response = await this.api.post<any, any>('/nfce/imprimir', parsedData.data, {
+      responseType: 'arraybuffer',
+    });
+
+    return Buffer.from(response, 'binary')
   }
 }

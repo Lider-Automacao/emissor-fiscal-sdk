@@ -5,7 +5,7 @@ import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
 export class GerarNfe {
-  private api: EmissorFiscalApi
+  private readonly api: EmissorFiscalApi
 
   constructor(api: EmissorFiscalApi) {
     this.api = api;

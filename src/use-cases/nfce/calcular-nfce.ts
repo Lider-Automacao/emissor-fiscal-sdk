@@ -11,7 +11,7 @@ export type CalculaNfceRequest = z.infer<typeof RequestSchema>
 export type CalculaNfceResponse = Pick<Nfce, 'itens' | 'total'>
 
 export class CalculaNfce {
-  private api: EmissorFiscalApi
+  private readonly api: EmissorFiscalApi
 
   constructor(api: EmissorFiscalApi) {
     this.api = api;

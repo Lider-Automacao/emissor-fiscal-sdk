@@ -4,7 +4,7 @@ import { CalculaNfe, CalculaNfeRequest, CancelarNfe, ConsultarNfe, EmitirNfe, Ge
 
 export class NfeService {
 
-  constructor(private api: EmissorFiscalApi) { }
+  constructor(private readonly api: EmissorFiscalApi) { }
 
   public async calcular(request: CalculaNfeRequest) {
     const usecase = new CalculaNfe(this.api)

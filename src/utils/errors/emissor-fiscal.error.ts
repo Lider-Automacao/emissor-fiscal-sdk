@@ -11,15 +11,15 @@ interface EmissorFiscalErrorDetails {
   statusCode?: number;
   apiResponse?: any;
   message: string;
-  description?: string | any;
+  description?: any;
 }
 
 export class EmissorFiscalError extends Error {
   name: string;
-  originalError: Error | AxiosError | null;
+  originalError: unknown;
   details: EmissorFiscalErrorDetails | null;
 
-  constructor(message: string, originalError: Error | AxiosError | null = null, details: EmissorFiscalErrorDetails | null = null) {
+  constructor(message: string, originalError: unknown = null, details: EmissorFiscalErrorDetails | null = null) {
     super(message);
     this.name = EmissorFiscalError.name;
     this.originalError = originalError;
@@ -27,7 +27,7 @@ export class EmissorFiscalError extends Error {
     Object.setPrototypeOf(this, EmissorFiscalError.prototype);
   }
 
-  static fromValidation(message: string, validationDetails: string | any): EmissorFiscalError {
+  static fromValidation(message: string, validationDetails: any): EmissorFiscalError {
     return new EmissorFiscalError(
       `Validation error: ${message}`,
       null,
@@ -112,7 +112,7 @@ export class EmissorFiscalError extends Error {
           statusCode: status,
           apiResponse: error.response?.data,
           message,
-          description: 'Serviço de NFC-e encontrou problemas para processar a NFC-e. Entre em contato com o suporte'
+          description: 'Erro desconhecido na requisição à API. Entre em contato com o suporte'
         });
     }
   }

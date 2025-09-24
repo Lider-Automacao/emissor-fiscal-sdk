@@ -1,4 +1,5 @@
 
+import { isNullOrUndefined } from '@raicamposs/toolkit';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { EmissorFiscalError } from '../utils/errors/emissor-fiscal.error';
 import { Credenciais } from './credenciais-api';
@@ -61,10 +62,30 @@ export class EmissorFiscalApi {
   }
 
   private handleError(error: unknown, path: string, method: string): EmissorFiscalError {
-    if (axios.isAxiosError(error)) {
+    if (!axios.isAxiosError(error))
+      return new EmissorFiscalError(`Error making ${method} request to ${path}: ${error instanceof Error ? error.message : 'Unknown error'}`, error);
+
+    if (isNullOrUndefined(error.response?.data)) {
       return EmissorFiscalError.fromApiResponse(error);
     }
-    return new EmissorFiscalError(`Error making ${method} request to ${path}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+
+    const data = error.response.data;
+    let parsedData = data;
+
+    if (Buffer.isBuffer(data) || data instanceof ArrayBuffer) {
+      try {
+        const dataAsString = Buffer.from(data as Buffer).toString('utf-8');
+        parsedData = JSON.parse(dataAsString);
+      } catch (parseError) {
+        console.debug('Error parsing response data:', parseError);
+        return EmissorFiscalError.fromApiResponse(error);
+      }
+    }
+
+    return EmissorFiscalError.fromApiResponse({
+      ...error,
+      response: { ...error.response, data: parsedData }
+    });
   }
 }
 

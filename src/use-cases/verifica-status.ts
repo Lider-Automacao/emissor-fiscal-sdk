@@ -2,7 +2,7 @@ import { EmissorFiscalApi } from "../api/emissor-fiscal-api.service";
 
 
 export class VerificarStatusServidor {
-  private api: EmissorFiscalApi
+  private readonly api: EmissorFiscalApi
 
   constructor(api: EmissorFiscalApi) {
     this.api = api;

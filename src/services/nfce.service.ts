@@ -4,7 +4,7 @@ import { CalculaNfce, CalculaNfceRequest, CancelarNfce, ConsultarNfce, EmitirNfc
 
 export class NfceService {
 
-  constructor(private api: EmissorFiscalApi) { }
+  constructor(private readonly api: EmissorFiscalApi) { }
 
   public async calcular(request: CalculaNfceRequest) {
     const usecase = new CalculaNfce(this.api)

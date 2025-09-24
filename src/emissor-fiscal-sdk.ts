@@ -6,9 +6,9 @@ import { VerificarStatusServidor } from "./use-cases/verifica-status";
 
 export class EmissorFiscalSDK {
 
-  private nfceService: NfceService;
-  private nfeService: NfeService;
-  private api: EmissorFiscalApi
+  private readonly nfceService: NfceService;
+  private readonly nfeService: NfeService;
+  private readonly api: EmissorFiscalApi
 
   constructor(credenciais: Credenciais) {
     this.api = new EmissorFiscalApi(credenciais);
