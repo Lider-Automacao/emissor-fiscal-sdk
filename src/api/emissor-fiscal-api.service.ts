@@ -5,7 +5,7 @@ import { EmissorFiscalError } from '../utils/errors/emissor-fiscal.error';
 import { Credenciais } from './credenciais-api';
 
 export class EmissorFiscalApi {
-  private client: AxiosInstance;
+  private readonly client: AxiosInstance;
 
   constructor({ url, senha, usuario }: Credenciais) {
     this.client = axios.create({
