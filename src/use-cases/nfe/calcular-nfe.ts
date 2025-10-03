@@ -1,11 +1,11 @@
 import z from "zod";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { NfeItemPropsSchema } from "../../dtos/nfe-item-props";
+import { PedidoItemSchema } from "../../dtos/pedido-item";
 import { Nfe } from "../../models";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
-const RequestSchema = z.array(NfeItemPropsSchema)
+const RequestSchema = z.array(PedidoItemSchema)
 
 export type CalculaNfeRequest = z.infer<typeof RequestSchema>
 export type CalculaNfeResponse = Pick<Nfe, 'itens' | 'total'>

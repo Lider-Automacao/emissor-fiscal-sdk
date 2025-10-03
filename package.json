@@ -1,10 +1,10 @@
 {
-  "name": "@liderautomacao/emisor-fiscal-sdk",
+  "name": "@liderautomacao/emissor-fiscal-sdk",
   "version": "1.0.7",
   "description": "Um pacote npm com TypeScript.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Lider-Automacao/emisor-fiscal-sdk.git"
+    "url": "https://github.com/Lider-Automacao/emissor-fiscal-sdk.git"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

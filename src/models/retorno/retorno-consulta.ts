@@ -1,11 +1,11 @@
 import z from 'zod'
 import { NullishString } from '../../types'
+import { StatusSchema } from '../status'
 
 export const RetornoConsultaSchema = z.object({
   data: z.date(),
-  status: z.string(),
+  status: StatusSchema,
   protocolo: z.string(),
-  chave: z.string(),
   xml: NullishString,
 })
 

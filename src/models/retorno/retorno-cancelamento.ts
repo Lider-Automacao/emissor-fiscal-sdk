@@ -1,9 +1,10 @@
 import z from 'zod'
+import { StatusSchema } from '../status'
 
 export const RetornoCancelamentoSchema = z.object({
   data: z.date(),
   evento: z.string(),
-  status: z.string(),
+  status: StatusSchema,
   protocolo: z.string(),
 })
 

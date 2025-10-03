@@ -1,1 +1,1 @@
-export * from './nfce-item-props';
+export * from './pedido-item';

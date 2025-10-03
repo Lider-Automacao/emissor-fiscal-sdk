@@ -1,4 +1,5 @@
 import z from 'zod'
+import { NullishString } from '../../types'
 import { IntSchema, NumberSchema } from '../../types/number-type'
 
 export const ICMS90Schema = z.object({
@@ -38,7 +39,7 @@ export const ICMS90Schema = z.object({
           valor: NumberSchema,
         })
         .optional(),
-      ufDevido: z.string(),
+      ufDevido: NullishString,
     })
     .optional(),
   desoneracao: z
