@@ -6,8 +6,6 @@ import { PagamentoSchema } from '../pagamento'
 import { TotalSchema } from '../total'
 import { NfeItemSchema } from './nfe-item'
 
-
-
 export const NfeSchema = z.object({
   ambiente: IntSchema,
   modelo: IntSchema.default(65),
@@ -22,7 +20,7 @@ export const NfeSchema = z.object({
   saida: z.boolean(),
   versaoProcesso: z.string(),
   presencial: z.union([z.literal(1), z.literal(4)]),
-  tipoImpressao: z.union([z.literal(4), z.literal(5)]),
+  tipoImpressao: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]),
   tipoEmissao: z.number().int(), //z.union([z.literal(0), z.literal(8)]),
   identificacaoDestino: z.union([z.literal(1), z.literal(2), z.literal(3)]),
   codigoMunicipio: IntSchema,

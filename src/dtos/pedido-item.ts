@@ -1,6 +1,9 @@
 import * as z from 'zod';
 import { CombustivelSchema } from '../models';
-import { NullishString } from '../types';
+import { NullishString, StringSomenteNumeros } from '../types';
+
+const CSTSchema = z.enum(['00', '10', '20', '30', '40', '41', '50', '51', '60', '70', '90'])
+const CSOSNSchema = z.enum(['101', '102', '103', '201', '202', '203', '300', '400', '500', '900'])
 
 const QuantidadeSchema = z.object({
   comercial: z.number().nonnegative('Quantidade comercial deve ser um número positivo.'),
@@ -23,10 +26,10 @@ export const PedidoItemSchema = z.object({
   codigo: z.number().int(),
   codigoBarras: NullishString.default('SEM GTIN'),
   descricao: z.string().min(1, 'A descrição do item é obrigatória.'),
-  ncm: z.string().length(8, 'NCM deve ter 8 dígitos.'),
+  ncm: StringSomenteNumeros.pipe(z.string().length(8, 'NCM deve ter 8 dígitos.')),
   exTipi: z.string(),
-  cest: z.string(),
-  cfop: z.string().length(4, 'CFOP deve ter 4 dígitos.'),
+  cest: StringSomenteNumeros.nullish(),
+  cfop: StringSomenteNumeros.pipe(z.string().length(4, 'CFOP deve ter 4 dígitos.')),
   valorBruto: z.number().nonnegative(),
   compoeTotal: z.boolean(),
   valorFrete: z.number().nonnegative(),
@@ -35,14 +38,14 @@ export const PedidoItemSchema = z.object({
   valorOutros: z.number().nonnegative(),
   valorLiquido: z.number().nonnegative(),
   origem: z.string().length(1, 'Origem deve ter 1 caractere.'),
-  cst: z.string().length(2, 'CST deve ter 2 caracteres.'),
+  cst: z.union([CSTSchema, CSOSNSchema]),
   aliquota: z.number().nonnegative(),
   aliquotaSt: z.number().nonnegative(),
   aliquotaSuperSimples: z.number().nonnegative(),
   percentualReducao: z.number().nonnegative(),
-  cstPis: z.string().length(2, 'CST PIS deve ter 2 caracteres.'),
+  cstPis: StringSomenteNumeros.pipe(z.string().length(2, 'CST PIS deve ter 2 caracteres.')),
   aliquotaPis: z.number().nonnegative(),
-  cstCofins: z.string().length(2, 'CST COFINS deve ter 2 caracteres.'),
+  cstCofins: StringSomenteNumeros.pipe(z.string().length(2, 'CST COFINS deve ter 2 caracteres.')),
   aliquotaCofins: z.number().nonnegative(),
   valorAproximadoTributos: z.number().nonnegative(),
   removeIcmsBasePisCofins: z.boolean(),

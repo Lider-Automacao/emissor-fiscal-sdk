@@ -1,5 +1,5 @@
 import z from 'zod'
-import { IntSchema, NumberSchema } from '../../types'
+import { IntSchema, NumberSchema } from '../../types/number-type'
 import { CofinsSchema } from '../cofins'
 import { CombustivelSchema } from '../combustivel'
 import {

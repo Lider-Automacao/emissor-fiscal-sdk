@@ -21,12 +21,10 @@ export const EmitenteSchema = z.object({
   endereco: EnderecoSchema.nullable().optional(),
   idCSC: z.string()
     .min(1, 'O ID do CSC é obrigatório.')
-    .max(6, 'O ID do CSC não pode exceder 6 caracteres.')
-    .nullish(),
+    .max(6, 'O ID do CSC não pode exceder 6 caracteres.'),
   csc: z.string()
     .min(1, 'O CSC é obrigatório.')
-    .max(36, 'O CSC não pode exceder 36 caracteres.')
-    .nullish(),
+    .max(36, 'O CSC não pode exceder 36 caracteres.'),
 })
 
 export type Emitente = z.infer<typeof EmitenteSchema>

@@ -1,5 +1,5 @@
-import { z } from 'zod'
-import { ConfiguracoesSchema } from '..'
+import * as z from "zod";
+import { ConfiguracoesSchema } from '..';
 
 export const EnvioConsultaSchema = z.object({
   configuracoes: ConfiguracoesSchema,

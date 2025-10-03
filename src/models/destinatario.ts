@@ -1,5 +1,6 @@
 import { isEmpty } from '@raicamposs/toolkit';
 import z from 'zod';
+import { NullishString } from '../types';
 import { EnderecoSchema } from './endereco';
 import { IndicadorInscricaoEstadual } from './indicador-inscricao-estadual';
 
@@ -19,10 +20,11 @@ export const DestinatarioSchema = z.object({
     .min(5, 'O código estrangeiro deve ter pelo menos 5 caracteres.')
     .max(20, 'O código estrangeiro não pode exceder 20 caracteres.')
     .nullable().optional(),
-  inscricaoMunicipal: z.string()
+  inscricaoMunicipal: NullishString.pipe(z.string()
     .min(1, 'A Inscrição Municipal deve ter pelo menos 1 caractere.')
     .max(15, 'A Inscrição Municipal não pode exceder 15 caracteres.')
-    .nullable().optional(),
+    .nullish()
+  ),
   inscricaoSuframa: z.string()
     .min(8, 'A Inscrição SUFRAMA deve ter 8 ou 9 caracteres.')
     .max(9, 'A Inscrição SUFRAMA deve ter no máximo 9 caracteres.')

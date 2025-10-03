@@ -1,9 +1,10 @@
-import { z } from 'zod'
-import { ConfiguracoesSchema } from '..'
-import { NfceSchema } from '../nfce/nfce'
+import * as z from "zod";
+import { ConfiguracoesSchema } from "../configuracoes";
+import { NfeSchema } from "../nfe/nfe";
+
 
 export const EnvioNfeApiSchema = z.object({
-  nfe: NfceSchema,
+  nfe: NfeSchema,
   configuracoes: ConfiguracoesSchema,
 })
 

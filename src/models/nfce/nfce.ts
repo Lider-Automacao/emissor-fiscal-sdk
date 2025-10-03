@@ -6,12 +6,6 @@ import { PagamentoSchema } from '../pagamento'
 import { TotalSchema } from '../total'
 import { NfceItemSchema } from './nfce-item'
 
-// function StrToTpEmis(out ok: boolean; const s: string): TpcnTipoEmissao;
-// begin
-//   result := StrToEnumerado(ok, s, ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-//                                   [teNormal, teContingencia, teSCAN, teDPEC, teFSDA, teSVCAN, teSVCRS, teSVCSP, teOffLine]);
-// end;
-
 export const NfceSchema = z.object({
   ambiente: IntSchema,
   modelo: IntSchema.default(65),

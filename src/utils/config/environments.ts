@@ -1,6 +1,6 @@
-import { config } from 'dotenv'
-import { z } from 'zod'
-import { EmissorFiscalError } from '../errors/emissor-fiscal.error'
+import { config } from 'dotenv';
+import * as z from "zod";
+import { EmissorFiscalError } from '../errors/emissor-fiscal.error';
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('production'),

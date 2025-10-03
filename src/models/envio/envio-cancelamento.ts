@@ -1,5 +1,5 @@
-import { z } from 'zod'
-import { ConfiguracoesSchema } from '..'
+import * as z from "zod";
+import { ConfiguracoesSchema } from '..';
 
 export const EnvioCancalamentoSchema = z.object({
   configuracoes: ConfiguracoesSchema,
