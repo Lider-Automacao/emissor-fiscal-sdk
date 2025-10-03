@@ -1,4 +1,4 @@
-# @liderautomacao/emisor-fiscal-sdk
+# @liderautomacao/emissor-fiscal-sdk
 
 *A maneira mais simples e eficiente de integrar com a API de Emissão Fiscal.*
 
@@ -17,7 +17,7 @@ Este SDK (Software Development Kit) foi projetado para simplificar a interação
 Para adicionar o SDK ao seu projeto, utilize o `npm` ou outro gerenciador de pacotes de sua preferência:
 
 ```bash
-npm install @liderautomacao/emisor-fiscal-sdk
+npm install @liderautomacao/emissor-fiscal-sdk
 ```
 
 ## Uso
@@ -25,7 +25,7 @@ npm install @liderautomacao/emisor-fiscal-sdk
 Primeiro, importe e instancie o `EmissorFiscalSDK`, fornecendo as credenciais de acesso à API.
 
 ```typescript
-import { EmissorFiscalSDK } from '@liderautomacao/emisor-fiscal-sdk';
+import { EmissorFiscalSDK } from '@liderautomacao/emissor-fiscal-sdk';
 
 // Configuração das credenciais
 const sdk = new EmissorFiscalSDK({
@@ -38,7 +38,7 @@ Após a inicialização, você pode utilizar os serviços disponíveis para inte
 ### Exemplo: Calculo NFC-e
 
 ```typescript
-import { EmissorFiscalSDK } from '@liderautomacao/emisor-fiscal-sdk';
+import { EmissorFiscalSDK } from '@liderautomacao/emissor-fiscal-sdk';
 
 const sdk = new EmissorFiscalSDK({
   chave: 'SEU_TOKEN_DE_AUTENTICACAO',
