@@ -55,9 +55,18 @@ export const PedidoItemSchema = z.object({
   valorUnitario: ValorUnitarioSchema,
 
   codigoBeneficioFiscal: z.string().nullable().optional(),
-  combustivel: CombustivelSchema.nullable().optional(), // Nullable<TCombustivel>
+  combustivel: CombustivelSchema.nullable().optional(),
   aliquotaAdRemRetido: z.number().nullable().optional(),
   aliquotaFcp: z.number().nullable().optional(),
+
+  destinatarioUF: z.string()
+    .uppercase()
+    .trim()
+    .length(2, 'UF do Destinatario deve ter 2 caracteres.'),
+  emitenteUF: z.string()
+    .uppercase()
+    .trim()
+    .length(2, 'UF do Destinatario deve ter 2 caracteres.'),
 }).describe('Schema para Item de Pedido');
 
 export type PedidoItem = z.infer<typeof PedidoItemSchema>
