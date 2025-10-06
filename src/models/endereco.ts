@@ -15,8 +15,7 @@ export const EnderecoSchema = z.object({
   complemento: z.string()
     .max(60, 'O complemento não pode exceder 60 caracteres.')
     .nullable().optional(),
-  cep: z.coerce.string()
-    .regex(/^\d{8}$/, 'O CEP deve conter 8 dígitos numéricos, sem formatação.')
+  cep: z.coerce.string().regex(/^\d{8}$/, 'O CEP deve conter 8 dígitos numéricos, sem formatação.').transform((cep) => Number(cep))
     .nullable().optional(),
   paisCodigo: z.number().int().positive('O código do país deve ser positivo.')
     .nullable().optional(),
@@ -31,3 +30,5 @@ export const EnderecoSchema = z.object({
     .length(2, 'A UF deve ter 2 caracteres.')
 
 }).describe('Schema para Endereço Completo');
+
+export type Endereco = z.infer<typeof EnderecoSchema>;

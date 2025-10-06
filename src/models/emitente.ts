@@ -18,13 +18,7 @@ export const EmitenteSchema = z.object({
     .min(3, 'A Inscrição Estadual deve ter pelo menos 3 caracteres.')
     .max(15, 'A Inscrição Estadual não pode exceder 15 caracteres.'),
   regimeTributario: z.number().int().min(1, 'O regime tributário é obrigatório.'),
-  endereco: EnderecoSchema.nullable().optional(),
-  idCSC: z.string()
-    .min(1, 'O ID do CSC é obrigatório.')
-    .max(6, 'O ID do CSC não pode exceder 6 caracteres.'),
-  csc: z.string()
-    .min(1, 'O CSC é obrigatório.')
-    .max(36, 'O CSC não pode exceder 36 caracteres.'),
+  endereco: EnderecoSchema.nullable().optional()
 })
 
 export type Emitente = z.infer<typeof EmitenteSchema>

@@ -30,7 +30,7 @@ export const TotalSchema = z.object({
   valorIpi: NumberSchema.default(0),
   valorIpiDevolvido: NumberSchema.default(0),
   valorIrrfRetido: NumberSchema.default(0),
-  valorNFCe: NumberSchema.default(0),
+  valorTotal: NumberSchema.default(0),
   valorOutros: NumberSchema.default(0),
   valorPis: NumberSchema.default(0),
   valorPisRetido: NumberSchema.default(0),

@@ -16,15 +16,15 @@ export const ConfiguracoesEmitenteSchema = z.discriminatedUnion('modelo', [
   z.object({
     modelo: z.literal(65),
     documento: z.string().trim().min(1, 'CNPJ/CPF inválido'),
+    uf: z.string().trim().min(2, 'UF inválida'),
+    ambiente: z.union([z.literal(1), z.literal(2)]),
+    tipoEmissao: z.union([z.literal(1), z.literal(9)]).default(1),
     idCSC: z.string()
       .min(1, 'O ID do CSC é obrigatório.')
       .max(6, 'O ID do CSC não pode exceder 6 caracteres.'),
     csc: z.string()
       .min(1, 'O CSC é obrigatório.')
       .max(36, 'O CSC não pode exceder 36 caracteres.'),
-    uf: z.string().trim().min(2, 'UF inválida'),
-    ambiente: z.union([z.literal(1), z.literal(2)]),
-    tipoEmissao: z.union([z.literal(1), z.literal(9)]).default(1),
   }),
   z.object({
     modelo: z.literal(55),
