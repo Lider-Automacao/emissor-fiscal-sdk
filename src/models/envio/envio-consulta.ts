@@ -5,7 +5,6 @@ export const EnvioConsultaSchema = z.object({
   configuracoes: ConfiguracoesSchema,
   dados: z.object({
     chaveAcesso: z.string(),
-    protocolo: z.string(),
     xml: z.string().optional().nullable(),
   }),
 })

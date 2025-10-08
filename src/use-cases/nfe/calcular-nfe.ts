@@ -1,14 +1,6 @@
-import z from "zod";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { PedidoItemSchema } from "../../dtos/pedido-item";
-import { Nfe } from "../../models";
+import { CalculaNfeRequest, CalculaNfeResponse, RequestNFeSchema } from "../../dtos/calcular-nfe-params";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
-
-
-const RequestSchema = z.array(PedidoItemSchema)
-
-export type CalculaNfeRequest = z.infer<typeof RequestSchema>
-export type CalculaNfeResponse = Pick<Nfe, 'itens' | 'total'>
 
 export class CalculaNfe {
   private readonly api: EmissorFiscalApi
@@ -18,7 +10,7 @@ export class CalculaNfe {
   }
 
   async executa(request: CalculaNfeRequest): Promise<CalculaNfeResponse> {
-    const parsedData = RequestSchema.safeParse(request);
+    const parsedData = RequestNFeSchema.safeParse(request);
 
     if (!parsedData.success) {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);

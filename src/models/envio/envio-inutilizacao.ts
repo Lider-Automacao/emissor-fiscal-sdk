@@ -4,7 +4,7 @@ import { ConfiguracoesSchema } from '..';
 export const EnvioInutilizacaoSchema = z.object({
   configuracoes: ConfiguracoesSchema,
   dados: z.object({
-    justificativa: z.string(),
+    motivo: z.string(),
     ano: z.number().int().min(2000),
     serie: z.number().int().min(1),
     numeroInicial: z.number().int().min(1),

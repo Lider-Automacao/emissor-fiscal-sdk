@@ -62,11 +62,14 @@ export const PedidoItemSchema = z.object({
   destinatarioUF: z.string()
     .uppercase()
     .trim()
-    .length(2, 'UF do Destinatario deve ter 2 caracteres.'),
+    .length(2, 'UF do Destinatario deve ter 2 caracteres.')
+    .nullable().optional(),
+
   emitenteUF: z.string()
     .uppercase()
     .trim()
-    .length(2, 'UF do Destinatario deve ter 2 caracteres.'),
+    .length(2, 'UF do Destinatario deve ter 2 caracteres.')
+    .nullable().optional(),
 }).describe('Schema para Item de Pedido');
 
 export type PedidoItem = z.infer<typeof PedidoItemSchema>

@@ -10,6 +10,7 @@ export * from './indicador-inscricao-estadual';
 export * from './nfce';
 export * from './nfe';
 export * from './pagamento';
+export * from './partilha';
 export * from './pis';
 export * from './retorno';
 export * from './status';

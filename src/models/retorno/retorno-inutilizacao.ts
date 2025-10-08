@@ -2,7 +2,7 @@ import z from 'zod'
 
 export const RetornoInutilizacaoSchema = z.object({
   evento: z.string(),
-  dataRecibo: z.date(),
+  dataRecibo: z.union([z.date(), z.iso.date()]),
   protocolo: z.string(),
   motivo: z.string(),
   status: z.enum([

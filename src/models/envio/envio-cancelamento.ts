@@ -4,7 +4,7 @@ import { ConfiguracoesSchema } from '..';
 export const EnvioCancalamentoSchema = z.object({
   configuracoes: ConfiguracoesSchema,
   dados: z.object({
-    motivoCancelamento: z.string(),
+    motivo: z.string(),
     chaveAcesso: z.string(),
     protocolo: z.string(),
     xml: z.string(),

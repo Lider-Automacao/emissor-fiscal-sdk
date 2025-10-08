@@ -29,6 +29,7 @@ import {
   ICMS900Schema,
   ICMS90Schema,
 } from '../icms'
+import { PartilhaSchema } from '../partilha'
 import { PisSchema } from '../pis'
 
 export const NfeItemSchema = z.object({
@@ -71,6 +72,7 @@ export const NfeItemSchema = z.object({
     pis: PisSchema,
     cofins: CofinsSchema,
     valorAproximadoTributos: NumberSchema,
+    partilha: PartilhaSchema.nullish(),
   }),
   compoeTotal: z.boolean(),
   codigoBeneficioFiscal: z.string().optional().nullable(),

@@ -1,9 +1,10 @@
+import { isEmpty } from '@raicamposs/toolkit'
 import z from 'zod'
 import { NullishString } from '../../types'
 
 export const RetornoEnvioApiSchema = z.object({
-  data: z.date(),
-  dataContigencia: z.date().optional().nullable(),
+  data: z.union([z.date(), z.iso.date()]),
+  dataContigencia: z.union([z.date(), z.iso.date().transform(value => isEmpty(value) ? null : value)]).nullish(),
   protocolo: z.string(),
   chave: z.string(),
   status: z.enum([
