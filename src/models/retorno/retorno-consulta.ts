@@ -1,9 +1,8 @@
-import { isEmpty } from '@raicamposs/toolkit'
 import z from 'zod'
-import { NullishString } from '../../types'
+import { DateNullishSchema, NullishString } from '../../types'
 
 export const RetornoConsultaSchema = z.object({
-  data: z.union([z.date(), z.iso.date().transform(value => isEmpty(value) ? null : value)]).nullish(),
+  data: DateNullishSchema,
   status: z.enum([
     'A',
     'C',

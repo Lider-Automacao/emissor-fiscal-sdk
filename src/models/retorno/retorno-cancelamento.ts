@@ -1,7 +1,8 @@
 import z from 'zod'
+import { DateSchema } from '../../types'
 
 export const RetornoCancelamentoSchema = z.object({
-  data: z.union([z.date(), z.iso.date()]),
+  data: DateSchema,
   evento: z.string(),
   protocolo: z.string(),
   status: z.enum([
