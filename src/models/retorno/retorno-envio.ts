@@ -6,7 +6,7 @@ export const RetornoEnvioApiSchema = z.object({
   data: z.union([z.date(), z.iso.date()]),
   dataContigencia: z.union([z.date(), z.iso.date().transform(value => isEmpty(value) ? null : value)]).nullish(),
   protocolo: z.string(),
-  chave: z.string(),
+  chaveAcesso: z.string(),
   status: z.enum([
     'A',
     'C',

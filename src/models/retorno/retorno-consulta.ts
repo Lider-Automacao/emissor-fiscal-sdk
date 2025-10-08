@@ -15,6 +15,7 @@ export const RetornoConsultaSchema = z.object({
     'N'
   ]),
   protocolo: z.string(),
+  chaveAcesso: z.string(),
   xml: NullishString,
 })
 
