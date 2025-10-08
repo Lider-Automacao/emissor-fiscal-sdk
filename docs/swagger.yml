@@ -1032,7 +1032,7 @@ components:
             dataContingencia:
               type: string
               format: date-time
-            justificativaContingencia:
+            motivoContingencia:
               type: string
             saida:
               type: boolean

@@ -1,24 +1,29 @@
 import z from 'zod'
+import { CPF_CNPJ_SCHEME } from '../types'
 
 export const ConfiguracaoCertificadoSchema = z.object({
-  arquivoBase64: z.string(),
-  senha: z.string(),
+  arquivoBase64: z.base64("O arquivo do certificado é obrigatório."),
+  senha: z.string().trim().nonempty('O arquivo do certificado é obrigatório.'),
 })
 
 export const ConfiguracaoEmailSchema = z.object({
-  host: z.string(),
-  password: z.string(),
-  port: z.coerce.string(),
-  userName: z.string(),
+  host: z.url().trim().nonempty(),
+  password: z.string().trim().nonempty(),
+  port: z.coerce.string().trim().nonempty().regex(/^\d+$/, 'A porta deve ser um número inteiro.'),
+  userName: z.string().trim().nonempty(),
+})
+
+const ConfiguracoesEmitenteNFeSchema = z.object({
+  modelo: z.literal(55),
+  documento: CPF_CNPJ_SCHEME.min(1, 'CNPJ/CPF inválido'),
+  uf: z.string().uppercase().trim().length(2, 'UF inválida'),
+  ambiente: z.union([z.literal(1), z.literal(2)]).default(1).describe('1=Produção/2=Homologação'),
+  tipoEmissao: z.union([z.literal(1), z.literal(9)]).default(1),
 })
 
 export const ConfiguracoesEmitenteSchema = z.discriminatedUnion('modelo', [
-  z.object({
+  ConfiguracoesEmitenteNFeSchema.extend({
     modelo: z.literal(65),
-    documento: z.string().trim().min(1, 'CNPJ/CPF inválido'),
-    uf: z.string().trim().min(2, 'UF inválida'),
-    ambiente: z.union([z.literal(1), z.literal(2)]),
-    tipoEmissao: z.union([z.literal(1), z.literal(9)]).default(1),
     idCSC: z.string()
       .min(1, 'O ID do CSC é obrigatório.')
       .max(6, 'O ID do CSC não pode exceder 6 caracteres.'),
@@ -26,17 +31,7 @@ export const ConfiguracoesEmitenteSchema = z.discriminatedUnion('modelo', [
       .min(1, 'O CSC é obrigatório.')
       .max(36, 'O CSC não pode exceder 36 caracteres.'),
   }),
-  z.object({
-    modelo: z.literal(55),
-    documento: z.string().trim().min(1, 'CNPJ/CPF inválido'),
-    uf: z.string().trim().min(2, 'UF inválida'),
-    ambiente: z.coerce
-      .number()
-      .int()
-      .transform((val) => (val <= 0 ? undefined : val))
-      .default(1),
-    tipoEmissao: z.union([z.literal(1), z.literal(9)]).default(1),
-  })
+  ConfiguracoesEmitenteNFeSchema
 ])
 
 export const ConfiguracoesSchema = z.object({

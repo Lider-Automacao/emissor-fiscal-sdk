@@ -16,7 +16,7 @@ export const NfceSchema = z.object({
   dataEmissao: z.iso.datetime({ offset: true }),
   dataSaidaEntrada: z.iso.datetime({ offset: true }),
   dataContingencia: z.iso.datetime({ offset: true }).optional(),
-  justificativaContingencia: z.string().optional(),
+  motivoContingencia: z.string().optional(),
   saida: z.boolean(),
   versaoProcesso: z.string(),
   presencial: z.union([z.literal(1), z.literal(4)]),

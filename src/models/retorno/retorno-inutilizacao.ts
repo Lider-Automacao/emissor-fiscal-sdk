@@ -11,10 +11,7 @@ export const RetornoInutilizacaoSchema = z.object({
     'C',
     'D',
     'I',
-    'O',
-    'G',
-    'S',
-    'N'
+    'O'
   ]),
   numero: z.string(),
   serie: z.string(),

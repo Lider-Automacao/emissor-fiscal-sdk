@@ -8,10 +8,7 @@ export const RetornoConsultaSchema = z.object({
     'C',
     'D',
     'I',
-    'O',
-    'G',
-    'S',
-    'N'
+    'O'
   ]),
   protocolo: z.string(),
   chaveAcesso: z.string(),

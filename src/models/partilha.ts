@@ -8,6 +8,7 @@ export const PartilhaSchema = z.object({
   aliquotaInterestadual: z.number().nullish(),
   icmsRelativoFcp: z.number().nullish(),
   icmsInterestadual: z.number().nullish(),
+  aliquotaInterestadualPart: z.number().nullish(),
 });
 
 export type Partilha = z.infer<typeof PartilhaSchema>;

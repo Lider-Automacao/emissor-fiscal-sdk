@@ -5,10 +5,7 @@ export const Status = {
   cancelada: 'C',
   denegada: 'D',
   inutilizada: 'I',
-  contingencia: 'O',
-  aguardandoProcessamento: 'G',
-  canceladaPorSubstituicao: 'S',
-  naoEnviada: 'N'
+  contingencia: 'O'
 } as const
 
 export const StatusSchema = z.enum(Status)

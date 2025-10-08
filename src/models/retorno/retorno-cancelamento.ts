@@ -10,10 +10,7 @@ export const RetornoCancelamentoSchema = z.object({
     'C',
     'D',
     'I',
-    'O',
-    'G',
-    'S',
-    'N'
+    'O'
   ]),
 })
 

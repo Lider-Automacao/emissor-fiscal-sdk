@@ -11,10 +11,7 @@ export const RetornoEnvioApiSchema = z.object({
     'C',
     'D',
     'I',
-    'O',
-    'G',
-    'S',
-    'N'
+    'O'
   ]),
   xml: z.string(),
   motivo: NullishString,
