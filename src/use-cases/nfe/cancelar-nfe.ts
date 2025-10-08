@@ -45,13 +45,12 @@ export class CancelarNfe {
       configuracoes,
       dados: {
         chaveAcesso: dados.chaveAcesso,
-        protocolo: dados.protocolo,
         xml: dados.xml,
       },
     };
     const response = await this.api.post<any, RetornoConsulta>('/nfe/consultar', data);
     return {
-      data: response.data,
+      data: response.data ?? new Date(),
       status: response.status,
       evento: '',
       protocolo: coalesce(response.protocolo, dados.protocolo),

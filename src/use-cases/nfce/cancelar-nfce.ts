@@ -44,13 +44,12 @@ export class CancelarNfce {
       configuracoes,
       dados: {
         chaveAcesso: dados.chaveAcesso,
-        protocolo: dados.protocolo,
         xml: dados.xml,
       },
     };
     const response = await this.api.post<any, RetornoConsulta>('/nfce/consultar', data);
     return {
-      data: response.data,
+      data: response.data ?? new Date(),
       status: response.status,
       evento: '',
       protocolo: coalesce(response.protocolo, dados.protocolo),

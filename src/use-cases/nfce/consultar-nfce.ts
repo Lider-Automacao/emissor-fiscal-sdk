@@ -24,8 +24,9 @@ export class ConsultarNfce {
     return {
       data: response.data,
       status: response.status,
+      chaveAcesso: coalesce(response.chaveAcesso, dados.chaveAcesso),
       xml: coalesce(response.xml, dados.xml),
-      protocolo: coalesce(response.protocolo, dados.protocolo),
+      protocolo: response.protocolo,
     }
   }
 }
