@@ -3,6 +3,7 @@ import { DateNullishSchema, NullishString } from '../../types'
 
 export const RetornoConsultaSchema = z.object({
   data: DateNullishSchema,
+  protocolo: z.string(),
   status: z.enum([
     'A',
     'C',
@@ -10,9 +11,9 @@ export const RetornoConsultaSchema = z.object({
     'I',
     'O'
   ]),
-  protocolo: z.string(),
   chaveAcesso: z.string(),
   xml: NullishString,
+  evento: NullishString,
 })
 
 export type RetornoConsulta = z.infer<typeof RetornoConsultaSchema>
