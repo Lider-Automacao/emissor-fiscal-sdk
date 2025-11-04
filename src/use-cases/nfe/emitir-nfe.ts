@@ -1,5 +1,5 @@
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { EnvioNfeApi, EnvioNfeApiSchema, RetornoEnvioApi } from "../../models";
+import { EnvioNfeApi, EnvioNfeApiSchema, RetornoEnvioApi, RetornoEnvioApiSchema } from "../../models";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
@@ -17,6 +17,7 @@ export class EmitirNfe {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);
     }
 
-    return this.api.post('/nfe/emitir', parsedData.data);
+    const response = await this.api.post<EnvioNfeApi, RetornoEnvioApi>('/nfe/emitir', parsedData.data);
+    return RetornoEnvioApiSchema.parse({ ...response, data: response.data ?? new Date(), });
   }
 }

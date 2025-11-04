@@ -3,15 +3,16 @@
 import { AxiosError, HttpStatusCode } from 'axios';
 import * as zPT from 'zod/v4';
 import { ZodError, flattenError } from 'zod/v4';
+import { EmissorApiError } from './emissor-api.error';
 
 zPT.config(zPT.locales.pt())
 
 
 interface EmissorFiscalErrorDetails {
   statusCode?: number;
-  apiResponse?: any;
   message: string;
   description?: any;
+  apiResponse?: any;
 }
 
 export class EmissorFiscalError extends Error {
@@ -72,15 +73,16 @@ export class EmissorFiscalError extends Error {
     if (status < HttpStatusCode.InternalServerError) {
       const data = error.response?.data || {
         statusCode: status,
+        message: error.message,
       };
 
-      const { detail, message, unit } = data as any;
+      const apiError = new EmissorApiError(data);
 
-      return new EmissorFiscalError(unit, error, {
+      return new EmissorFiscalError(apiError.message ?? error.message, error, {
         statusCode: status,
         apiResponse: data,
-        message: unit ?? message ?? error.message,
-        description: detail,
+        message: apiError.message ?? error.message,
+        description: apiError.description,
       });
     }
 

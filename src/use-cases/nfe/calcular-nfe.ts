@@ -16,6 +16,7 @@ export class CalculaNfe {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);
     }
 
-    return this.api.post<CalculaNfeRequest, CalculaNfeResponse>('/nfe/calcular', parsedData.data);
+    const response = await this.api.post<CalculaNfeRequest, CalculaNfeResponse>('/nfe/calcular', parsedData.data);
+    return response;
   }
 }

@@ -1,6 +1,6 @@
 import { coalesce } from "@raicamposs/toolkit";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { EnvioConsulta, EnvioConsultaSchema, RetornoConsulta } from "../../models";
+import { EnvioConsulta, EnvioConsultaSchema, RetornoConsulta, RetornoConsultaSchema } from "../../models";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
@@ -22,12 +22,12 @@ export class ConsultarNfe {
 
     const { dados } = parsedData.data;
 
-    return {
+    return RetornoConsultaSchema.parse({
       data: response.data,
       status: response.status,
       xml: coalesce(response.xml, dados.xml),
       chaveAcesso: coalesce(response.chaveAcesso, dados.chaveAcesso),
       protocolo: response.protocolo,
-    }
+    })
   }
 }

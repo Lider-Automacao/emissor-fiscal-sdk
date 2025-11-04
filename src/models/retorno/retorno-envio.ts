@@ -2,8 +2,8 @@ import z from 'zod'
 import { DateNullishSchema, DateSchema, NullishString } from '../../types'
 
 export const RetornoEnvioApiSchema = z.object({
-  data: DateSchema,
-  dataContigencia: DateNullishSchema,
+  data: DateSchema.catch(new Date()),
+  dataContigencia: DateNullishSchema.catch(null),
   protocolo: z.string(),
   chaveAcesso: z.string(),
   status: z.enum([

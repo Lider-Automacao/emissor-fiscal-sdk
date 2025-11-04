@@ -2,7 +2,7 @@ import z from 'zod'
 import { DateNullishSchema, NullishString } from '../../types'
 
 export const RetornoConsultaSchema = z.object({
-  data: DateNullishSchema,
+  data: DateNullishSchema.catch(null),
   protocolo: z.string(),
   status: z.enum([
     'A',

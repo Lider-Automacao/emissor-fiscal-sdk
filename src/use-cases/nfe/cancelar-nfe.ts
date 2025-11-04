@@ -1,6 +1,6 @@
 import { coalesce, isAssigned } from "@raicamposs/toolkit";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { EnvioCancalamentoSchema, EnvioCancelamento, EnvioConsulta, RetornoCancelamento, RetornoConsulta } from "../../models";
+import { EnvioCancalamentoSchema, EnvioCancelamento, EnvioConsulta, RetornoCancelamento, RetornoCancelamentoSchema, RetornoConsulta } from "../../models";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
@@ -21,10 +21,10 @@ export class CancelarNfe {
     try {
       const response = await this.api.post<any, RetornoCancelamento>('/nfe/cancelar', parsedData.data);
       const { dados } = parsedData.data;
-      return {
+      return RetornoCancelamentoSchema.parse({
         ...response,
         protocolo: coalesce(response.protocolo, dados.protocolo),
-      };
+      });
     } catch (error) {
       if (!(error instanceof EmissorFiscalError)) {
         throw error;
@@ -49,11 +49,11 @@ export class CancelarNfe {
       },
     };
     const response = await this.api.post<any, RetornoConsulta>('/nfe/consultar', data);
-    return {
+    return RetornoCancelamentoSchema.parse({
       data: response.data ?? new Date(),
       status: response.status,
       evento: '',
       protocolo: coalesce(response.protocolo, dados.protocolo),
-    }
+    })
   }
 }
