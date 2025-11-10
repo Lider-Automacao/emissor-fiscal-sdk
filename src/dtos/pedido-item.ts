@@ -70,6 +70,22 @@ export const PedidoItemSchema = z.object({
     .trim()
     .length(2, 'UF do Destinatario deve ter 2 caracteres.')
     .nullable().optional(),
+
+  // --- Nova Tributação (IBS/CBS) - Campos Simples ---
+  cstIBSCBS: z.string().min(1).nullable().optional(),
+  classTribIBSCBS: z.string().min(1).nullable().optional(),
+  aliquotaIBSEst: z.number().nonnegative().nullable().optional(),
+  percRedIBS: z.number().nonnegative().nullable().optional(),
+  aliquotaCBS: z.number().nonnegative().nullable().optional(),
+  aliquotaIBSMun: z.number().nonnegative().nullable().optional(),
+  percRedCBS: z.number().nonnegative().nullable().optional(),
+
+  // --- Nova Tributação (IBS/CBS) - Regime Regular (Reg) ---
+  cstReg: z.string().min(1).nullable().optional(),
+  classTribReg: z.string().min(1).nullable().optional(),
+  aliqEfetRegIBSEst: z.number().nonnegative().nullable().optional(),
+  aliqEfetRegIBSMun: z.number().nonnegative().nullable().optional(),
+  aliqEfetRegCBS: z.number().nonnegative().nullable().optional(),
 }).describe('Schema para Item de Pedido');
 
 export type PedidoItem = z.infer<typeof PedidoItemSchema>

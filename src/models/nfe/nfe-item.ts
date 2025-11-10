@@ -2,6 +2,8 @@ import z from 'zod'
 import { IntSchema, NumberSchema } from '../../types/number-type'
 import { CofinsSchema } from '../cofins'
 import { CombustivelSchema } from '../combustivel'
+import { IbsCbsSchema } from '../ibs_cbs/ibs_cbs'
+import { ImpostoSeletivoSchema } from '../ibs_cbs/imposto_seletivo'
 import {
   ICMS00Schema,
   ICMS02Schema,
@@ -42,6 +44,7 @@ export const NfeItemSchema = z.object({
   cfop: z.string(),
   valorBruto: NumberSchema,
   tributos: z.object({
+    partilha: PartilhaSchema.nullish(),
     icms: z.discriminatedUnion('cst', [
       ICMS00Schema,
       ICMS02Schema,
@@ -71,8 +74,9 @@ export const NfeItemSchema = z.object({
     ]),
     pis: PisSchema,
     cofins: CofinsSchema,
+    impostoSeletivo: ImpostoSeletivoSchema.optional().nullable(),
+    ibscbs: IbsCbsSchema.optional().nullable(),
     valorAproximadoTributos: NumberSchema,
-    partilha: PartilhaSchema.nullish(),
   }),
   compoeTotal: z.boolean(),
   codigoBeneficioFiscal: z.string().optional().nullable(),
