@@ -1,10 +1,9 @@
 import { z } from 'zod';
 import { NumberMinZeroSchema } from '../../types';
-import { CSOSNSchema } from '../CSOSNSchema';
-import { CSTSchema } from '../CSTSchema';
+import { CST_IBS_CBS_SCHEMA } from '../CSTSchema';
 
 const ImpostoSeletivoSchema = z.object({
-  cst: z.union([CSTSchema, CSOSNSchema]),
+  cst: CST_IBS_CBS_SCHEMA,
   classificacao: z.string()
     .min(1),
   baseCalculo: NumberMinZeroSchema

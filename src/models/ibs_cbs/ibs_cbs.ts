@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { NumberSchema } from '../../types';
-import { CSOSNSchema } from '../CSOSNSchema';
-import { CSTSchema } from '../CSTSchema';
+import { CST_IBS_CBS_SCHEMA } from '../CSTSchema';
 import { Cbs, CbsSchema } from './cbs';
 import { CbsCreditoPresumido, CbsCreditoPresumidoSchema } from './cbs_credito_presumido';
 import { CompraGovernamentalItem, CompraGovernamentalItemSchema } from './compra_governamental_item';
@@ -15,7 +14,7 @@ import { Uf, UfSchema } from './uf';
 
 
 const IbsCbsSchema = z.object({
-  cst: z.union([CSTSchema, CSOSNSchema]),
+  cst: CST_IBS_CBS_SCHEMA,
   classificacao: z.string().trim().nonempty(),
   valorIbs: NumberSchema.default(0)
     .nullable()
