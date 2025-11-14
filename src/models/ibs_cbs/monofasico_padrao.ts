@@ -1,32 +1,15 @@
 import { z } from 'zod';
+import { NumberMinZeroSchema } from '../../types';
 
 const MonofasicoPadraoSchema = z.object({
-  quantidade: z.number()
-    .min(0)
-    .nullable()
-    .optional(),
-
-  aliquotaAdRemIbs: z.number()
-    .min(0)
-    .nullable()
-    .optional(),
-
-  aliquotaAdRemCbs: z.number()
-    .min(0)
-    .nullable()
-    .optional(),
-
-  valorIbs: z.number()
-    .min(0)
-    .nullable()
-    .optional(),
-
-  valorCbs: z.number()
-    .min(0)
-    .nullable()
-    .optional(),
+  quantidade: NumberMinZeroSchema.nullish(),
+  aliquotaAdRemIbs: NumberMinZeroSchema.nullish(),
+  aliquotaAdRemCbs: NumberMinZeroSchema.nullish(),
+  valorIbs: NumberMinZeroSchema.nullish(),
+  valorCbs: NumberMinZeroSchema.nullish(),
 });
 
 type MonofasicoPadrao = z.infer<typeof MonofasicoPadraoSchema>;
 
 export { MonofasicoPadrao, MonofasicoPadraoSchema };
+

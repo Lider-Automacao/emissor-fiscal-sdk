@@ -1,14 +1,13 @@
 import { z } from 'zod';
+import { NumberMinZeroSchema } from '../../types';
 import { Devolucao, DevolucaoSchema } from './devolucao';
 import { Diferimento, DiferimentoSchema } from './diferimento';
 import { Reducao, ReducaoSchema } from './reducao';
 
 
 const UfSchema = z.object({
-  aliquota: z.number()
-    .min(0),
-  valor: z.number()
-    .min(0),
+  aliquota: NumberMinZeroSchema,
+  valor: NumberMinZeroSchema,
   reducao: ReducaoSchema.nullable().optional(),
   devolucao: DevolucaoSchema.nullable().optional(),
   diferimento: DiferimentoSchema.nullable().optional(),
@@ -21,3 +20,4 @@ type Uf = z.infer<typeof UfSchema> & {
 };
 
 export { Uf, UfSchema };
+

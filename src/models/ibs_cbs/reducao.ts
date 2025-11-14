@@ -1,10 +1,9 @@
 import { z } from 'zod';
+import { NumberMinZeroSchema } from '../../types';
 
 const ReducaoSchema = z.object({
-  aliquota: z.number()
-    .min(0),
-  aliquotaEfetiva: z.number()
-    .min(0),
+  aliquota: NumberMinZeroSchema,
+  aliquotaEfetiva: NumberMinZeroSchema,
 });
 
 type Reducao = z.infer<typeof ReducaoSchema>;

@@ -1,15 +1,12 @@
 import { z } from 'zod';
+import { IntMinZeroSchema, NumberMinZeroDefaultZeroSchema } from '../../types';
 
 const CreditoPresumidoZfmSchema = z.object({
-  tipo: z.number().int()
-    .min(0),
-
-  valor: z.number()
-    .min(0)
-    .nullable()
-    .optional(),
+  tipo: IntMinZeroSchema,
+  valor: NumberMinZeroDefaultZeroSchema.nullish(),
 });
 
 type CreditoPresumidoZfm = z.infer<typeof CreditoPresumidoZfmSchema>;
 
 export { CreditoPresumidoZfm, CreditoPresumidoZfmSchema };
+

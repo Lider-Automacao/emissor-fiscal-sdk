@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { NumberMinZeroSchema } from '../../types';
 import { MonofasicoDiferimento, MonofasicoDiferimentoSchema } from './monofasico_diferimento';
 import { MonofasicoPadrao, MonofasicoPadraoSchema } from './monofasico_padrao';
 import { MonofasicoRetencao, MonofasicoRetencaoSchema } from './monofasico_retencao';
@@ -6,16 +7,12 @@ import { MonofasicoRetidoAnteriormente, MonofasicoRetidoAnteriormenteSchema } fr
 
 
 const MonofasicoSchema = z.object({
-  valorTotalIbs: z.number()
-    .min(0)
+  valorTotalIbs: NumberMinZeroSchema
     .nullable()
     .optional(),
-
-  valorTotalCbs: z.number()
-    .min(0)
+  valorTotalCbs: NumberMinZeroSchema
     .nullable()
     .optional(),
-
   padrao: MonofasicoPadraoSchema
     .nullable()
     .optional(),

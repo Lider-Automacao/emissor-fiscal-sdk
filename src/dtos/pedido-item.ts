@@ -1,9 +1,8 @@
 import * as z from 'zod';
 import { CombustivelSchema } from '../models';
+import { CSOSNSchema } from '../models/CSOSNSchema';
+import { CSTSchema } from '../models/CSTSchema';
 import { NullishString, StringSomenteNumeros } from '../types';
-
-const CSTSchema = z.enum(['00', '10', '20', '30', '40', '41', '50', '51', '60', '70', '90'])
-const CSOSNSchema = z.enum(['101', '102', '103', '201', '202', '203', '300', '400', '500', '900'])
 
 const QuantidadeSchema = z.object({
   comercial: z.number().nonnegative('Quantidade comercial deve ser um número positivo.'),

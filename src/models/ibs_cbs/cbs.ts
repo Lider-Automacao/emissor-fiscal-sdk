@@ -1,14 +1,13 @@
 import { z } from 'zod';
+import { NumberMinZeroDefaultZeroSchema } from '../../types';
 import { Devolucao, DevolucaoSchema } from './devolucao';
 import { Diferimento, DiferimentoSchema } from './diferimento';
 import { Reducao, ReducaoSchema } from './reducao';
 
 
 const CbsSchema = z.object({
-  aliquota: z.number()
-    .min(0),
-  valor: z.number()
-    .min(0),
+  aliquota: NumberMinZeroDefaultZeroSchema,
+  valor: NumberMinZeroDefaultZeroSchema,
   reducao: ReducaoSchema.nullable().optional(),
   devolucao: DevolucaoSchema.nullable().optional(),
   diferimento: DiferimentoSchema.nullable().optional(),
@@ -21,3 +20,4 @@ type Cbs = z.infer<typeof CbsSchema> & {
 };
 
 export { Cbs, CbsSchema };
+

@@ -1,17 +1,11 @@
 import { z } from 'zod';
+import { NumberMinZeroSchema } from '../../types';
 
 const IbsCreditoPresumidoSchema = z.object({
-  codigo: z.string()
-    .min(1),
-
-  percentual: z.number()
-    .min(0),
-
-  valor: z.number()
-    .min(0),
-
-  valorSuspensivo: z.number()
-    .min(0),
+  codigo: z.string().nonempty().trim(),
+  percentual: NumberMinZeroSchema,
+  valor: NumberMinZeroSchema,
+  valorSuspensivo: NumberMinZeroSchema,
 });
 
 type IbsCreditoPresumido = z.infer<typeof IbsCreditoPresumidoSchema>;

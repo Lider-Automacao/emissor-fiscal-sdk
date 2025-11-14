@@ -1,14 +1,17 @@
 import { z } from 'zod';
+import { NumberMinZeroSchema } from '../../types';
+import { CSOSNSchema } from '../CSOSNSchema';
+import { CSTSchema } from '../CSTSchema';
 
 const TributacaoRegularSchema = z.object({
-  cst: z.string().min(1),
+  cst: z.union([CSTSchema, CSOSNSchema]),
   classificacao: z.string().min(1),
-  aliquotaUF: z.number().min(0),
-  valorUF: z.number().min(0).default(0),
-  aliquotaMunicipio: z.number().min(0),
-  valorMunicipio: z.number().min(0).default(0),
-  aliquota: z.number().min(0),
-  valor: z.number().min(0).default(0),
+  aliquotaUF: NumberMinZeroSchema,
+  valorUF: NumberMinZeroSchema.nullish().default(0),
+  aliquotaMunicipio: NumberMinZeroSchema,
+  valorMunicipio: NumberMinZeroSchema.nullish().default(0),
+  aliquota: NumberMinZeroSchema,
+  valor: NumberMinZeroSchema.nullish().default(0),
 });
 
 type TributacaoRegular = z.infer<typeof TributacaoRegularSchema>;

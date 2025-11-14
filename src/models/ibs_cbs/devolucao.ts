@@ -1,8 +1,8 @@
 import { z } from 'zod';
+import { NumberMinZeroSchema } from '../../types';
 
 const DevolucaoSchema = z.object({
-  valor: z.number()
-    .min(0),
+  valor: NumberMinZeroSchema,
 });
 
 

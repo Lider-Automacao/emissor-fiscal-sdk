@@ -1,14 +1,13 @@
 import { z } from 'zod';
+import { IntMinZeroSchema, NumberMinZeroSchema } from '../../types';
 
 const CompraGovernamentalSchema = z.object({
-  tipoEnte: z.number().int()
-    .min(0),
-  percentual: z.number()
-    .min(0),
-  tipoOperacao: z.number()
-    .min(0),
+  tipoEnte: IntMinZeroSchema,
+  percentual: NumberMinZeroSchema,
+  tipoOperacao: NumberMinZeroSchema,
 });
 
 type CompraGovernamental = z.infer<typeof CompraGovernamentalSchema>;
 
 export { CompraGovernamental, CompraGovernamentalSchema };
+

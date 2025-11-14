@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { NumberMinZeroSchema } from '../../types';
 
 const DiferimentoSchema = z.object({
-  aliquota: z.number().min(0),
-  valor: z.number().min(0),
+  aliquota: NumberMinZeroSchema,
+  valor: NumberMinZeroSchema,
 });
 
 type Diferimento = z.infer<typeof DiferimentoSchema>;

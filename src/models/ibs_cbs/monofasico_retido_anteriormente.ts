@@ -1,30 +1,12 @@
 import { z } from 'zod';
+import { NumberMinZeroSchema } from '../../types';
 
 const MonofasicoRetidoAnteriormenteSchema = z.object({
-  quantidadeRetida: z.number()
-    .min(0)
-    .nullable()
-    .optional(),
-
-  aliquotaAdRemIbsRetida: z.number()
-    .min(0)
-    .nullable()
-    .optional(),
-
-  valorIbsRetido: z.number()
-    .min(0)
-    .nullable()
-    .optional(),
-
-  aliquotaAdRemCbsRetida: z.number()
-    .min(0)
-    .nullable()
-    .optional(),
-
-  valorCbsRetida: z.number()
-    .min(0)
-    .nullable()
-    .optional(),
+  quantidadeRetida: NumberMinZeroSchema.nullish(),
+  aliquotaAdRemIbsRetida: NumberMinZeroSchema.nullish(),
+  valorIbsRetido: NumberMinZeroSchema.nullish(),
+  aliquotaAdRemCbsRetida: NumberMinZeroSchema.nullish(),
+  valorCbsRetida: NumberMinZeroSchema.nullish(),
 });
 
 type MonofasicoRetidoAnteriormente = z.infer<typeof MonofasicoRetidoAnteriormenteSchema>;
