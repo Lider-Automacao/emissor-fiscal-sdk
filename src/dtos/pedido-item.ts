@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { CombustivelSchema } from '../models';
-import { CSOSNSchema } from '../models/CSOSNSchema';
-import { CSTSchema } from '../models/CSTSchema';
+import { CSOSN_SCHEMA } from '../models/CSOSNSchema';
+import { CST_SCHEMA } from '../models/CSTSchema';
 import { NullishString, StringSomenteNumeros } from '../types';
 
 const QuantidadeSchema = z.object({
@@ -37,7 +37,7 @@ export const PedidoItemSchema = z.object({
   valorOutros: z.number().nonnegative(),
   valorLiquido: z.number().nonnegative(),
   origem: z.string().length(1, 'Origem deve ter 1 caractere.'),
-  cst: z.union([CSTSchema, CSOSNSchema]),
+  cst: z.union([CST_SCHEMA, CSOSN_SCHEMA]),
   aliquota: z.number().nonnegative(),
   aliquotaSt: z.number().nonnegative(),
   aliquotaSuperSimples: z.number().nonnegative(),
