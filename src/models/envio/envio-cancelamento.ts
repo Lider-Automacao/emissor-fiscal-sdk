@@ -11,4 +11,4 @@ export const EnvioCancalamentoSchema = z.object({
   }),
 })
 
-export type EnvioCancelamento = z.infer<typeof EnvioCancalamentoSchema>
+export type EnvioCancelamento = z.input<typeof EnvioCancalamentoSchema>

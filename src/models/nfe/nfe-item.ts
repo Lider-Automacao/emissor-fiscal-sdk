@@ -77,6 +77,8 @@ export const NfeItemSchema = z.object({
     impostoSeletivo: ImpostoSeletivoSchema.optional().nullable(),
     ibscbs: IbsCbsSchema.optional().nullable(),
     valorAproximadoTributos: NumberSchema,
+    valorOutrosSped: NumberSchema.default(0),
+    valorIsentoSped: NumberSchema.default(0),
   }),
   compoeTotal: z.boolean(),
   codigoBeneficioFiscal: z.string().optional().nullable(),

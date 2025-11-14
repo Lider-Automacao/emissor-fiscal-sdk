@@ -12,4 +12,4 @@ export const EnvioInutilizacaoSchema = z.object({
   }),
 })
 
-export type EnvioInutilizacao = z.infer<typeof EnvioInutilizacaoSchema>
+export type EnvioInutilizacao = z.input<typeof EnvioInutilizacaoSchema>

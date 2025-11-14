@@ -22,4 +22,4 @@ export const EnvioImpressaoSchema = z.object({
   }),
 })
 
-export type EnvioImpressao = z.infer<typeof EnvioImpressaoSchema>
+export type EnvioImpressao = z.input<typeof EnvioImpressaoSchema>

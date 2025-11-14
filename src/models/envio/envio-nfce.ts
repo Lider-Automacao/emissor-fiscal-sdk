@@ -7,4 +7,4 @@ export const EnvioNfceApiSchema = z.object({
   configuracoes: ConfiguracoesSchema,
 })
 
-export type EnvioNfceApi = z.infer<typeof EnvioNfceApiSchema>
+export type EnvioNfceApi = z.input<typeof EnvioNfceApiSchema>
