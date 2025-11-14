@@ -23,7 +23,7 @@ export const NfeSchema = z.object({
   tipoImpressao: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]),
   tipoEmissao: z.number().int(), //z.union([z.literal(0), z.literal(8)]),
   identificacaoDestino: z.union([z.literal(1), z.literal(2), z.literal(3)]),
-  codigoMunicipio: IntSchema,
+  codigoMunicipioFatoGerador: IntSchema,
   consumidorFinal: z.boolean().default(true),
   emitente: EmitenteSchema,
   destinatario: DestinatarioSchema.optional().nullish(),

@@ -1050,7 +1050,7 @@ components:
             identificacaoDestino:
               type: integer
               format: int32
-            codigoMunicipio:
+            codigoMunicipioFatoGerador:
               type: integer
               format: int32
             consumidorFinal:

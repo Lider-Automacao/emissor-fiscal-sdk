@@ -1,6 +1,6 @@
 {
   "name": "@liderautomacao/emissor-fiscal-sdk",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Um pacote npm com TypeScript.",
   "repository": {
     "type": "git",
