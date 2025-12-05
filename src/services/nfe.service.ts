@@ -1,6 +1,5 @@
 import { EmissorFiscalApi } from "../api/emissor-fiscal-api.service";
-import { CalculaNfeRequest } from "../dtos";
-import { EnvioCancelamento, EnvioConsulta, EnvioImpressao, EnvioInutilizacao, EnvioNfeApi } from "../models";
+import { CalculaNfeRequest, EnvioCancelamento, EnvioConsulta, EnvioImpressao, EnvioInutilizacao, EnvioNfeApi } from "../dtos";
 import { CalculaNfe, CancelarNfe, ConsultarNfe, EmitirNfe, GerarNfe, ImprimirNfe, InutilizarNfe } from "../use-cases";
 
 export class NfeService {

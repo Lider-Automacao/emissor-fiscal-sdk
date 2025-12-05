@@ -1,4 +1,4 @@
-import z from 'zod/v4/classic/external.cjs';
+import z from 'zod';
 import { CPF_CNPJ_SCHEME } from '../../types';
 
 const ConfiguracoesEnvioOutrosSchema = z.object({

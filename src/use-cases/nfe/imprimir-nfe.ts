@@ -1,5 +1,5 @@
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { EnvioImpressao, EnvioImpressaoSchema } from "../../models";
+import { EnvioImpressao, EnvioImpressaoSchema } from "../../dtos";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 

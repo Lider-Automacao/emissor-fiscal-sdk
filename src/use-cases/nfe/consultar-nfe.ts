@@ -1,6 +1,6 @@
 import { coalesce } from "@raicamposs/toolkit";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { EnvioConsulta, EnvioConsultaSchema, RetornoConsulta, RetornoConsultaSchema } from "../../models";
+import { EnvioConsulta, EnvioConsultaSchema, RetornoConsulta, RetornoConsultaSchema } from "../../dtos";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 

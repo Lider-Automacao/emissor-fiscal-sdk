@@ -1,6 +1,6 @@
 import { coalesce, isAssigned } from "@raicamposs/toolkit";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { EnvioCancelamento, EnvioCancelamentoSchema, EnvioConsulta, RetornoCancelamento, RetornoCancelamentoSchema, RetornoConsulta } from "../../models";
+import { EnvioCancelamento, EnvioCancelamentoSchema, EnvioConsulta, RetornoCancelamento, RetornoCancelamentoSchema, RetornoConsulta } from "../../dtos";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 

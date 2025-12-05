@@ -1,5 +1,5 @@
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { EnvioNfeApi, EnvioNfeApiSchema, RetornoEnvioApi, RetornoEnvioApiSchema } from "../../models";
+import { EnvioNfeApi, EnvioNfeApiSchema, RetornoEnvioApi, RetornoEnvioApiSchema } from "../../dtos";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 

@@ -1,5 +1,5 @@
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { EnvioInutilizacao, EnvioInutilizacaoSchema, RetornoInutilizacao, RetornoInutilizacaoSchema } from "../../models";
+import { EnvioInutilizacao, EnvioInutilizacaoSchema, RetornoInutilizacao, RetornoInutilizacaoSchema } from "../../dtos";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
