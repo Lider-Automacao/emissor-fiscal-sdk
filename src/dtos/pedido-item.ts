@@ -1,7 +1,8 @@
 import * as z from 'zod';
 import { CombustivelSchema } from '../models';
-import { CSOSN_SCHEMA } from '../models/CSOSNSchema';
-import { CST_SCHEMA } from '../models/CSTSchema';
+import { CSOSN_SCHEMA } from '../models/auxiliares';
+import { CST_IBS_CBS_SCHEMA, CST_SCHEMA } from '../models/auxiliares/cst';
+import { UFSchema } from '../models/auxiliares/ufs';
 import { NullishString, StringSomenteNumeros } from '../types';
 
 const QuantidadeSchema = z.object({
@@ -58,17 +59,8 @@ export const PedidoItemSchema = z.object({
   aliquotaAdRemRetido: z.number().nullable().optional(),
   aliquotaFcp: z.number().nullable().optional(),
 
-  destinatarioUF: z.string()
-    .uppercase()
-    .trim()
-    .length(2, 'UF do Destinatario deve ter 2 caracteres.')
-    .nullable().optional(),
-
-  emitenteUF: z.string()
-    .uppercase()
-    .trim()
-    .length(2, 'UF do Destinatario deve ter 2 caracteres.')
-    .nullable().optional(),
+  destinatarioUF: UFSchema,
+  emitenteUF: UFSchema,
 
   // --- Nova Tributação (IBS/CBS) - Campos Simples ---
   cstIBSCBS: z.string().min(1).nullable().optional(),
@@ -80,7 +72,7 @@ export const PedidoItemSchema = z.object({
   percRedCBS: z.number().nonnegative().nullable().optional(),
 
   // --- Nova Tributação (IBS/CBS) - Regime Regular (Reg) ---
-  cstReg: z.string().min(1).nullable().optional(),
+  cstReg: CST_IBS_CBS_SCHEMA.nullable().optional(),
   classTribReg: z.string().min(1).nullable().optional(),
   aliqEfetRegIBSEst: z.number().nonnegative().nullable().optional(),
   aliqEfetRegIBSMun: z.number().nonnegative().nullable().optional(),

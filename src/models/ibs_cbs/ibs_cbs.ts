@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { NumberSchema } from '../../types';
-import { CST_IBS_CBS_SCHEMA } from '../CSTSchema';
+import { CST_IBS_CBS_SCHEMA } from '../auxiliares/cst';
 import { Cbs, CbsSchema } from './cbs';
 import { CbsCreditoPresumido, CbsCreditoPresumidoSchema } from './cbs_credito_presumido';
 import { CompraGovernamentalItem, CompraGovernamentalItemSchema } from './compra_governamental_item';

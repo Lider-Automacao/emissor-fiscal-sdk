@@ -43,3 +43,4 @@ export const NullishNumberSchema = z
   .pipe(z.number())
   .nullish();
 
+export const PercentualSchema = NumberMinZeroDefaultZeroSchema.pipe(z.number().min(0).max(100));

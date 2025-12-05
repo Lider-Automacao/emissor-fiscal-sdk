@@ -1,6 +1,6 @@
 import { coalesce, isAssigned } from "@raicamposs/toolkit";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { EnvioCancalamentoSchema, EnvioCancelamento, EnvioConsulta, RetornoCancelamento, RetornoCancelamentoSchema, RetornoConsulta } from "../../models";
+import { EnvioCancelamento, EnvioCancelamentoSchema, EnvioConsulta, RetornoCancelamento, RetornoCancelamentoSchema, RetornoConsulta } from "../../models";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
@@ -12,7 +12,7 @@ export class CancelarNfce {
   }
 
   async executa(request: EnvioCancelamento): Promise<RetornoCancelamento> {
-    const parsedData = EnvioCancalamentoSchema.safeParse(request);
+    const parsedData = EnvioCancelamentoSchema.safeParse(request);
 
     if (!parsedData.success) {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);

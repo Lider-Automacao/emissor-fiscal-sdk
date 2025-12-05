@@ -1,9 +1,9 @@
 import z from 'zod'
 import { IntSchema, NumberSchema } from '../../types/number-type'
-import { DestinatarioSchema } from '../destinatario'
-import { EmitenteSchema } from '../emitente'
-import { PagamentoSchema } from '../pagamento'
-import { TotalSchema } from '../total'
+import { DestinatarioSchema } from '../auxiliares/destinatario'
+import { EmitenteSchema } from '../auxiliares/emitente'
+import { PagamentoSchema } from '../auxiliares/pagamento'
+import { TotalSchema } from '../auxiliares/total'
 import { NfeItemSchema } from './nfe-item'
 
 export const NfeSchema = z.object({

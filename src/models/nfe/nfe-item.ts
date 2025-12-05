@@ -1,7 +1,9 @@
 import z from 'zod'
 import { IntSchema, NumberSchema } from '../../types/number-type'
-import { CofinsSchema } from '../cofins'
-import { CombustivelSchema } from '../combustivel'
+import { CofinsSchema } from '../auxiliares/cofins'
+import { CombustivelSchema } from '../auxiliares/combustivel'
+import { PartilhaSchema } from '../auxiliares/partilha'
+import { PisSchema } from '../auxiliares/pis'
 import { IbsCbsSchema } from '../ibs_cbs/ibs_cbs'
 import { ImpostoSeletivoSchema } from '../ibs_cbs/imposto_seletivo'
 import {
@@ -31,8 +33,6 @@ import {
   ICMS900Schema,
   ICMS90Schema,
 } from '../icms'
-import { PartilhaSchema } from '../partilha'
-import { PisSchema } from '../pis'
 
 export const NfeItemSchema = z.object({
   controleItem: IntSchema,

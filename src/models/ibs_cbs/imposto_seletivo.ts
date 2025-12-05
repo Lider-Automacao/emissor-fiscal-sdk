@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { NumberMinZeroSchema } from '../../types';
-import { CST_IBS_CBS_SCHEMA } from '../CSTSchema';
+import { CST_IBS_CBS_SCHEMA } from '../auxiliares/cst';
 
 const ImpostoSeletivoSchema = z.object({
   cst: CST_IBS_CBS_SCHEMA,
