@@ -1,7 +1,7 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { ConfiguracoesSchema } from '../../models';
-import { NFSeSchema } from '../../models/nfse';
+import { ConfiguracoesSchema } from "../../models";
+import { NFSeSchema } from "../../models/nfse";
 
 export const NfseEnvioEmitirSchema = z.object({
   nfse: NFSeSchema,
@@ -9,4 +9,4 @@ export const NfseEnvioEmitirSchema = z.object({
   enviarPorEmail: z.boolean().default(false),
 });
 
-export type NfseEnvioEmitir = z.infer<typeof NfseEnvioEmitirSchema>;
+export type NfseEnvioEmitir = z.input<typeof NfseEnvioEmitirSchema>;

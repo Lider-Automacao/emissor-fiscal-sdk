@@ -1,8 +1,11 @@
-import { z } from 'zod';
-import { CST_PIS_COFINS_SCHEMA } from '../models/auxiliares';
-import { DateSchema, NumberMinZeroDefaultZeroSchema, PercentualSchema, StringSomenteNumeros } from '../types';
-
-
+import { z } from "zod";
+import { CST_PIS_COFINS_SCHEMA } from "../models/auxiliares";
+import {
+  DateSchema,
+  NumberMinZeroDefaultZeroSchema,
+  PercentualSchema,
+  StringSomenteNumeros,
+} from "../types";
 
 export const CalculaNfseRequestSchema = z.object({
   municipioEmissor: z.number().int().min(1000000).max(9999999), // Código IBGE 7 dígitos
@@ -16,7 +19,9 @@ export const CalculaNfseRequestSchema = z.object({
   regimeTributario: z.number().int().min(1).max(6).optional().nullable(), // Regime Especial de Tributação
 
   descricao: z.string().max(2000),
-  cnae: StringSomenteNumeros.pipe(z.string().length(7, "CNAE deve ter 7 dígitos.")),
+  cnae: StringSomenteNumeros.pipe(
+    z.string().length(7, "CNAE deve ter 7 dígitos.")
+  ),
   codigoFederal: StringSomenteNumeros.optional().nullable(),
   codigoMunicipal: StringSomenteNumeros.optional().nullable(),
   codigoNacional: StringSomenteNumeros.optional().nullable(),
@@ -43,5 +48,4 @@ export const CalculaNfseRequestSchema = z.object({
   versaoIBPT: z.string().max(10).optional().nullable(),
 });
 
-
-export type CalculaNfseRequest = z.infer<typeof CalculaNfseRequestSchema>;
+export type CalculaNfseRequest = z.input<typeof CalculaNfseRequestSchema>;
