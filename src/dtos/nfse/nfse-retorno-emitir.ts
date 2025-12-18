@@ -6,11 +6,9 @@ export const NfseRetornoEmitirSchema = z.object({
   idRps: z.string().optional().nullable(),
   protocolo: z.string().optional().nullable(),
   lote: z.string().optional().nullable(),
-
   numero: z.string().optional().nullable(),
   numeroRps: z.string().optional().nullable(),
   codigoVerificacao: z.string().optional().nullable(),
-
   status: z.string().optional().nullable(),
   envio: DateTimeSchema,
   xml: z.string().optional().nullable(),

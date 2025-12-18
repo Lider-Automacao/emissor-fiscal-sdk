@@ -1,7 +1,8 @@
 import { z } from 'zod';
-import { ValoresSchema } from '.';
 import { StringSomenteNumeros } from '../../types';
+import { UFSchema } from '../auxiliares';
 import { ExigibilidadeIssSchema } from './exigibilidade-iss';
+import { ValoresSchema } from './valores';
 
 export const ServicoSchema = z.object({
   descricao: z.string().max(2000, "A descrição do serviço é muito longa."),
@@ -20,7 +21,7 @@ export const ServicoSchema = z.object({
   exigibilidadeIss: ExigibilidadeIssSchema,
   responsavelRetencao: z.number().int().min(1).max(2),
   discriminacao: z.string().optional().nullable(),
-  ufPrestacao: z.string().length(2).optional().nullable(),
+  ufPrestacao: UFSchema.optional().nullable(),
   issRetido: z.boolean(),
   valores: ValoresSchema,
 });

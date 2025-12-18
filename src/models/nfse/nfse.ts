@@ -1,7 +1,9 @@
 import { z } from 'zod';
-import { OrgaoGeradorSchema, RpsSchema, ServicoSchema } from '.';
 import { DestinatarioSchema, EmitenteSchema } from '../auxiliares';
 import { NFSeIbsCbsSchema } from './ibs-cbs';
+import { OrgaoGeradorSchema } from './orgao-gerador';
+import { RpsSchema } from './rps';
+import { ServicoSchema } from './servico';
 
 
 export const NFSeSchema = z.object({

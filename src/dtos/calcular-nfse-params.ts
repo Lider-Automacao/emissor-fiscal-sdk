@@ -35,6 +35,7 @@ export const CalculaNfseRequestSchema = z.object({
   outrasRetencoes: NumberMinZeroDefaultZeroSchema,
 
   cst: CST_PIS_COFINS_SCHEMA,
+  aliquotaSuperSimples: PercentualSchema,
   aliquotaIss: PercentualSchema,
   aliquotaPis: PercentualSchema,
   aliquotaCofins: PercentualSchema,

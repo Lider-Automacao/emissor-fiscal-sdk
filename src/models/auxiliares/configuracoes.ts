@@ -10,8 +10,8 @@ export const ConfiguracoesSchema = z.object({
   logo: z.union([
     z.url(),
     z.base64(),
-  ]).optional(),
-  site: z.url().optional(),
+  ]).nullish(),
+  site: z.url().nullish(),
   sistema: z.string().default('WebLider'),
   certificado: ConfiguracaoCertificadoSchema,
   configuracoesEnvio: ConfiguracoesEnvioSchema,

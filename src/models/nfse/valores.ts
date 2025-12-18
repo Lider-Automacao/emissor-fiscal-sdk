@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { NumberMinZeroDefaultZeroSchema, PercentualSchema } from '../../types';
-import { CST_SCHEMA } from '../auxiliares';
+import { CST_PIS_COFINS_SCHEMA } from '../auxiliares';
 
 export const ValoresSchema = z.object({
   descontoCondicionado: NumberMinZeroDefaultZeroSchema,
@@ -20,7 +20,7 @@ export const ValoresSchema = z.object({
   valorIssRetido: NumberMinZeroDefaultZeroSchema,
   outrasRetencoes: NumberMinZeroDefaultZeroSchema,
 
-  cst: CST_SCHEMA,
+  cst: CST_PIS_COFINS_SCHEMA,
 
   tributacaoFederalIBPT: PercentualSchema,
   tributacaoMunicipalIBPT: PercentualSchema,
