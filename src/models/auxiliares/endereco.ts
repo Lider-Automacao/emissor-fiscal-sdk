@@ -25,7 +25,6 @@ export const EnderecoSchema = z.object({
     .min(2, 'O nome do país deve ter pelo menos 2 caracteres.')
     .max(60, 'O nome do país não pode exceder 60 caracteres.')
     .nullable().optional(),
-  fone: z.string().nullable().optional(),
   uf: UFSchema
 
 }).describe('Schema para Endereço Completo');
