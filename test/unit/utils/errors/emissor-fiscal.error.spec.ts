@@ -70,7 +70,7 @@ describe('EmissorFiscalError', () => {
     expect(err.details).toEqual({
       statusCode: 500,
       message: 'InternalServerError',
-      description: 'Serviço de NFC-e encontrou problemas para processar a NFC-e. Entre em contato com o suporte',
+      description: 'Serviço de emissão fiscal encontrou problemas para processar o documento. Entre em contato com o suporte',
     });
   });
 

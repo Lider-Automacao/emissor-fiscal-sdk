@@ -93,21 +93,21 @@ export class EmissorFiscalError extends Error {
           statusCode: status,
           apiResponse: error.response?.data,
           message,
-          description: 'Serviço de NFC-e encontrou problemas para processar a NFC-e. Entre em contato com o suporte'
+          description: 'Serviço de emissão fiscal encontrou problemas para processar o documento. Entre em contato com o suporte'
         });
       case HttpStatusCode.ServiceUnavailable:
         return new EmissorFiscalError(error.message, error, {
           statusCode: status,
           apiResponse: error.response?.data,
           message,
-          description: 'O serviço de NFC-e está temporariamente indisponível. Tente novamente mais tarde'
+          description: 'O serviço de emissão fiscal está temporariamente indisponível. Tente novamente mais tarde'
         });
       case HttpStatusCode.GatewayTimeout:
         return new EmissorFiscalError(error.message, error, {
           statusCode: status,
           apiResponse: error.response?.data,
           message,
-          description: 'O servidor de NFC-e demorou muito para responder. Aguarde e tente novamente'
+          description: 'O servidor de emissão fiscal demorou muito para responder. Aguarde e tente novamente'
         });
       default:
         return new EmissorFiscalError(error.message, error, {
