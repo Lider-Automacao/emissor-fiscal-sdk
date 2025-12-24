@@ -1,10 +1,37 @@
 import z from "zod";
-import { CST_IBS_CBS_SCHEMA } from "../auxiliares";
+import { DateSchema } from "../../types";
+import { CST_IBS_CBS_SCHEMA, EnderecoSchema } from "../auxiliares";
 
-export const NFSeIbsCbsSchema = z.object({
-  cst: CST_IBS_CBS_SCHEMA,
-  classTrib: z.string().min(1).nullable().optional(),
+
+const documentoReferenciadoSchema = z.object({
+  tipoDocumento: z.number().int(),
+  chaveAcesso: z.string().optional(),
+  numeroDocumento: z.string().optional(),
+  descricaoDocumento: z.string().optional(),
+  dataEmissao: DateSchema,
+  valorFinanceiro: z.number().nonnegative()
 });
 
+const imovelSchema = z.object({
+  inscricaoImobiliaria: z.string().optional(),
+  cib: z.string().optional(),
+  endereco: EnderecoSchema.nullish()
+});
 
-export type NFSeIbsCbs = z.infer<typeof NFSeIbsCbsSchema>;
+export const NfseIbsCbsSchema = z.object({
+  cst: CST_IBS_CBS_SCHEMA,
+  classificacaoTributaria: z.string(),
+  consumidorFinal: z.boolean().default(false),
+  percentualDiferimentoUF: z.number().min(0).max(100).default(0),
+  percentualDiferimentoMunicipal: z.number().min(0).max(100).default(0),
+  percentualDiferimentoCBS: z.number().min(0).max(100).default(0),
+  finalidadeEmissao: z.number().int().nullish(),
+  codigoIndicadorOperacao: z.string().nullish(),
+  tipoOperacao: z.number().int().nullish(),
+  entidadeGovernamental: z.number().int().nullish(),
+  imovel: imovelSchema.nullish(),
+  documentosReferenciados: z.array(documentoReferenciadoSchema).default([])
+});
+
+export type NfseIbsCbs = z.infer<typeof NfseIbsCbsSchema>;
+export type DocumentoReferenciado = z.infer<typeof documentoReferenciadoSchema>;
