@@ -22,7 +22,7 @@ export const ServicoSchema = z.object({
   responsavelRetencao: z.number().int().min(1).max(2),
   discriminacao: z.string().optional().nullable(),
   ufPrestacao: UFSchema.optional().nullable(),
-  issRetido: z.boolean(),
+  issRetido: z.number().int().min(1).max(6).default(4),
   valores: ValoresSchema,
 });
 

@@ -34,6 +34,7 @@ export const CalculaNfseRequestSchema = z.object({
   valorIssRetido: NumberMinZeroDefaultZeroSchema,
   outrasRetencoes: NumberMinZeroDefaultZeroSchema,
 
+
   cst: CST_PIS_COFINS_SCHEMA,
   aliquotaSuperSimples: PercentualSchema,
   aliquotaIss: PercentualSchema,
@@ -42,7 +43,7 @@ export const CalculaNfseRequestSchema = z.object({
   aliquotaIrrf: PercentualSchema,
   aliquotaCsll: PercentualSchema,
   aliquotaInss: PercentualSchema,
-  issRetido: z.boolean().default(false),
+  issRetido: z.number().int().min(1).max(6).default(4),
 
   tributacaoFederalIBPT: PercentualSchema,
   tributacaoMunicipalIBPT: PercentualSchema,
