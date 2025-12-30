@@ -19,7 +19,12 @@ export const ServicoSchema = z.object({
   municipio: z.number().int(),
   municipioIncidencia: z.number().int(),
   exigibilidadeIss: ExigibilidadeIssSchema,
-  responsavelRetencao: z.number().int().min(1).max(2),
+  responsavelRetencao: z.union([
+    z.literal(0).describe("Nenhum"),
+    z.literal(1).describe("Tomador"),
+    z.literal(2).describe("Prestador"),
+    z.literal(3).describe("Intermediario"),
+  ]),
   discriminacao: z.string().optional().nullable(),
   ufPrestacao: UFSchema.optional().nullable(),
   issRetido: z.number().int().min(1).max(6).default(4),
