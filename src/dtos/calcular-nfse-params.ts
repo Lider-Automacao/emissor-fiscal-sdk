@@ -31,9 +31,7 @@ export const CalculaNfseRequestSchema = z.object({
   descontoIncondicionado: NumberMinZeroDefaultZeroSchema,
   valorDeducoes: NumberMinZeroDefaultZeroSchema,
   valorServicos: NumberMinZeroDefaultZeroSchema,
-  valorIssRetido: NumberMinZeroDefaultZeroSchema,
   outrasRetencoes: NumberMinZeroDefaultZeroSchema,
-
 
   cst: CST_PIS_COFINS_SCHEMA,
   aliquotaSuperSimples: PercentualSchema,

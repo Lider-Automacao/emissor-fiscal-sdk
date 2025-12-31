@@ -38,6 +38,14 @@ export const ValoresSchema = z.object({
   valorTributoFederal: NumberMinZeroDefaultZeroSchema,
   valorTributoEstadual: NumberMinZeroDefaultZeroSchema,
   valorTributoMunicipal: NumberMinZeroDefaultZeroSchema,
+  issRetido: z.union([
+    z.literal(1).describe("Retenção"),
+    z.literal(2).describe("Normal"),
+    z.literal(3).describe("Substituição"),
+    z.literal(4).describe("Nenhum"),
+    z.literal(5).describe("Retido Fora do Município"),
+    z.literal(6).describe("Devido Fora do Município Não Retido"),
+  ]),
 });
 
 export type Valores = z.infer<typeof ValoresSchema>;

@@ -27,7 +27,6 @@ export const ServicoSchema = z.object({
   ]),
   discriminacao: z.string().optional().nullable(),
   ufPrestacao: UFSchema.optional().nullable(),
-  issRetido: z.number().int().min(1).max(6).default(4),
   valores: ValoresSchema,
 });
 
