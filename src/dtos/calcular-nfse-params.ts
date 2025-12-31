@@ -11,8 +11,12 @@ export const CalculaNfseRequestSchema = z.object({
   municipioEmissor: z.number().int().min(1000000).max(9999999), // Código IBGE 7 dígitos
   municipioIncidencia: z.number().int().min(1000000).max(9999999), // Código IBGE 7 dígitos
   exigibilidadeIss: z.number().int().min(1).max(7),
-  responsavelRetencao: z.number().int().min(1).max(2).optional().nullable(),
-
+  responsavelRetencao: z.union([
+    z.literal(0).describe("Nenhum"),
+    z.literal(1).describe("Tomador"),
+    z.literal(2).describe("Prestador"),
+    z.literal(3).describe("Intermediario"),
+  ]),
   lote: z.string().optional().nullable(),
   competencia: DateSchema,
   numero: z.string().max(15).optional().nullable(),
