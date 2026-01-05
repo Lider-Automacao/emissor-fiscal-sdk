@@ -1,3 +1,4 @@
+import { isNullOrUndefined } from "@raicamposs/toolkit";
 import z from "zod";
 import { CodigoIbgeMunicipioSchema } from "./codigo-ibge-municipio";
 import { UFSchema } from "./ufs";
@@ -17,8 +18,11 @@ export const EnderecoSchema = z.object({
   complemento: z.string()
     .max(60, 'O complemento não pode exceder 60 caracteres.')
     .nullable().optional(),
-  cep: z.coerce.string().regex(/^\d{8}$/, 'O CEP deve conter 8 dígitos numéricos, sem formatação.').transform(Number)
-    .nullable().optional(),
+  cep: z.preprocess((value) => {
+    if (typeof value !== 'string') return value;
+    if (isNullOrUndefined(value)) return null;
+    return value.replace(/\D/g, '');
+  }, z.string().regex(/^\d{8}$/, 'O CEP deve conter 8 dígitos numéricos, sem formatação.').nullable().optional()),
   paisCodigo: z.number().int().positive('O código do país deve ser positivo.')
     .nullable().optional(),
   paisNome: z.string()

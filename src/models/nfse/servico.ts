@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { StringSomenteNumeros } from '../../types';
+import { NullishStringSomenteNumeros, StringSomenteNumeros } from '../../types';
 import { UFSchema } from '../auxiliares';
 import { ExigibilidadeIssSchema } from './exigibilidade-iss';
 import { ValoresSchema } from './valores';
@@ -9,11 +9,11 @@ export const ServicoSchema = z.object({
   servico: z.string().optional().nullable(),
 
   cnae: StringSomenteNumeros.pipe(z.string().length(7, "CNAE deve ter 7 dígitos.")),
-  codigoFederal: StringSomenteNumeros.optional().nullable(),
-  codigoMunicipal: StringSomenteNumeros.optional().nullable(),
-  codigoNacional: StringSomenteNumeros.optional().nullable(),
-  codigoNbs: StringSomenteNumeros.optional().nullable(),
-  codigoTributacaoMunicipio: StringSomenteNumeros.optional().nullable(),
+  codigoFederal: NullishStringSomenteNumeros,
+  codigoMunicipal: NullishStringSomenteNumeros,
+  codigoNacional: NullishStringSomenteNumeros,
+  codigoNbs: NullishStringSomenteNumeros,
+  codigoTributacaoMunicipio: NullishStringSomenteNumeros,
 
   versaoIBPT: z.string().max(10).optional().nullable(),
   municipio: z.number().int(),

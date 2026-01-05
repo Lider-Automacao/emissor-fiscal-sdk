@@ -10,3 +10,4 @@ export const NfseEnvioEmitirSchema = z.object({
 });
 
 export type NfseEnvioEmitir = z.input<typeof NfseEnvioEmitirSchema>;
+export type NfseEmitir = z.infer<typeof NfseEnvioEmitirSchema>;

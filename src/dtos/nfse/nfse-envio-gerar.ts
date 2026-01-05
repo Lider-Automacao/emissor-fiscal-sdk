@@ -9,3 +9,4 @@ export const NfseEnvioGerarSchema = z.object({
 });
 
 export type NfseEnvioGerar = z.input<typeof NfseEnvioGerarSchema>;
+export type NfseGerar = z.infer<typeof NfseEnvioGerarSchema>;

@@ -1,3 +1,4 @@
+import z from "zod";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
 import { EnvioNfceApi, EnvioNfceApiSchema } from "../../dtos";
 import { Xml } from "../../types";
@@ -18,6 +19,6 @@ export class GerarNfce {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);
     }
 
-    return this.api.post<EnvioNfceApi, Xml>('/nfce/gerar', parsedData.data);
+    return this.api.post<z.infer<typeof EnvioNfceApiSchema>, Xml>('/nfce/gerar', parsedData.data);
   }
 }

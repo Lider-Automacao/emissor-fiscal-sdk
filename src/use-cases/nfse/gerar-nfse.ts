@@ -1,3 +1,4 @@
+import z from "zod";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
 import { NfseEnvioGerar, NfseEnvioGerarSchema } from "../../dtos/nfse/nfse-envio-gerar";
 import { NfseRetornoGerar, NfseRetornoGerarSchema } from "../../dtos/nfse/nfse-retorno-gerar";
@@ -18,7 +19,7 @@ export class GerarNfse {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);
     }
 
-    const response = await this.api.post<NfseEnvioGerar, NfseRetornoGerar>('/nfse/gerar', parsedData.data);
+    const response = await this.api.post<z.infer<typeof NfseEnvioGerarSchema>, NfseRetornoGerar>('/nfse/gerar', parsedData.data);
 
     return NfseRetornoGerarSchema.parse(response);
   }

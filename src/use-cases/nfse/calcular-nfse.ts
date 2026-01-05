@@ -1,3 +1,4 @@
+import z from "zod";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
 import { CalculaNfseRequest, CalculaNfseRequestSchema } from "../../dtos/calcular-nfse-params";
 import { NFSe } from "../../models/nfse";
@@ -17,7 +18,7 @@ export class CalculaNfse {
       throw EmissorFiscalError.fromZodError("Dados de envio inválidos", parsedData.error);
     }
 
-    const response = await this.api.post<CalculaNfseRequest, NFSe>('/nfse/calcular', parsedData.data);
+    const response = await this.api.post<z.infer<typeof CalculaNfseRequestSchema>, NFSe>('/nfse/calcular', parsedData.data);
     return response;
   }
 }

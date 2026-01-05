@@ -10,10 +10,11 @@ export const CPF_CNPJ_SCHEME = z
   .refine(
     (value) => {
       if (isNullOrUndefined(value)) return false;
-      if (value.length === 14) {
-        return new CNPJ(value).isValid;
+      const onlyNumbers = value.trim().replace(/\D/g, "");
+      if (onlyNumbers.length === 14) {
+        return new CNPJ(onlyNumbers).isValid;
       }
-      return new CPF(value).isValid;
+      return new CPF(onlyNumbers).isValid;
     },
     {
       message: 'O documento (CNPJ/CPF) é inválido',

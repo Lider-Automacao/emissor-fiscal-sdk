@@ -2,6 +2,7 @@ import { z } from "zod";
 import { CST_PIS_COFINS_SCHEMA } from "../models/auxiliares";
 import {
   DateSchema,
+  NullishStringSomenteNumeros,
   NumberMinZeroDefaultZeroSchema,
   PercentualSchema,
   StringSomenteNumeros,
@@ -26,10 +27,10 @@ export const CalculaNfseRequestSchema = z.object({
   cnae: StringSomenteNumeros.pipe(
     z.string().length(7, "CNAE deve ter 7 dígitos.")
   ),
-  codigoFederal: StringSomenteNumeros.optional().nullable(),
-  codigoMunicipal: StringSomenteNumeros.optional().nullable(),
-  codigoNacional: StringSomenteNumeros.optional().nullable(),
-  codigoNbs: StringSomenteNumeros.optional().nullable(),
+  codigoFederal: NullishStringSomenteNumeros,
+  codigoMunicipal: NullishStringSomenteNumeros,
+  codigoNacional: NullishStringSomenteNumeros,
+  codigoNbs: NullishStringSomenteNumeros,
 
   descontoCondicionado: NumberMinZeroDefaultZeroSchema,
   descontoIncondicionado: NumberMinZeroDefaultZeroSchema,
@@ -47,8 +48,8 @@ export const CalculaNfseRequestSchema = z.object({
   aliquotaInss: PercentualSchema,
   issRetido: z.number().int().min(1).max(6).default(4),
 
-  tributacaoFederalIBPT: PercentualSchema,
-  tributacaoMunicipalIBPT: PercentualSchema,
+  tributacaoFederalIBPT: PercentualSchema.default(0),
+  tributacaoMunicipalIBPT: PercentualSchema.default(0),
   versaoIBPT: z.string().max(10).optional().nullable(),
 });
 
