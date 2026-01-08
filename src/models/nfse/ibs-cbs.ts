@@ -1,5 +1,5 @@
 import z from "zod";
-import { DateSchema } from "../../types";
+import { DateSchema, PercentualSchema } from "../../types";
 import { CST_IBS_CBS_SCHEMA, EnderecoSchema } from "../auxiliares";
 
 
@@ -22,9 +22,12 @@ export const NfseIbsCbsSchema = z.object({
   cst: CST_IBS_CBS_SCHEMA,
   classificacaoTributaria: z.string(),
   consumidorFinal: z.boolean().default(false),
-  percentualDiferimentoUF: z.number().min(0).max(100).default(0),
-  percentualDiferimentoMunicipal: z.number().min(0).max(100).default(0),
-  percentualDiferimentoCBS: z.number().min(0).max(100).default(0),
+  percentualDiferimentoUF: PercentualSchema.default(0),
+  percentualDiferimentoMunicipal: PercentualSchema.default(0),
+  percentualDiferimentoCBS: PercentualSchema.default(0),
+  cbs: PercentualSchema.default(0),
+  ibsMunicipal: PercentualSchema.default(0),
+  ibsEstadual: PercentualSchema.default(0),
   finalidadeEmissao: z.number().int().nullish(),
   codigoIndicadorOperacao: z.string().nullish(),
   tipoOperacao: z.number().int().nullish(),

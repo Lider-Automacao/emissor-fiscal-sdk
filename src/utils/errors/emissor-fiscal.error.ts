@@ -2,7 +2,7 @@
 
 import { AxiosError, HttpStatusCode } from 'axios';
 import * as zPT from 'zod/v4';
-import { ZodError, flattenError } from 'zod/v4';
+import { ZodError } from 'zod/v4';
 import { EmissorApiError } from './emissor-api.error';
 
 zPT.config(zPT.locales.pt())
@@ -42,8 +42,8 @@ export class EmissorFiscalError extends Error {
       exception,
       {
         statusCode: HttpStatusCode.NotAcceptable,
-        message,
-        description: flattenError(exception)
+        message: exception.message,
+        description: zPT.prettifyError(exception),
       }
     );
   }

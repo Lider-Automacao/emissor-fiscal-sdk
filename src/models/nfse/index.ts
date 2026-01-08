@@ -1,6 +1,8 @@
+export * from './beneficio-municipal';
 export * from './exigibilidade-iss';
 export * from './ibs-cbs';
 export * from './nfse';
+export * from './obra';
 export * from './orgao-gerador';
 export * from './regime-especial-tributacao';
 export * from './rps';
@@ -8,3 +10,4 @@ export * from './servico';
 export * from './status-rps';
 export * from './tipo-rps';
 export * from './valores';
+
