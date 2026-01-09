@@ -1,13 +1,13 @@
 import { EmissorFiscalApi } from "../api/emissor-fiscal-api.service";
-import { CalculaNfseRequest } from "../dtos";
-import { NfseEnvioCancelamento } from "../dtos/nfse/nfse-envio-cancelamento";
+import { CalculaNfseRequest, NfseEnvioCancelamentoPorChave } from "../dtos";
+import { NfseEnvioCancelamentoPorRps } from "../dtos/nfse/nfse-envio-cancelamento-por-rps";
 import { NfseEnvioConsultaPorChave } from "../dtos/nfse/nfse-envio-consulta-por-chave";
 import { NfseEnvioConsultaPorRps } from "../dtos/nfse/nfse-envio-consulta-por-rps";
 import { NfseEnvioEmitir } from "../dtos/nfse/nfse-envio-emitir";
 import { NfseEnvioEnviarEmail } from "../dtos/nfse/nfse-envio-enviar-email";
 import { NfseEnvioGerar } from "../dtos/nfse/nfse-envio-gerar";
 import { NfseEnvioImpressao } from "../dtos/nfse/nfse-envio-impressao";
-import { CalculaNfse, CancelarNfse, ConsultarNfsePorChave, ConsultarNfsePorRps, EmitirNfse, EnviarNfsePorEmail, GerarNfse, ImprimirNfse } from "../use-cases/nfse";
+import { CalculaNfse, CancelarNfsePorChave, CancelarNfsePorRps, ConsultarNfsePorChave, ConsultarNfsePorRps, EmitirNfse, EnviarNfsePorEmail, GerarNfse, ImprimirNfse } from "../use-cases/nfse";
 
 export class NfseService {
 
@@ -18,17 +18,22 @@ export class NfseService {
     return usecase.executa(request);
   }
 
-  public async cancelar(request: NfseEnvioCancelamento) {
-    const usecase = new CancelarNfse(this.api)
+  public async cancelarPorChave(request: NfseEnvioCancelamentoPorRps) {
+    const usecase = new CancelarNfsePorChave(this.api)
     return usecase.executa(request);
   }
 
-  public async consultarNfsePorChave(request: NfseEnvioConsultaPorChave) {
+  public async cancelarPorRps(request: NfseEnvioCancelamentoPorChave) {
+    const usecase = new CancelarNfsePorRps(this.api)
+    return usecase.executa(request);
+  }
+
+  public async consultarPorChave(request: NfseEnvioConsultaPorChave) {
     const usecase = new ConsultarNfsePorChave(this.api)
     return usecase.executa(request);
   }
 
-  public async consultarNfsePorRps(request: NfseEnvioConsultaPorRps) {
+  public async consultarPorRps(request: NfseEnvioConsultaPorRps) {
     const usecase = new ConsultarNfsePorRps(this.api)
     return usecase.executa(request);
   }

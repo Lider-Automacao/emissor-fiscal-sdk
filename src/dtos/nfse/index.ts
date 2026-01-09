@@ -1,4 +1,5 @@
-export * from './nfse-envio-cancelamento';
+export * from './nfse-envio-cancelamento-por-chave';
+export * from './nfse-envio-cancelamento-por-rps';
 export * from './nfse-envio-consulta-por-chave';
 export * from './nfse-envio-consulta-por-rps';
 export * from './nfse-envio-emitir';

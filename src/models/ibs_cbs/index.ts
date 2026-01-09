@@ -19,3 +19,4 @@ export * from './reducao';
 export * from './transferencia_credito';
 export * from './tributacao_regular';
 export * from './uf';
+

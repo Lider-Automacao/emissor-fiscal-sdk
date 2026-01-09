@@ -3,6 +3,8 @@ import { NullishStringSomenteNumeros, StringSomenteNumeros } from '../../types';
 import { UFSchema } from '../auxiliares';
 import { BeneficioMunicipalSchema } from './beneficio-municipal';
 import { ExigibilidadeIssSchema } from './exigibilidade-iss';
+import { NfseIbsCbsSchema } from './ibs-cbs';
+import { ObraSchema } from './obra';
 import { ValoresSchema } from './valores';
 
 export const ServicoSchema = z.object({
@@ -28,6 +30,8 @@ export const ServicoSchema = z.object({
   ]),
   ufPrestacao: UFSchema.nullish(),
   valores: ValoresSchema,
+  ibsCbs: NfseIbsCbsSchema.nullable().optional(),
+  obra: ObraSchema.nullable().optional(),
   beneficioMunicipal: BeneficioMunicipalSchema.nullish().optional(),
 });
 
