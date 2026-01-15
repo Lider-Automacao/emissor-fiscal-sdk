@@ -1,40 +1,40 @@
 import z from 'zod'
-import { IntSchema, NumberSchema } from '../../types/number-type'
+import { IntSchema, NumberDefaultZeroSchema } from '../../types/number-type'
 
 export const ICMS70Schema = z.object({
   cst: z.literal('70'),
   origem: z.string(),
-  aliquota: NumberSchema.default(0),
-  valor: NumberSchema.default(0),
+  aliquota: NumberDefaultZeroSchema.default(0),
+  valor: NumberDefaultZeroSchema.default(0),
   baseCalculo: z
     .object({
       modalidadeDeterminacao: IntSchema,
-      percentualReducao: NumberSchema,
-      valor: NumberSchema,
+      percentualReducao: NumberDefaultZeroSchema,
+      valor: NumberDefaultZeroSchema,
     })
     .optional(),
   fundoCombatePobreza: z
     .object({
-      valorBaseCalculo: NumberSchema,
-      aliquota: NumberSchema,
-      valor: NumberSchema,
+      valorBaseCalculo: NumberDefaultZeroSchema,
+      aliquota: NumberDefaultZeroSchema,
+      valor: NumberDefaultZeroSchema,
     })
     .optional(),
   substituicaoTributaria: z
     .object({
       baseCalculo: z.object({
         modalidadeDeterminacao: IntSchema,
-        percentualReducao: NumberSchema,
-        valor: NumberSchema,
+        percentualReducao: NumberDefaultZeroSchema,
+        valor: NumberDefaultZeroSchema,
       }),
-      margemValorAdicionado: NumberSchema,
-      aliquota: NumberSchema,
-      valor: NumberSchema,
+      margemValorAdicionado: NumberDefaultZeroSchema,
+      aliquota: NumberDefaultZeroSchema,
+      valor: NumberDefaultZeroSchema,
       fundoCombatePobreza: z
         .object({
-          valorBaseCalculo: NumberSchema,
-          aliquota: NumberSchema,
-          valor: NumberSchema,
+          valorBaseCalculo: NumberDefaultZeroSchema,
+          aliquota: NumberDefaultZeroSchema,
+          valor: NumberDefaultZeroSchema,
         })
         .optional(),
     })
@@ -42,7 +42,7 @@ export const ICMS70Schema = z.object({
   desoneracao: z
     .object({
       motivo: IntSchema,
-      valor: NumberSchema,
+      valor: NumberDefaultZeroSchema,
       deduzItem: z.boolean(),
     })
     .optional(),

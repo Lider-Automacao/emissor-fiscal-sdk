@@ -1,5 +1,5 @@
 import z from 'zod'
-import { IntSchema, NumberSchema } from '../../types/number-type'
+import { IntSchema, NumberDefaultZeroSchema } from '../../types/number-type'
 
 export const ICMS202Schema = z.object({
   cst: z.literal('202'),
@@ -7,17 +7,17 @@ export const ICMS202Schema = z.object({
   substituicaoTributaria: z.object({
     baseCalculo: z.object({
       modalidadeDeterminacao: IntSchema,
-      valor: NumberSchema,
-      percentualReducao: NumberSchema,
+      valor: NumberDefaultZeroSchema,
+      percentualReducao: NumberDefaultZeroSchema,
     }),
-    margemValorAdicionado: NumberSchema,
-    aliquota: NumberSchema,
-    valor: NumberSchema,
+    margemValorAdicionado: NumberDefaultZeroSchema,
+    aliquota: NumberDefaultZeroSchema,
+    valor: NumberDefaultZeroSchema,
     fundoCombatePobreza: z
       .object({
-        aliquota: NumberSchema,
-        valorBaseCalculo: NumberSchema,
-        valor: NumberSchema,
+        aliquota: NumberDefaultZeroSchema,
+        valorBaseCalculo: NumberDefaultZeroSchema,
+        valor: NumberDefaultZeroSchema,
       })
       .optional(),
   }),

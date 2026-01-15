@@ -1,18 +1,18 @@
 import z from 'zod'
-import { NumberSchema } from '../../types/number-type'
+import { NumberDefaultZeroSchema } from '../../types/number-type'
 
 export const ICMS15Schema = z.object({
   cst: z.literal('15'),
   origem: z.string(),
-  baseCalculoMono: NumberSchema,
-  aliquotaAdRem: NumberSchema,
-  baseCalculoMonoRetencao: NumberSchema,
-  valorIcmsMono: NumberSchema,
-  aliquotaAdRemRetencao: NumberSchema,
-  valorIcmsMonoRetencao: NumberSchema,
+  baseCalculoMono: NumberDefaultZeroSchema,
+  aliquotaAdRem: NumberDefaultZeroSchema,
+  baseCalculoMonoRetencao: NumberDefaultZeroSchema,
+  valorIcmsMono: NumberDefaultZeroSchema,
+  aliquotaAdRemRetencao: NumberDefaultZeroSchema,
+  valorIcmsMonoRetencao: NumberDefaultZeroSchema,
   reducaoAdRem: z.object({
-    percentualReducaoAdRem: NumberSchema,
-    motivoReducaoAdRem: NumberSchema,
+    percentualReducaoAdRem: NumberDefaultZeroSchema,
+    motivoReducaoAdRem: NumberDefaultZeroSchema,
   }),
 })
 

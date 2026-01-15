@@ -1,42 +1,42 @@
 import z from 'zod'
 import { NullishString } from '../../types'
-import { IntSchema, NumberSchema } from '../../types/number-type'
+import { IntSchema, NumberDefaultZeroSchema } from '../../types/number-type'
 
 export const ICMS90Schema = z.object({
   cst: z.literal('90'),
   origem: z.string(),
-  aliquota: NumberSchema.default(0),
-  valor: NumberSchema.default(0),
-  baseOperacaoPropria: NumberSchema.default(0),
+  aliquota: NumberDefaultZeroSchema.default(0),
+  valor: NumberDefaultZeroSchema.default(0),
+  baseOperacaoPropria: NumberDefaultZeroSchema.default(0),
   baseCalculo: z
     .object({
       modalidadeDeterminacao: IntSchema,
-      valor: NumberSchema,
-      percentualReducao: NumberSchema,
+      valor: NumberDefaultZeroSchema,
+      percentualReducao: NumberDefaultZeroSchema,
     })
     .optional(),
   fundoCombatePobreza: z
     .object({
-      valorBaseCalculo: NumberSchema,
-      aliquota: NumberSchema,
-      valor: NumberSchema,
+      valorBaseCalculo: NumberDefaultZeroSchema,
+      aliquota: NumberDefaultZeroSchema,
+      valor: NumberDefaultZeroSchema,
     })
     .optional(),
   substituicaoTributaria: z
     .object({
       baseCalculo: z.object({
         modalidadeDeterminacao: IntSchema,
-        valor: NumberSchema,
-        percentualReducao: NumberSchema,
+        valor: NumberDefaultZeroSchema,
+        percentualReducao: NumberDefaultZeroSchema,
       }),
-      margemValorAdicionado: NumberSchema,
-      aliquota: NumberSchema,
-      valor: NumberSchema,
+      margemValorAdicionado: NumberDefaultZeroSchema,
+      aliquota: NumberDefaultZeroSchema,
+      valor: NumberDefaultZeroSchema,
       fundoCombatePobreza: z
         .object({
-          valorBaseCalculo: NumberSchema,
-          aliquota: NumberSchema,
-          valor: NumberSchema,
+          valorBaseCalculo: NumberDefaultZeroSchema,
+          aliquota: NumberDefaultZeroSchema,
+          valor: NumberDefaultZeroSchema,
         })
         .optional(),
       ufDevido: NullishString,
@@ -45,7 +45,7 @@ export const ICMS90Schema = z.object({
   desoneracao: z
     .object({
       motivo: IntSchema,
-      valor: NumberSchema,
+      valor: NumberDefaultZeroSchema,
       deduzItem: z.boolean(),
     })
     .optional(),

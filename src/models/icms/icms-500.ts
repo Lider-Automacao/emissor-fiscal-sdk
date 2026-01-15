@@ -1,32 +1,32 @@
 import z from 'zod'
-import { NumberSchema } from '../../types/number-type'
+import { NumberDefaultZeroSchema } from '../../types/number-type'
 
 export const ICMS500Schema = z.object({
   cst: z.literal('500'),
   origem: z.string(),
   substituicaoTributaria: z
     .object({
-      valorBaseCalculo: NumberSchema,
-      aliquota: NumberSchema,
-      valor: NumberSchema,
+      valorBaseCalculo: NumberDefaultZeroSchema,
+      aliquota: NumberDefaultZeroSchema,
+      valor: NumberDefaultZeroSchema,
       fundoCombatePobreza: z
         .object({
-          aliquota: NumberSchema,
-          valorBaseCalculo: NumberSchema,
-          valor: NumberSchema,
+          aliquota: NumberDefaultZeroSchema,
+          valorBaseCalculo: NumberDefaultZeroSchema,
+          valor: NumberDefaultZeroSchema,
         })
         .optional(),
     })
     .optional(),
-  valor: NumberSchema,
+  valor: NumberDefaultZeroSchema,
   efetivo: z
     .object({
       baseCalculo: z.object({
-        valor: NumberSchema,
-        percentualReducao: NumberSchema,
+        valor: NumberDefaultZeroSchema,
+        percentualReducao: NumberDefaultZeroSchema,
       }),
-      aliquota: NumberSchema,
-      valor: NumberSchema,
+      aliquota: NumberDefaultZeroSchema,
+      valor: NumberDefaultZeroSchema,
     })
     .optional(),
 })

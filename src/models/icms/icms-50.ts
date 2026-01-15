@@ -1,5 +1,5 @@
 import z from 'zod'
-import { IntSchema, NumberSchema } from '../../types/number-type'
+import { IntSchema, NumberDefaultZeroSchema } from '../../types/number-type'
 
 export const ICMS50Schema = z.object({
   cst: z.literal('50'),
@@ -7,7 +7,7 @@ export const ICMS50Schema = z.object({
   desoneracao: z
     .object({
       motivo: IntSchema,
-      valor: NumberSchema,
+      valor: NumberDefaultZeroSchema,
       deduzItem: z.boolean(),
     })
     .optional(),

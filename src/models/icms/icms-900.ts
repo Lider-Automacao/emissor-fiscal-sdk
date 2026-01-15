@@ -1,36 +1,36 @@
 import z from 'zod'
-import { IntSchema, NumberSchema } from '../../types/number-type'
+import { IntSchema, NumberDefaultZeroSchema } from '../../types/number-type'
 
 export const ICMS900Schema = z.object({
   cst: z.literal('900'),
   origem: z.string(),
   baseCalculo: z.object({
     modalidadeDeterminacao: IntSchema,
-    valor: NumberSchema,
-    percentualReducao: NumberSchema,
+    valor: NumberDefaultZeroSchema,
+    percentualReducao: NumberDefaultZeroSchema,
   }),
-  aliquota: NumberSchema,
-  valor: NumberSchema,
+  aliquota: NumberDefaultZeroSchema,
+  valor: NumberDefaultZeroSchema,
   substituicaoTributaria: z.object({
     baseCalculo: z.object({
       modalidadeDeterminacao: IntSchema,
-      valor: NumberSchema,
-      percentualReducao: NumberSchema,
+      valor: NumberDefaultZeroSchema,
+      percentualReducao: NumberDefaultZeroSchema,
     }),
-    margemValorAdicionado: NumberSchema,
-    aliquota: NumberSchema,
-    valor: NumberSchema,
+    margemValorAdicionado: NumberDefaultZeroSchema,
+    aliquota: NumberDefaultZeroSchema,
+    valor: NumberDefaultZeroSchema,
     fundoCombatePobreza: z
       .object({
-        aliquota: NumberSchema,
-        valorBaseCalculo: NumberSchema,
-        valor: NumberSchema,
+        aliquota: NumberDefaultZeroSchema,
+        valorBaseCalculo: NumberDefaultZeroSchema,
+        valor: NumberDefaultZeroSchema,
       })
       .optional(),
   }),
   creditoSimplesNacional: z.object({
-    percentual: NumberSchema,
-    valor: NumberSchema,
+    percentual: NumberDefaultZeroSchema,
+    valor: NumberDefaultZeroSchema,
   }),
 })
 

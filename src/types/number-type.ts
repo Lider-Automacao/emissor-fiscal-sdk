@@ -14,6 +14,13 @@ export const NumberMinZeroSchema = z
   ])
   .pipe(z.number().min(0));
 
+export const NumberDefaultZeroSchema = z
+  .union([
+    z.number(),
+    z.string().transform((value) => Number.isNaN(value) ? undefined : Number(value)),
+  ])
+  .pipe(z.number().default(0));
+
 export const NumberMinZeroDefaultZeroSchema = z
   .union([
     z.number(),

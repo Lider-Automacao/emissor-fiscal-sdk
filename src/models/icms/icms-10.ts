@@ -1,41 +1,41 @@
 import z from 'zod'
 import { NullishString } from '../../types'
-import { IntSchema, NumberSchema } from '../../types/number-type'
+import { IntSchema, NumberDefaultZeroSchema } from '../../types/number-type'
 
 export const ICMS10Schema = z.object({
   cst: z.literal('10'),
   origem: z.string(),
-  aliquota: NumberSchema,
-  valor: NumberSchema,
-  baseOperacaoPropria: NumberSchema,
+  aliquota: NumberDefaultZeroSchema,
+  valor: NumberDefaultZeroSchema,
+  baseOperacaoPropria: NumberDefaultZeroSchema,
   baseCalculo: z.object({
     modalidadeDeterminacao: IntSchema,
-    valor: NumberSchema,
-    percentualReducao: NumberSchema,
+    valor: NumberDefaultZeroSchema,
+    percentualReducao: NumberDefaultZeroSchema,
   }),
   substituicaoTributaria: z.object({
-    aliquota: NumberSchema,
+    aliquota: NumberDefaultZeroSchema,
     baseCalculo: z.object({
       modalidadeDeterminacao: IntSchema,
-      valor: NumberSchema,
-      percentualReducao: NumberSchema,
+      valor: NumberDefaultZeroSchema,
+      percentualReducao: NumberDefaultZeroSchema,
     }),
-    margemValorAdicionado: NumberSchema,
-    valor: NumberSchema,
+    margemValorAdicionado: NumberDefaultZeroSchema,
+    valor: NumberDefaultZeroSchema,
     fundoCombatePobreza: z
       .object({
-        aliquota: NumberSchema,
-        valorBaseCalculo: NumberSchema,
-        valor: NumberSchema,
+        aliquota: NumberDefaultZeroSchema,
+        valorBaseCalculo: NumberDefaultZeroSchema,
+        valor: NumberDefaultZeroSchema,
       })
       .optional(),
     ufDevido: NullishString,
   }),
   fundoCombatePobreza: z
     .object({
-      aliquota: NumberSchema,
-      valorBaseCalculo: NumberSchema,
-      valor: NumberSchema,
+      aliquota: NumberDefaultZeroSchema,
+      valorBaseCalculo: NumberDefaultZeroSchema,
+      valor: NumberDefaultZeroSchema,
     })
     .optional(),
 })
