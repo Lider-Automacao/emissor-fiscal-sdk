@@ -1,9 +1,9 @@
 import z from 'zod'
-import { DateNullishSchema, DateSchema, NullishString } from '../../types'
+import { DateNullishSchema, DateSchema, DateTimeNullishSchema, DateTimeSchema, NullishString } from '../../types'
 
 export const RetornoEnvioApiSchema = z.object({
-  data: DateSchema.catch(new Date()),
-  dataContigencia: DateNullishSchema.catch(null),
+  data: z.union([DateSchema, DateTimeSchema]).nullish().catch(undefined),
+  dataContigencia: z.union([DateNullishSchema, DateTimeNullishSchema]).nullish().catch(undefined),
   protocolo: z.string(),
   chaveAcesso: z.string(),
   status: z.enum([
@@ -14,7 +14,7 @@ export const RetornoEnvioApiSchema = z.object({
     'O'
   ]),
   xml: z.string(),
-  motivo: NullishString,
+  motivo: NullishString.optional(),
   numero: z.number(),
   serie: z.number(),
 })
