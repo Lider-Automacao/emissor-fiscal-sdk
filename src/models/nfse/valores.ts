@@ -1,6 +1,6 @@
-import { z } from 'zod';
-import { NumberMinZeroDefaultZeroSchema, PercentualSchema } from '../../types';
-import { CST_PIS_COFINS_SCHEMA } from '../auxiliares';
+import { z } from "zod";
+import { NumberMinZeroDefaultZeroSchema, PercentualSchema } from "../../types";
+import { CST_PIS_COFINS_SCHEMA } from "../auxiliares";
 
 export const ValoresSchema = z.object({
   descontoCondicionado: NumberMinZeroDefaultZeroSchema,
@@ -45,6 +45,17 @@ export const ValoresSchema = z.object({
     z.literal(4).describe("Nenhum"),
     z.literal(5).describe("Retido Fora do Município"),
     z.literal(6).describe("Devido Fora do Município Não Retido"),
+  ]),
+  pisCofinsRetido: z.union([
+    z.literal(1).describe("Retido"),
+    z.literal(2).describe("Não Retido"),
+    z.literal(3).describe("Pis Cofins Csll Retido"),
+    z.literal(4).describe("Pis Cofins Retido Csll Nao Retido"),
+    z.literal(5).describe("Pis Retido Cofins Csll Nao Retido"),
+    z.literal(6).describe("Cofins Retido Pis Csll Nao Retido"),
+    z.literal(7).describe("Cofins Csll Retido Pis Nao Retido"),
+    z.literal(8).describe("Csll Retido Pis Cofins Nao Retido"),
+    z.literal(9).describe("Pis Csll Retido Cofins Nao Retido"),
   ]),
 });
 

@@ -25,7 +25,7 @@ export const CalculaNfseRequestSchema = z.object({
 
   descricao: z.string().max(2000),
   cnae: StringSomenteNumeros.pipe(
-    z.string().length(7, "CNAE deve ter 7 dígitos.")
+    z.string().length(7, "CNAE deve ter 7 dígitos."),
   ),
   codigoFederal: NullishStringSomenteNumeros,
   codigoMunicipal: NullishStringSomenteNumeros,
@@ -47,7 +47,21 @@ export const CalculaNfseRequestSchema = z.object({
   aliquotaCsll: PercentualSchema,
   aliquotaInss: PercentualSchema,
   issRetido: z.number().int().min(1).max(6).default(4),
-
+  pisCofinsRetido: z
+    .union([
+      z.literal(1).describe("Retido"),
+      z.literal(2).describe("Não Retido"),
+      z.literal(3).describe("Pis Cofins Csll Retido"),
+      z.literal(4).describe("Pis Cofins Retido Csll Nao Retido"),
+      z.literal(5).describe("Pis Retido Cofins Csll Nao Retido"),
+      z.literal(6).describe("Cofins Retido Pis Csll Nao Retido"),
+      z.literal(7).describe("Cofins Csll Retido Pis Nao Retido"),
+      z.literal(8).describe("Csll Retido Pis Cofins Nao Retido"),
+      z.literal(9).describe("Pis Csll Retido Cofins Nao Retido"),
+    ])
+    .default(2),
+  aliquotaPisRetido: PercentualSchema.default(0),
+  aliquotaCofinsRetido: PercentualSchema.default(0),
   tributacaoFederalIBPT: PercentualSchema.default(0),
   tributacaoMunicipalIBPT: PercentualSchema.default(0),
   versaoIBPT: z.string().max(10).optional().nullable(),
