@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ConfiguracoesSchema } from '../../models';
+import { ConfiguracoesSchema, TipoRPSSchema } from '../../models';
 
 const DadosSchema = z.object({
   numeroNFSe: z.string().optional().nullable(),
@@ -9,7 +9,7 @@ const DadosSchema = z.object({
   protocolo: z.string().optional().nullable(),
   codigoCancelamento: z.number().int().min(1).max(99).optional().nullable(),
   motivo: z.string().max(255).optional().nullable(),
-  tipoRps: z.string().max(1).optional().nullable(),
+  tipoRps: TipoRPSSchema.optional().nullable(),
 });
 
 export const NfseEnvioCancelamentoPorRpsSchema = z.object({
