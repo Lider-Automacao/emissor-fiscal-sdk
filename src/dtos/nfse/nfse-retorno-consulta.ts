@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { DateTimeSchema } from '../../types';
+import { z } from "zod";
+import { DateTimeSchema } from "../../types";
 
 export const NfseRetornoConsultaSchema = z.object({
   id: z.string().optional().nullable(),
@@ -14,6 +14,8 @@ export const NfseRetornoConsultaSchema = z.object({
   codigoVerificacao: z.string().optional().nullable(),
   envio: DateTimeSchema,
   xml: z.string().optional().nullable(),
+  valorServico: z.number().optional().nullable(),
+  identificacaoTomador: z.string().optional().nullable(),
 });
 
 export type NfseRetornoConsulta = z.infer<typeof NfseRetornoConsultaSchema>;
