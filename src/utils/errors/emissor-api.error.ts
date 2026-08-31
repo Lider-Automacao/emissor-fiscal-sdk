@@ -1,10 +1,47 @@
+// Campos crus da resposta de erro da API (ver EHorseException.ToJSONObject /
+// TCustomError.ToJSONObject no lado Delphi). `unit` é o nome da unit/classe
+// Delphi que lançou o erro - serve só pra rastreio/debug, nunca é mensagem
+// pro usuário final.
 export class EmissorApiError {
 
   constructor(public apiResponse: any) { }
 
+  get error(): string | undefined {
+    return this.apiResponse?.error;
+  }
+
+  get title(): string | undefined {
+    return this.apiResponse?.title;
+  }
+
+  get unit(): string | undefined {
+    return this.apiResponse?.unit;
+  }
+
+  get hint(): string | undefined {
+    return this.apiResponse?.hint;
+  }
+
+  get code(): number | undefined {
+    return this.apiResponse?.code;
+  }
+
+  get type(): string | undefined {
+    return this.apiResponse?.type;
+  }
+
+  get detail(): string | undefined {
+    return this.apiResponse?.detail;
+  }
+
+  // Mensagem legível: `error` é o campo que o ErrorClassifier (server) garante
+  // populado (Error > Detail > Title, nunca vazio) no shape do EHorseException.
+  // `title`/`message` cobrem payload fora desse shape (ex.: erro genérico do
+  // Axios/proxy, sem passar pelo Horse). `unit` é last-resort - só serve como
+  // texto quando nem isso existe.
   get message(): string | null {
-    const { unit, message, error } = this.apiResponse;
-    return unit ?? message ?? error;
+    const { error, title, message, unit } = this.apiResponse ?? {};
+    return error ?? title ?? message ?? unit ?? null;
   }
 
   get description(): string | undefined {

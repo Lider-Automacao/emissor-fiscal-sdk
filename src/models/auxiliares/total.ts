@@ -42,6 +42,8 @@ export const TotalSchema = z.object({
   valorIBSEst: NumberSchema.default(0),
   valorIBSMun: NumberSchema.default(0),
   valorCBS: NumberSchema.default(0),
+  valorIS: NumberSchema.default(0),
+  infoComplementar: z.string().nullable().optional(),
 })
 
 export type Total = z.infer<typeof TotalSchema>

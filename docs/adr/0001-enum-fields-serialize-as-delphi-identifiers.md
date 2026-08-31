@@ -1,0 +1,3 @@
+# Campos enum trafegam como o identifier Pascal literal, não camelCase
+
+A API não registra serializer customizado para tipos enum no Neon (só `SetMemberCase(CamelCase)`, que afeta nomes de propriedade, não valores de enum) — então o Neon serializa um enum Delphi usando o nome exato do identifier declarado (ex.: `PercentualAproveitado`), sem tradução de case. Decidimos espelhar isso 1:1 no zod (`z.enum(['PercentualAproveitado', 'PercentualReduzido'])`) em vez de traduzir para uma convenção camelCase/kebab mais idiomática em JS, para não precisar de uma camada de tradução client-side. Reverter exige registrar um serializer customizado no lado Delphi ou adicionar essa camada de mapeamento no SDK.

@@ -39,13 +39,16 @@ describe('EmissorFiscalError', () => {
   });
 
   it('fromApiResponse should extract data from api error', () => {
+    // Shape real do EHorseException/TCustomError (Delphi): `error` é o campo
+    // que o ErrorClassifier server-side garante populado, `unit` é só o nome
+    // da unit/classe Delphi que lançou o erro (debug, não é mensagem).
     const axiosError = {
       isAxiosError: true,
       response: {
         status: 404,
         data: {
-          "error": "0",
-          "unit": "Erro na emissão NFCe",
+          "error": "Erro na emissão NFCe",
+          "unit": "TNFCeMetodosService",
           "detail": "Falha na validação dos dados da nota: 3146"
         }
       }

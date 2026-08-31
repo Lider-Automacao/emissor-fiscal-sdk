@@ -1,6 +1,6 @@
 import { EmissorFiscalApi } from "../api/emissor-fiscal-api.service";
-import { CalculaNfeRequest, EnvioCancelamento, EnvioConsulta, EnvioImpressao, EnvioInutilizacao, EnvioNfeApi } from "../dtos";
-import { CalculaNfe, CancelarNfe, ConsultarNfe, EmitirNfe, GerarNfe, ImprimirNfe, InutilizarNfe } from "../use-cases";
+import { CalculaNfeRequest, EnvioCancelamento, EnvioCartaCorrecao, EnvioConsulta, EnvioImpressao, EnvioInutilizacao, EnvioNfeApi } from "../dtos";
+import { CalculaNfe, CancelarNfe, ConsultarNfe, EmitirNfe, GerarCartaCorrecaoNfe, GerarNfe, ImprimirNfe, InutilizarNfe } from "../use-cases";
 
 export class NfeService {
 
@@ -38,6 +38,11 @@ export class NfeService {
 
   public async inutilizar(request: EnvioInutilizacao) {
     const usecase = new InutilizarNfe(this.api)
+    return usecase.executa(request);
+  }
+
+  public async gerarCartaCorrecao(request: EnvioCartaCorrecao) {
+    const usecase = new GerarCartaCorrecaoNfe(this.api)
     return usecase.executa(request);
   }
 

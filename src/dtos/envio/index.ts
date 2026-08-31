@@ -1,4 +1,5 @@
 export * from './envio-cancelamento';
+export * from './envio-carta-correcao';
 export * from './envio-consulta';
 export * from './envio-impressao';
 export * from './envio-inutilizacao';

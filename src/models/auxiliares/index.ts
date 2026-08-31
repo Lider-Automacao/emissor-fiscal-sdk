@@ -3,6 +3,7 @@ export * from './cofins';
 export * from './combustivel';
 export * from './configuracao-certificado';
 export * from './configuracao-email';
+export * from './configuracao-responsavel-tecnico';
 export * from './configuracoes';
 export * from './configuracoes-envio';
 export * from './configuracoes-webservice';

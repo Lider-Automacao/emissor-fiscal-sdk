@@ -77,6 +77,37 @@ export const PedidoItemSchema = z.object({
   aliqEfetRegIBSEst: z.number().nonnegative().nullable().optional(),
   aliqEfetRegIBSMun: z.number().nonnegative().nullable().optional(),
   aliqEfetRegCBS: z.number().nonnegative().nullable().optional(),
+
+  // --- ICMS-ST / Desoneração ---
+  interpretacaoPercentualReducao: z.enum(['PercentualAproveitado', 'PercentualReduzido']).default('PercentualAproveitado'),
+  mvaSt: z.number().nonnegative().nullable().optional(),
+  percentualReducaoSt: z.number().nonnegative().nullable().optional(),
+  percentualReducaoStZerada: z.boolean().nullable().optional(),
+  percentualDiferimento: z.number().nonnegative().nullable().optional(),
+  aliquotaFcpSt: z.number().nonnegative().nullable().optional(),
+  motivoDesoneracao: z.number().int().nullable().optional(),
+  deduzValorDesoneracaoDoItem: z.boolean().nullable().optional(),
+
+  // --- IPI ---
+  cstIpi: z.string().min(1).nullable().optional(),
+  aliquotaIpi: z.number().nonnegative().nullable().optional(),
+  valorIpi: z.number().nonnegative(),
+
+  // --- Base de cálculo do ICMS próprio ---
+  incluirFreteBcIcms: z.boolean(),
+  incluirSeguroBcIcms: z.boolean(),
+  incluirOutrasDespesasBcIcms: z.boolean(),
+  incluirIpiBcIcms: z.boolean(),
+
+  // --- Imposto Seletivo (reforma tributária, Grupo UB) ---
+  cstIS: z.string().min(1).nullable().optional(),
+  classificacaoIS: z.string().min(1).nullable().optional(),
+  aliquotaIS: z.number().nonnegative().nullable().optional(),
+  aliquotaEspecificaIS: z.number().nonnegative().nullable().optional(),
+  unidadeIS: z.string().min(1).nullable().optional(),
+  quantidadeIS: z.number().nonnegative().nullable().optional(),
+
+  infoComplementares: z.string().nullable().optional(),
 }).describe('Schema para Item de Pedido');
 
 export type PedidoItem = z.infer<typeof PedidoItemSchema>
