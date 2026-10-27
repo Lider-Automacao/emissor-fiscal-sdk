@@ -1,0 +1,2950 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "EmissorFiscalAPI",
+    "termsOfService": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "license": {
+      "name": "Apache License - Version 2.0, January 2004",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "schemes": [],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/nfe/cancelar": {
+      "post": {
+        "tags": [
+          "NF-e"
+        ],
+        "summary": "Cancelar NF-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para cancelamento da NF-e",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NFeCancelamentoInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/NFeCancelamentoOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfe/calcular": {
+      "post": {
+        "tags": [
+          "NF-e"
+        ],
+        "summary": "Calcula os tributos dos itens da NF-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "itens",
+            "description": "itens da NF-e",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NotaItemInput"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "calculo realizado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/NFeCalculada"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfe/emitir": {
+      "post": {
+        "tags": [
+          "NF-e"
+        ],
+        "summary": "Emitir NF-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para emissão da NF-e",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NFeInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/NFeOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfe/inutilizar": {
+      "post": {
+        "tags": [
+          "NF-e"
+        ],
+        "summary": "Inutilizar numeração de NF-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para inutilização de numeração",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NFeInutilizacaoInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NFeInutilizacaoOutput"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfe/consultar": {
+      "post": {
+        "tags": [
+          "NF-e"
+        ],
+        "summary": "Consultar NF-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para consulta da NF-e",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NFeConsultaInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/NFeConsultaOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfce/gerar": {
+      "post": {
+        "tags": [
+          "NFC-e"
+        ],
+        "summary": "Place an order for a Pet",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "order",
+            "description": "order placed for purchasing the pet",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NFCeInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfce/cancelar": {
+      "post": {
+        "tags": [
+          "NFC-e"
+        ],
+        "summary": "Cancelar NFC-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para cancelamento da NFC-e",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NFCeCancelamentoInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/NFCeCancelamentoOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfce/calcular": {
+      "post": {
+        "tags": [
+          "NFC-e"
+        ],
+        "summary": "Calcula os tributos dos itens da NFC-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "itens",
+            "description": "itens da NFC-e",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NotaItemInput"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "calculo realizado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/NFCeCalculada"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfce/inutilizar": {
+      "post": {
+        "tags": [
+          "NFC-e"
+        ],
+        "summary": "Inutilizar numeração de NFC-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para inutilização de numeração",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NFCeInutilizacaoInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NFCeInutilizacaoOutput"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfce/consultar": {
+      "post": {
+        "tags": [
+          "NFC-e"
+        ],
+        "summary": "Consultar NFC-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para consulta da NFC-e",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NFCeConsultaInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/NFCeConsultaOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfce/emitir": {
+      "post": {
+        "tags": [
+          "NFC-e"
+        ],
+        "summary": "Emitir NFC-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para emissão da NFC-e",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NFCeInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/NFCeOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfse/cancelar": {
+      "post": {
+        "tags": [
+          "NFS-e"
+        ],
+        "summary": "Cancelar NFS-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para cancelamento da NFS-e",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelamentoInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CancelamentoOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfse/consultar/chave": {
+      "post": {
+        "tags": [
+          "NFS-e"
+        ],
+        "summary": "Consultar NFS-e por chave de acesso",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para consulta por chave",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConsultaPorChaveInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ConsultaOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfse/consultar/dps": {
+      "post": {
+        "tags": [
+          "NFS-e"
+        ],
+        "summary": "Consultar NFS-e por DPS",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para consulta por DPS",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConsultaPorDpsInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ConsultaDpsOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfse/emitir": {
+      "post": {
+        "tags": [
+          "NFS-e"
+        ],
+        "summary": "Emitir NFS-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para emissão da NFS-e",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmitirInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/EmitirOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfse/gerar": {
+      "post": {
+        "tags": [
+          "NFS-e"
+        ],
+        "summary": "Gerar NFS-e",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para geração da NFS-e",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmitirInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GerarOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/nfse/consultar/rps": {
+      "post": {
+        "tags": [
+          "NFS-e"
+        ],
+        "summary": "Consultar NFS-e por RPS",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "dados para consulta por RPS",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConsultaPorRpsInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ConsultaOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "definitions": {
+    "CancelamentoInput": {
+      "type": "object",
+      "description": "CancelamentoInput",
+      "properties": {
+        "dados": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CancelamentoInput.TDados"
+            }
+          ]
+        },
+        "Configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        }
+      }
+    },
+    "CancelamentoInput.TDados": {
+      "type": "object",
+      "description": "CancelamentoInput.TDados",
+      "properties": {
+        "chave": {
+          "type": "string"
+        },
+        "codigoCancelamento": {
+          "type": "integer"
+        },
+        "motivo": {
+          "type": "string"
+        },
+        "NumeroNFSe": {
+          "type": "string"
+        },
+        "NumeroRps": {
+          "type": "string"
+        },
+        "serie": {
+          "type": "string"
+        },
+        "lote": {
+          "type": "string"
+        },
+        "protocolo": {
+          "type": "string"
+        },
+        "tipoRps": {
+          "type": "string"
+        }
+      }
+    },
+    "CancelamentoOutput": {
+      "type": "object",
+      "description": "CancelamentoOutput",
+      "properties": {
+        "situacao": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        },
+        "msgCanc": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
+        },
+        "sequenciaEvento": {
+          "type": "string"
+        },
+        "idEvento": {
+          "type": "string"
+        }
+      }
+    },
+    "Cartao": {
+      "type": "object",
+      "description": "Cartao",
+      "properties": {
+        "tipoIntegracao": {
+          "type": "integer"
+        },
+        "cnpjCredenciadora": {
+          "type": "string"
+        },
+        "bandeiraOperadora": {
+          "type": "string"
+        },
+        "numeroAutorizacao": {
+          "type": "string"
+        },
+        "cnpjBeneficiario": {
+          "type": "string"
+        },
+        "idTerminal": {
+          "type": "string"
+        }
+      }
+    },
+    "Certificado": {
+      "type": "object",
+      "description": "Certificado",
+      "properties": {
+        "arquivoBase64": {
+          "type": "string"
+        },
+        "senha": {
+          "type": "string"
+        },
+        "numeroSerie": {
+          "type": "string"
+        },
+        "certificadoInstalado": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Configuracoes": {
+      "type": "object",
+      "description": "Configuracoes",
+      "properties": {
+        "logo": {
+          "type": "string"
+        },
+        "sistema": {
+          "type": "string"
+        },
+        "site": {
+          "type": "string"
+        },
+        "certificado": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Certificado"
+            }
+          ]
+        },
+        "email": {
+          "type": "auxiliares.entity.configuracoes.email.temail"
+        },
+        "webService": {
+          "type": "auxiliares.entity.configuracoes.webservice.tconfiguracoeswebservice"
+        },
+        "responsavelTecnico": {
+          "type": "auxiliares.entity.configuracoes.responsaveltecnico.tresponsaveltecnico"
+        },
+        "ConfiguracoesEnvio": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ConfiguracoesEnvio"
+            }
+          ]
+        },
+        "emitente": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Emitente"
+            }
+          ]
+        },
+        "PastaRaizArmazenamento": {
+          "type": "string"
+        },
+        "DiretorioDeRegistro": {
+          "type": "string"
+        },
+        "TipoLogo": {
+          "type": "string",
+          "enum": [
+            "istURL",
+            "istBase64",
+            "istLocalPath",
+            "istUnknown"
+          ]
+        }
+      }
+    },
+    "ConfiguracoesEnvio": {
+      "type": "object",
+      "description": "ConfiguracoesEnvio",
+      "properties": {
+        "idCSC": {
+          "type": "string"
+        },
+        "csc": {
+          "type": "string"
+        },
+        "ambiente": {
+          "type": "integer"
+        },
+        "modelo": {
+          "type": "integer"
+        },
+        "tipoEmissao": {
+          "type": "integer"
+        },
+        "documentoContador": {
+          "type": "string"
+        },
+        "versaoQrCode": {
+          "type": "integer"
+        }
+      }
+    },
+    "ConsultaDpsOutput": {
+      "type": "object",
+      "description": "ConsultaDpsOutput",
+      "properties": {
+        "Dps": {
+          "type": "string"
+        },
+        "Xml": {
+          "type": "string"
+        }
+      }
+    },
+    "ConsultaOutput": {
+      "type": "object",
+      "description": "ConsultaOutput",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Serie": {
+          "type": "string"
+        },
+        "SerieRps": {
+          "type": "string"
+        },
+        "Numero": {
+          "type": "string"
+        },
+        "NumeroRps": {
+          "type": "string"
+        },
+        "Lote": {
+          "type": "string"
+        },
+        "Situacao": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "Protocolo": {
+          "type": "string"
+        },
+        "CodigoVerificacao": {
+          "type": "string"
+        },
+        "Envio": {
+          "type": "string"
+        },
+        "Xml": {
+          "type": "string"
+        }
+      }
+    },
+    "ConsultaPorChaveInput": {
+      "type": "object",
+      "description": "ConsultaPorChaveInput",
+      "properties": {
+        "Configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        },
+        "chave": {
+          "type": "string"
+        }
+      }
+    },
+    "ConsultaPorDpsInput": {
+      "type": "object",
+      "description": "ConsultaPorDpsInput",
+      "properties": {
+        "Configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        },
+        "dps": {
+          "type": "string"
+        }
+      }
+    },
+    "ConsultaPorRpsInput": {
+      "type": "object",
+      "description": "ConsultaPorRpsInput",
+      "properties": {
+        "Dados": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ConsultaPorRpsInput.TDados"
+            }
+          ]
+        },
+        "Configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        }
+      }
+    },
+    "ConsultaPorRpsInput.TDados": {
+      "type": "object",
+      "description": "ConsultaPorRpsInput.TDados",
+      "properties": {
+        "numero": {
+          "type": "string"
+        },
+        "serie": {
+          "type": "string"
+        },
+        "protocolo": {
+          "type": "string"
+        },
+        "tipoRps": {
+          "type": "string"
+        }
+      }
+    },
+    "DadosCancelamentoNFCe": {
+      "type": "object",
+      "description": "DadosCancelamentoNFCe",
+      "properties": {
+        "motivo": {
+          "type": "string"
+        },
+        "chaveAcesso": {
+          "type": "string"
+        },
+        "protocolo": {
+          "type": "string"
+        },
+        "xml": {
+          "type": "string"
+        }
+      }
+    },
+    "DadosCancelamentoNFe": {
+      "type": "object",
+      "description": "DadosCancelamentoNFe",
+      "properties": {
+        "motivo": {
+          "type": "string"
+        },
+        "chaveAcesso": {
+          "type": "string"
+        },
+        "protocolo": {
+          "type": "string"
+        },
+        "xml": {
+          "type": "string"
+        }
+      }
+    },
+    "DadosConsultaNFCe": {
+      "type": "object",
+      "description": "DadosConsultaNFCe",
+      "properties": {
+        "chaveAcesso": {
+          "type": "string"
+        },
+        "xml": {
+          "type": "string"
+        }
+      }
+    },
+    "DadosConsultaNFe": {
+      "type": "object",
+      "description": "DadosConsultaNFe",
+      "properties": {
+        "chaveAcesso": {
+          "type": "string"
+        },
+        "xml": {
+          "type": "string"
+        }
+      }
+    },
+    "DadosInutilizacaoNFCe": {
+      "type": "object",
+      "description": "DadosInutilizacaoNFCe",
+      "properties": {
+        "ano": {
+          "type": "integer"
+        },
+        "serie": {
+          "type": "integer"
+        },
+        "numeroInicial": {
+          "type": "integer"
+        },
+        "numeroFinal": {
+          "type": "integer"
+        },
+        "motivo": {
+          "type": "string"
+        }
+      }
+    },
+    "DadosInutilizacaoNFe": {
+      "type": "object",
+      "description": "DadosInutilizacaoNFe",
+      "properties": {
+        "ano": {
+          "type": "integer"
+        },
+        "serie": {
+          "type": "integer"
+        },
+        "numeroInicial": {
+          "type": "integer"
+        },
+        "numeroFinal": {
+          "type": "integer"
+        },
+        "motivo": {
+          "type": "string"
+        }
+      }
+    },
+    "DocumentoReferenciado": {
+      "type": "object",
+      "description": "DocumentoReferenciado",
+      "properties": {
+        "tipo": {
+          "type": "string",
+          "enum": [
+            "tdrNFe",
+            "tdrNF",
+            "tdrECF",
+            "tdrNFP",
+            "tdrCTe"
+          ]
+        },
+        "chaveAcesso": {
+          "type": "string"
+        },
+        "codigoUf": {
+          "type": "integer"
+        },
+        "anoMes": {
+          "type": "string"
+        },
+        "cnpj": {
+          "type": "string"
+        },
+        "cpf": {
+          "type": "string"
+        },
+        "inscricaoEstadual": {
+          "type": "string"
+        },
+        "modelo": {
+          "type": "string"
+        },
+        "serie": {
+          "type": "integer"
+        },
+        "numero": {
+          "type": "integer"
+        },
+        "numeroEcf": {
+          "type": "string"
+        },
+        "coo": {
+          "type": "string"
+        }
+      }
+    },
+    "Emitente": {
+      "type": "object",
+      "description": "Emitente",
+      "properties": {
+        "documento": {
+          "type": "string"
+        },
+        "razao": {
+          "type": "string"
+        },
+        "fantasia": {
+          "type": "string"
+        },
+        "inscicaoEstadual": {
+          "type": "string"
+        },
+        "inscicaoMunicipal": {
+          "type": "string"
+        },
+        "regimeTributario": {
+          "type": "integer"
+        },
+        "incentivadorCultural": {
+          "type": "boolean"
+        },
+        "endereco": {
+          "type": "auxiliares.entity.endereco.tendereco"
+        },
+        "contato": {
+          "type": "auxiliares.entity.contato.tcontato"
+        },
+        "optanteSimplesNacional": {
+          "type": "boolean"
+        }
+      }
+    },
+    "EmitirInput": {
+      "type": "object",
+      "description": "EmitirInput",
+      "properties": {
+        "nfse": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/NFSe"
+            }
+          ]
+        },
+        "Configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        },
+        "EnviarPorEmail": {
+          "type": "boolean"
+        }
+      }
+    },
+    "EmitirOutput": {
+      "type": "object",
+      "description": "EmitirOutput",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "IdRps": {
+          "type": "string"
+        },
+        "Numero": {
+          "type": "string"
+        },
+        "NumeroRps": {
+          "type": "string"
+        },
+        "Lote": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "Protocolo": {
+          "type": "string"
+        },
+        "CodigoVerificacao": {
+          "type": "string"
+        },
+        "Envio": {
+          "type": "string"
+        },
+        "Xml": {
+          "type": "string"
+        }
+      }
+    },
+    "GerarOutput": {
+      "type": "object",
+      "description": "GerarOutput",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Xml": {
+          "type": "string"
+        }
+      }
+    },
+    "ItemDocumento": {
+      "type": "object",
+      "description": "ItemDocumento",
+      "properties": {
+        "controleItem": {
+          "type": "integer"
+        },
+        "codigo": {
+          "type": "string"
+        },
+        "codigoBarras": {
+          "type": "string"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "ncm": {
+          "type": "string"
+        },
+        "exTipi": {
+          "type": "string"
+        },
+        "indicadorBemMovelUsado": {
+          "type": "string",
+          "enum": [
+            "bmuNaoInformado",
+            "bmuBemMovelUsado"
+          ]
+        },
+        "cest": {
+          "type": "string"
+        },
+        "cfop": {
+          "type": "string"
+        },
+        "valorBruto": {
+          "type": "number"
+        },
+        "tributos": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Tributos"
+            }
+          ]
+        },
+        "compoeTotal": {
+          "type": "boolean"
+        },
+        "codigoBeneficioFiscal": {
+          "type": "string"
+        },
+        "valorFrete": {
+          "type": "number"
+        },
+        "valorSeguro": {
+          "type": "number"
+        },
+        "valorDesconto": {
+          "type": "number"
+        },
+        "valorOutros": {
+          "type": "number"
+        },
+        "unidade": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Unidade"
+            }
+          ]
+        },
+        "quantidade": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Quantidade"
+            }
+          ]
+        },
+        "valorUnitarioLiquido": {
+          "type": "number"
+        },
+        "valorProdutoLiquido": {
+          "type": "number"
+        },
+        "icmsPrevisto": {
+          "type": "number"
+        },
+        "valorUnitario": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ValorUnitario"
+            }
+          ]
+        },
+        "informacoesComplementares": {
+          "type": "string"
+        },
+        "combustivel": {
+          "type": "auxiliares.entity.combustivel.tcombustivel"
+        },
+        "documentoReferenciado": {
+          "type": "fiscal.entity.documentoreferenciado.tdfereferenciadoitem"
+        }
+      }
+    },
+    "NFCe": {
+      "type": "object",
+      "description": "NFCe",
+      "required": [
+        "numero",
+        "serie",
+        "finalidade",
+        "natureza",
+        "dataEmissao",
+        "presencial",
+        "tipoImpressao"
+      ],
+      "properties": {
+        "numero": {
+          "type": "integer",
+          "description": "B08 - Número da NFC-e."
+        },
+        "serie": {
+          "type": "integer",
+          "description": "B07 - Série da NFC-e."
+        },
+        "finalidade": {
+          "type": "integer",
+          "description": "B25 - Finalidade da Operação. 1 - NFC-e Normal."
+        },
+        "natureza": {
+          "type": "string",
+          "description": "B04 - Natureza da Operação."
+        },
+        "dataEmissao": {
+          "type": "string",
+          "description": "B09 - Data de emissão da nota. ",
+          "format": "date-time"
+        },
+        "presencial": {
+          "type": "integer",
+          "description": "B25b - Indicador de presença do comprador no estabelecimento comercial no momento da operação. 1 - Operação presencial; 4 - NFC-e em operação com entrega a domicílio; 5 - Operação presencial, fora do estabelecimento."
+        },
+        "tipoImpressao": {
+          "type": "integer",
+          "description": "B21 - Formato da impressão da DANFCE. 4 - DANFE NFC-e."
+        },
+        "tipoEmissao": {
+          "type": "integer"
+        },
+        "identificacaoDestino": {
+          "type": "integer"
+        },
+        "codigoMunicipioFatoGeradorIbs": {
+          "type": "integer"
+        },
+        "tipoNotaDebito": {
+          "type": "string"
+        },
+        "tipoNotaCredito": {
+          "type": "string"
+        },
+        "pagamentoAntecipado": {
+          "type": "generics.collections.tobjectlist<auxiliares.entity.pagamentoantecipado.tpagamentoantecipado>"
+        },
+        "codigoMunicipioFatoGerador": {
+          "type": "integer"
+        },
+        "consumidorFinal": {
+          "type": "boolean"
+        },
+        "codigoNumerico": {
+          "type": "string"
+        },
+        "transporte": {
+          "type": "fiscal.entity.transporte.ttransporte"
+        },
+        "indicadorIntermediador": {
+          "type": "integer"
+        },
+        "emitente": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Emitente"
+            }
+          ]
+        },
+        "destinatario": {
+          "type": "auxiliares.entity.destinatario.tdestinatario"
+        },
+        "itens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemDocumento"
+          }
+        },
+        "total": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Totalizadores"
+            }
+          ]
+        },
+        "pagamento": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Pagamento"
+            }
+          ]
+        },
+        "ambiente": {
+          "type": "integer"
+        },
+        "modelo": {
+          "type": "integer"
+        },
+        "dataSaidaEntrada": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dataContingencia": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "motivoContingencia": {
+          "type": "string"
+        },
+        "saida": {
+          "type": "boolean"
+        },
+        "versaoProcesso": {
+          "type": "string"
+        }
+      }
+    },
+    "NFCeCalculada": {
+      "type": "object",
+      "description": "NFCeCalculada",
+      "properties": {
+        "itens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemDocumento"
+          }
+        },
+        "total": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Totalizadores"
+            }
+          ]
+        }
+      }
+    },
+    "NFCeCancelamentoInput": {
+      "type": "object",
+      "description": "NFCeCancelamentoInput",
+      "properties": {
+        "dados": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DadosCancelamentoNFCe"
+            }
+          ]
+        },
+        "configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        }
+      }
+    },
+    "NFCeCancelamentoOutput": {
+      "type": "object",
+      "description": "NFCeCancelamentoOutput",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evento": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "sdNaoDefinido",
+            "sdAutorizada",
+            "sdDenegada",
+            "sdCancelada",
+            "sdCanceladaPorSubstituicao",
+            "sdContingencia",
+            "sdInutilizada",
+            "sdEventoRegistrado"
+          ]
+        },
+        "statusDescricao": {
+          "type": "string"
+        },
+        "protocolo": {
+          "type": "string"
+        }
+      }
+    },
+    "NFCeConsultaInput": {
+      "type": "object",
+      "description": "NFCeConsultaInput",
+      "properties": {
+        "dados": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DadosConsultaNFCe"
+            }
+          ]
+        },
+        "configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        }
+      }
+    },
+    "NFCeConsultaOutput": {
+      "type": "object",
+      "description": "NFCeConsultaOutput",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "protocolo": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "sdNaoDefinido",
+            "sdAutorizada",
+            "sdDenegada",
+            "sdCancelada",
+            "sdCanceladaPorSubstituicao",
+            "sdContingencia",
+            "sdInutilizada",
+            "sdEventoRegistrado"
+          ]
+        },
+        "statusDescricao": {
+          "type": "string"
+        },
+        "chaveAcesso": {
+          "type": "string"
+        },
+        "xml": {
+          "type": "string"
+        },
+        "evento": {
+          "type": "string"
+        },
+        "codigoStatus": {
+          "type": "integer"
+        }
+      }
+    },
+    "NFCeInput": {
+      "type": "object",
+      "description": "NFCeInput",
+      "properties": {
+        "nfce": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/NFCe"
+            }
+          ]
+        },
+        "configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        }
+      }
+    },
+    "NFCeInutilizacaoInput": {
+      "type": "object",
+      "description": "NFCeInutilizacaoInput",
+      "properties": {
+        "dados": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DadosInutilizacaoNFCe"
+            }
+          ]
+        },
+        "configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        }
+      }
+    },
+    "NFCeInutilizacaoOutput": {
+      "type": "object",
+      "description": "NFCeInutilizacaoOutput",
+      "properties": {
+        "evento": {
+          "type": "string"
+        },
+        "dataRecibo": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "protocolo": {
+          "type": "string"
+        },
+        "motivo": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "sdNaoDefinido",
+            "sdAutorizada",
+            "sdDenegada",
+            "sdCancelada",
+            "sdCanceladaPorSubstituicao",
+            "sdContingencia",
+            "sdInutilizada",
+            "sdEventoRegistrado"
+          ]
+        },
+        "statusDescricao": {
+          "type": "string"
+        },
+        "numero": {
+          "type": "integer"
+        },
+        "serie": {
+          "type": "integer"
+        }
+      }
+    },
+    "NFCeOutput": {
+      "type": "object",
+      "description": "NFCeOutput",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "protocolo": {
+          "type": "string"
+        },
+        "chaveAcesso": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "sdNaoDefinido",
+            "sdAutorizada",
+            "sdDenegada",
+            "sdCancelada",
+            "sdCanceladaPorSubstituicao",
+            "sdContingencia",
+            "sdInutilizada",
+            "sdEventoRegistrado"
+          ]
+        },
+        "statusDescricao": {
+          "type": "string"
+        },
+        "xml": {
+          "type": "string"
+        },
+        "motivo": {
+          "type": "string"
+        },
+        "numero": {
+          "type": "integer"
+        },
+        "serie": {
+          "type": "integer"
+        },
+        "dataContigencia": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "codigoStatus": {
+          "type": "integer"
+        }
+      }
+    },
+    "NFSe": {
+      "type": "object",
+      "description": "NFSe",
+      "properties": {
+        "OrgaoGerador": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/NFSeOrgaoGerador"
+            }
+          ]
+        },
+        "Prestador": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Emitente"
+            }
+          ]
+        },
+        "Intermediario": {
+          "type": "nfse.entity.destinatario.tnfsedestinatario"
+        },
+        "Tomador": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/NFSeDestinatario"
+            }
+          ]
+        },
+        "Rps": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/NFSeRps"
+            }
+          ]
+        },
+        "Servico": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/NFSeServico"
+            }
+          ]
+        }
+      }
+    },
+    "NFSeDestinatario": {
+      "type": "object",
+      "description": "NFSeDestinatario",
+      "properties": {
+        "documento": {
+          "type": "string"
+        },
+        "codigoEstrangeiro": {
+          "type": "string"
+        },
+        "inscricaoMunicipal": {
+          "type": "string"
+        },
+        "indicadorInscricaoEstadual": {
+          "type": "integer"
+        },
+        "inscricaoEstadual": {
+          "type": "string"
+        },
+        "inscricaoSuframa": {
+          "type": "string"
+        },
+        "nome": {
+          "type": "string"
+        },
+        "endereco": {
+          "type": "auxiliares.entity.endereco.tendereco"
+        },
+        "contato": {
+          "type": "auxiliares.entity.contato.tcontato"
+        }
+      }
+    },
+    "NFSeOrgaoGerador": {
+      "type": "object",
+      "description": "NFSeOrgaoGerador",
+      "properties": {
+        "codigoMunicipio": {
+          "type": "integer"
+        },
+        "uf": {
+          "type": "string"
+        }
+      }
+    },
+    "NFSeRps": {
+      "type": "object",
+      "description": "NFSeRps",
+      "properties": {
+        "Competencia": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "DataEmissao": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Numero": {
+          "type": "string"
+        },
+        "Serie": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "integer"
+        },
+        "Lote": {
+          "type": "string"
+        },
+        "Tipo": {
+          "type": "integer"
+        },
+        "NaturezaOperacao": {
+          "type": "integer"
+        },
+        "RegimeEspecialTributacao": {
+          "type": "integer"
+        }
+      }
+    },
+    "NFSeServico": {
+      "type": "object",
+      "description": "NFSeServico",
+      "properties": {
+        "Descricao": {
+          "type": "string"
+        },
+        "Discriminacao": {
+          "type": "string"
+        },
+        "Cnae": {
+          "type": "string"
+        },
+        "CodigoFederal": {
+          "type": "string"
+        },
+        "CodigoMunicipal": {
+          "type": "string"
+        },
+        "CodigoTributacaoMunicipio": {
+          "type": "string"
+        },
+        "CodigoNacional": {
+          "type": "string"
+        },
+        "CodigoNbs": {
+          "type": "string"
+        },
+        "VersaoIBPT": {
+          "type": "string"
+        },
+        "Municipio": {
+          "type": "integer"
+        },
+        "MunicipioIncidencia": {
+          "type": "integer"
+        },
+        "ufPrestacao": {
+          "type": "string"
+        },
+        "ExigibilidadeIss": {
+          "type": "integer"
+        },
+        "ResponsavelRetencao": {
+          "type": "integer"
+        },
+        "Valores": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/NFSeValores"
+            }
+          ]
+        },
+        "Obra": {
+          "type": "nfse.entity.obra.tobra"
+        },
+        "IbsCbs": {
+          "type": "nfse.entity.ibscbs.tibscbs"
+        },
+        "BeneficioMunicipal": {
+          "type": "nfse.entity.beneficiomunicipal.tbeneficiomunicipal"
+        }
+      }
+    },
+    "NFSeValores": {
+      "type": "object",
+      "description": "NFSeValores",
+      "properties": {
+        "DescontoCondicionado": {
+          "type": "number"
+        },
+        "DescontoIncondicionado": {
+          "type": "number"
+        },
+        "ValorDeducoes": {
+          "type": "number"
+        },
+        "ValorServicos": {
+          "type": "number"
+        },
+        "AliquotaIss": {
+          "type": "number"
+        },
+        "AliquotaIrrf": {
+          "type": "number"
+        },
+        "AliquotaCsll": {
+          "type": "number"
+        },
+        "AliquotaInss": {
+          "type": "number"
+        },
+        "IssRetido": {
+          "type": "integer"
+        },
+        "PisCofinsRetido": {
+          "type": "integer"
+        },
+        "OutrasRetencoes": {
+          "type": "number"
+        },
+        "Cst": {
+          "type": "string"
+        },
+        "AliquotaPis": {
+          "type": "number"
+        },
+        "AliquotaCofins": {
+          "type": "number"
+        },
+        "AliquotaSuperSimples": {
+          "type": "number"
+        },
+        "TributacaoEstadualIBPT": {
+          "type": "number"
+        },
+        "TributacaoFederalIBPT": {
+          "type": "number"
+        },
+        "TributacaoMunicipalIBPT": {
+          "type": "number"
+        },
+        "BaseCalculo": {
+          "type": "number"
+        },
+        "BaseCalculoPisCofins": {
+          "type": "number"
+        },
+        "ValorLiquido": {
+          "type": "number"
+        },
+        "ValorIssRetido": {
+          "type": "number"
+        },
+        "ValTotTributos": {
+          "type": "number"
+        },
+        "ValorCofins": {
+          "type": "number"
+        },
+        "ValorIss": {
+          "type": "number"
+        },
+        "ValorPis": {
+          "type": "number"
+        },
+        "ValorCsll": {
+          "type": "number"
+        },
+        "ValorInss": {
+          "type": "number"
+        },
+        "ValorIr": {
+          "type": "number"
+        },
+        "ValorRetencoes": {
+          "type": "number"
+        },
+        "ValorTributoFederal": {
+          "type": "number"
+        },
+        "ValorTributoEstadual": {
+          "type": "number"
+        },
+        "ValorTributoMunicipal": {
+          "type": "number"
+        },
+        "DeveInformarPisCofins": {
+          "type": "boolean"
+        }
+      }
+    },
+    "NFe": {
+      "type": "object",
+      "description": "NFe",
+      "properties": {
+        "numero": {
+          "type": "integer"
+        },
+        "serie": {
+          "type": "integer"
+        },
+        "finalidade": {
+          "type": "integer"
+        },
+        "natureza": {
+          "type": "string"
+        },
+        "dataEmissao": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dataSaidaEntrada": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dataContingencia": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "motivoContingencia": {
+          "type": "string"
+        },
+        "saida": {
+          "type": "boolean"
+        },
+        "presencial": {
+          "type": "integer"
+        },
+        "tipoImpressao": {
+          "type": "integer"
+        },
+        "tipoEmissao": {
+          "type": "integer"
+        },
+        "identificacaoDestino": {
+          "type": "integer"
+        },
+        "codigoMunicipioFatoGerador": {
+          "type": "integer"
+        },
+        "codigoMunicipioFatoGeradorIbs": {
+          "type": "integer"
+        },
+        "tipoNotaDebito": {
+          "type": "string"
+        },
+        "tipoNotaCredito": {
+          "type": "string"
+        },
+        "pagamentoAntecipado": {
+          "type": "generics.collections.tobjectlist<auxiliares.entity.pagamentoantecipado.tpagamentoantecipado>"
+        },
+        "consumidorFinal": {
+          "type": "boolean"
+        },
+        "indicadorIntermediador": {
+          "type": "integer"
+        },
+        "transporte": {
+          "type": "fiscal.entity.transporte.ttransporte"
+        },
+        "cobranca": {
+          "type": "fiscal.entity.cobranca.tcobranca"
+        },
+        "informacoesAdicionais": {
+          "type": "fiscal.entity.informacoesadicionais.tinformacoesadicionais"
+        },
+        "emitente": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Emitente"
+            }
+          ]
+        },
+        "destinatario": {
+          "type": "auxiliares.entity.destinatario.tdestinatario"
+        },
+        "itens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemDocumento"
+          }
+        },
+        "documentosReferenciados": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentoReferenciado"
+          }
+        },
+        "compraGovernamental": {
+          "type": "auxiliares.entity.compragovernamental.tcompragovernamental"
+        },
+        "total": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Totalizadores"
+            }
+          ]
+        },
+        "pagamento": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Pagamento"
+            }
+          ]
+        },
+        "versaoProcesso": {
+          "type": "string"
+        },
+        "ambiente": {
+          "type": "integer"
+        },
+        "modelo": {
+          "type": "integer"
+        }
+      }
+    },
+    "NFeCalculada": {
+      "type": "object",
+      "description": "NFeCalculada",
+      "properties": {
+        "itens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemDocumento"
+          }
+        },
+        "total": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Totalizadores"
+            }
+          ]
+        }
+      }
+    },
+    "NFeCancelamentoInput": {
+      "type": "object",
+      "description": "NFeCancelamentoInput",
+      "properties": {
+        "dados": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DadosCancelamentoNFe"
+            }
+          ]
+        },
+        "configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        }
+      }
+    },
+    "NFeCancelamentoOutput": {
+      "type": "object",
+      "description": "NFeCancelamentoOutput",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evento": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "sdNaoDefinido",
+            "sdAutorizada",
+            "sdDenegada",
+            "sdCancelada",
+            "sdCanceladaPorSubstituicao",
+            "sdContingencia",
+            "sdInutilizada",
+            "sdEventoRegistrado"
+          ]
+        },
+        "statusDescricao": {
+          "type": "string"
+        },
+        "protocolo": {
+          "type": "string"
+        }
+      }
+    },
+    "NFeConsultaInput": {
+      "type": "object",
+      "description": "NFeConsultaInput",
+      "properties": {
+        "dados": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DadosConsultaNFe"
+            }
+          ]
+        },
+        "configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        }
+      }
+    },
+    "NFeConsultaOutput": {
+      "type": "object",
+      "description": "NFeConsultaOutput",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "protocolo": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "sdNaoDefinido",
+            "sdAutorizada",
+            "sdDenegada",
+            "sdCancelada",
+            "sdCanceladaPorSubstituicao",
+            "sdContingencia",
+            "sdInutilizada",
+            "sdEventoRegistrado"
+          ]
+        },
+        "statusDescricao": {
+          "type": "string"
+        },
+        "chaveAcesso": {
+          "type": "string"
+        },
+        "xml": {
+          "type": "string"
+        },
+        "evento": {
+          "type": "string"
+        }
+      }
+    },
+    "NFeInput": {
+      "type": "object",
+      "description": "NFeInput",
+      "properties": {
+        "nfe": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/NFe"
+            }
+          ]
+        },
+        "configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        }
+      }
+    },
+    "NFeInutilizacaoInput": {
+      "type": "object",
+      "description": "NFeInutilizacaoInput",
+      "properties": {
+        "dados": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DadosInutilizacaoNFe"
+            }
+          ]
+        },
+        "configuracoes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Configuracoes"
+            }
+          ]
+        }
+      }
+    },
+    "NFeInutilizacaoOutput": {
+      "type": "object",
+      "description": "NFeInutilizacaoOutput",
+      "properties": {
+        "evento": {
+          "type": "string"
+        },
+        "dataRecibo": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "protocolo": {
+          "type": "string"
+        },
+        "motivo": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "sdNaoDefinido",
+            "sdAutorizada",
+            "sdDenegada",
+            "sdCancelada",
+            "sdCanceladaPorSubstituicao",
+            "sdContingencia",
+            "sdInutilizada",
+            "sdEventoRegistrado"
+          ]
+        },
+        "statusDescricao": {
+          "type": "string"
+        },
+        "numero": {
+          "type": "integer"
+        },
+        "serie": {
+          "type": "integer"
+        }
+      }
+    },
+    "NFeOutput": {
+      "type": "object",
+      "description": "NFeOutput",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "protocolo": {
+          "type": "string"
+        },
+        "chaveAcesso": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "sdNaoDefinido",
+            "sdAutorizada",
+            "sdDenegada",
+            "sdCancelada",
+            "sdCanceladaPorSubstituicao",
+            "sdContingencia",
+            "sdInutilizada",
+            "sdEventoRegistrado"
+          ]
+        },
+        "statusDescricao": {
+          "type": "string"
+        },
+        "xml": {
+          "type": "string"
+        },
+        "motivo": {
+          "type": "string"
+        },
+        "numero": {
+          "type": "integer"
+        },
+        "serie": {
+          "type": "integer"
+        },
+        "dataContigencia": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "NotaItemInput": {
+      "type": "object",
+      "description": "NotaItemInput",
+      "properties": {
+        "controleItem": {
+          "type": "integer"
+        },
+        "codigo": {
+          "type": "integer"
+        },
+        "codigoBarras": {
+          "type": "string"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "ncm": {
+          "type": "string"
+        },
+        "exTipi": {
+          "type": "string"
+        },
+        "indicadorBemMovelUsado": {
+          "type": "string",
+          "enum": [
+            "bmuNaoInformado",
+            "bmuBemMovelUsado"
+          ]
+        },
+        "cest": {
+          "type": "string"
+        },
+        "cfop": {
+          "type": "string"
+        },
+        "valorBruto": {
+          "type": "number"
+        },
+        "compoeTotal": {
+          "type": "boolean"
+        },
+        "codigoBeneficioFiscal": {
+          "type": "string"
+        },
+        "valorFrete": {
+          "type": "number"
+        },
+        "valorSeguro": {
+          "type": "number"
+        },
+        "valorDesconto": {
+          "type": "number"
+        },
+        "valorOutros": {
+          "type": "number"
+        },
+        "unidade": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Unidade"
+            }
+          ]
+        },
+        "quantidade": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Quantidade"
+            }
+          ]
+        },
+        "valorUnitario": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ValorUnitario"
+            }
+          ]
+        },
+        "valorLiquido": {
+          "type": "number"
+        },
+        "origem": {
+          "type": "string"
+        },
+        "cst": {
+          "type": "string"
+        },
+        "aliquota": {
+          "type": "number"
+        },
+        "aliquotaSt": {
+          "type": "number"
+        },
+        "aliquotaSuperSimples": {
+          "type": "number"
+        },
+        "percentualReducao": {
+          "type": "number"
+        },
+        "interpretacaoPercentualReducao": {
+          "type": "string",
+          "enum": [
+            "PercentualAproveitado",
+            "PercentualReduzido"
+          ]
+        },
+        "cstPis": {
+          "type": "string"
+        },
+        "aliquotaPis": {
+          "type": "number"
+        },
+        "cstCofins": {
+          "type": "string"
+        },
+        "aliquotaCofins": {
+          "type": "number"
+        },
+        "combustivel": {
+          "type": "auxiliares.entity.combustivel.tcombustivel"
+        },
+        "aliquotaAdRemRetido": {
+          "type": "number"
+        },
+        "valorAproximadoTributos": {
+          "type": "number"
+        },
+        "removeIcmsBasePisCofins": {
+          "type": "boolean"
+        },
+        "aliquotaFcp": {
+          "type": "number"
+        },
+        "destinatarioUF": {
+          "type": "string"
+        },
+        "emitenteUF": {
+          "type": "string"
+        },
+        "infoComplementares": {
+          "type": "string"
+        },
+        "mvaSt": {
+          "type": "number"
+        },
+        "percentualReducaoSt": {
+          "type": "number"
+        },
+        "percentualReducaoStZerada": {
+          "type": "boolean"
+        },
+        "percentualDiferimento": {
+          "type": "number"
+        },
+        "cstIpi": {
+          "type": "string"
+        },
+        "aliquotaIpi": {
+          "type": "number"
+        },
+        "aliquotaFcpSt": {
+          "type": "number"
+        },
+        "baseCalculoStRetido": {
+          "type": "number"
+        },
+        "valorUnitarioLiquido": {
+          "type": "number"
+        },
+        "valorProdutoLiquido": {
+          "type": "number"
+        },
+        "icmsPrevisto": {
+          "type": "number"
+        },
+        "aliquotaStRetido": {
+          "type": "number"
+        },
+        "valorIcmsStRetido": {
+          "type": "number"
+        },
+        "baseCalculoFcpStRetido": {
+          "type": "number"
+        },
+        "aliquotaFcpStRetido": {
+          "type": "number"
+        },
+        "motivoDesoneracao": {
+          "type": "integer"
+        },
+        "deduzValorDesoneracaoDoItem": {
+          "type": "boolean"
+        },
+        "incluirFreteBcIcms": {
+          "type": "boolean"
+        },
+        "incluirSeguroBcIcms": {
+          "type": "boolean"
+        },
+        "incluirOutrasDespesasBcIcms": {
+          "type": "boolean"
+        },
+        "incluirIpiBcIcms": {
+          "type": "boolean"
+        },
+        "valorIpi": {
+          "type": "number"
+        },
+        "cstIBSCBS": {
+          "type": "string"
+        },
+        "classTribIBSCBS": {
+          "type": "string"
+        },
+        "percRedIBS": {
+          "type": "number"
+        },
+        "percRedCBS": {
+          "type": "number"
+        },
+        "aliquotaIBSEst": {
+          "type": "number"
+        },
+        "aliquotaIBSMun": {
+          "type": "number"
+        },
+        "aliquotaCBS": {
+          "type": "number"
+        },
+        "cstReg": {
+          "type": "string"
+        },
+        "classTribReg": {
+          "type": "string"
+        },
+        "aliqEfetRegIBSEst": {
+          "type": "number"
+        },
+        "aliqEfetRegIBSMun": {
+          "type": "number"
+        },
+        "aliqEfetRegCBS": {
+          "type": "number"
+        },
+        "cstIS": {
+          "type": "string"
+        },
+        "classificacaoIS": {
+          "type": "string"
+        },
+        "aliquotaIS": {
+          "type": "number"
+        },
+        "aliquotaEspecificaIS": {
+          "type": "number"
+        },
+        "unidadeIS": {
+          "type": "string"
+        },
+        "quantidadeIS": {
+          "type": "number"
+        }
+      }
+    },
+    "Pagamento": {
+      "type": "object",
+      "description": "Pagamento",
+      "properties": {
+        "indicadorPagamento": {
+          "type": "integer"
+        },
+        "troco": {
+          "type": "number"
+        },
+        "itens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PagamentoItem"
+          }
+        }
+      }
+    },
+    "PagamentoItem": {
+      "type": "object",
+      "description": "PagamentoItem",
+      "properties": {
+        "aVista": {
+          "type": "boolean"
+        },
+        "meio": {
+          "type": "string"
+        },
+        "descricaoMeio": {
+          "type": "string"
+        },
+        "valor": {
+          "type": "number"
+        },
+        "dataHora": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "cnpjTransacional": {
+          "type": "string"
+        },
+        "ufTransacional": {
+          "type": "string"
+        },
+        "cartao": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Cartao"
+            }
+          ]
+        }
+      }
+    },
+    "Quantidade": {
+      "type": "object",
+      "description": "Quantidade",
+      "properties": {
+        "comercial": {
+          "type": "number"
+        },
+        "tributavel": {
+          "type": "number"
+        }
+      }
+    },
+    "Totalizadores": {
+      "type": "object",
+      "description": "Totalizadores",
+      "properties": {
+        "baseCalculoIcms": {
+          "type": "number"
+        },
+        "valorIcms": {
+          "type": "number"
+        },
+        "valorFcp": {
+          "type": "number"
+        },
+        "valorFcpSt": {
+          "type": "number"
+        },
+        "baseCalculoIrrf": {
+          "type": "number"
+        },
+        "valorIrrfRetido": {
+          "type": "number"
+        },
+        "valorFcpStRetido": {
+          "type": "number"
+        },
+        "baseCalculoMono": {
+          "type": "number"
+        },
+        "valorIcmsMono": {
+          "type": "number"
+        },
+        "baseCalculoMonoRetencao": {
+          "type": "number"
+        },
+        "valorIcmsMonoRetencao": {
+          "type": "number"
+        },
+        "baseCalculoMonoRetido": {
+          "type": "number"
+        },
+        "valorIcmsMonoRetido": {
+          "type": "number"
+        },
+        "valorIcmsDesonerado": {
+          "type": "number"
+        },
+        "baseCalculoIcmsSt": {
+          "type": "number"
+        },
+        "valorIcmsSt": {
+          "type": "number"
+        },
+        "valorProdutosServicos": {
+          "type": "number"
+        },
+        "valorFrete": {
+          "type": "number"
+        },
+        "valorSeguro": {
+          "type": "number"
+        },
+        "valorDesconto": {
+          "type": "number"
+        },
+        "valorIi": {
+          "type": "number"
+        },
+        "valorIpi": {
+          "type": "number"
+        },
+        "valorIpiDevolvido": {
+          "type": "number"
+        },
+        "valorPis": {
+          "type": "number"
+        },
+        "valorCofins": {
+          "type": "number"
+        },
+        "valorOutros": {
+          "type": "number"
+        },
+        "valorTotal": {
+          "type": "number"
+        },
+        "valorLiquidoTotal": {
+          "type": "number"
+        },
+        "valorAproximadoTributos": {
+          "type": "number"
+        },
+        "valorPisRetido": {
+          "type": "number"
+        },
+        "valorCofinsRetido": {
+          "type": "number"
+        },
+        "valorCsllRetido": {
+          "type": "number"
+        },
+        "baseCalculoRetencao": {
+          "type": "number"
+        },
+        "valorPrevidenciaRetido": {
+          "type": "number"
+        },
+        "valorIcmsEstadoDestino": {
+          "type": "number"
+        },
+        "valorIcmsEstadoRemetente": {
+          "type": "number"
+        },
+        "baseIBSCBS": {
+          "type": "number"
+        },
+        "valorIBS": {
+          "type": "number"
+        },
+        "valorIBSEst": {
+          "type": "number"
+        },
+        "valorIBSMun": {
+          "type": "number"
+        },
+        "valorCBS": {
+          "type": "number"
+        },
+        "valorIS": {
+          "type": "number"
+        },
+        "infoComplementar": {
+          "type": "string"
+        }
+      }
+    },
+    "Tributos": {
+      "type": "object",
+      "description": "Tributos",
+      "properties": {
+        "partilha": {
+          "type": "tributos.entities.partilha.tpartilha"
+        },
+        "pis": {
+          "type": "tributos.entities.pis.tpis"
+        },
+        "cofins": {
+          "type": "tributos.entities.cofins.tcofins"
+        },
+        "impostoSeletivo": {
+          "type": "tributos.entities.impostoseletivo.timpostoseletivo"
+        },
+        "ibscbs": {
+          "type": "tributos.entities.ibscbs.tibscbs"
+        },
+        "ipi": {
+          "type": "tributos.entities.ipi.tipi"
+        },
+        "valorAproximadoTributos": {
+          "type": "number"
+        },
+        "valorOutrosSped": {
+          "type": "number"
+        },
+        "valorIsentoSped": {
+          "type": "number"
+        }
+      }
+    },
+    "Unidade": {
+      "type": "object",
+      "description": "Unidade",
+      "properties": {
+        "comercial": {
+          "type": "string"
+        },
+        "tributavel": {
+          "type": "string"
+        }
+      }
+    },
+    "ValorUnitario": {
+      "type": "object",
+      "description": "ValorUnitario",
+      "properties": {
+        "comercial": {
+          "type": "number"
+        },
+        "tributavel": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
