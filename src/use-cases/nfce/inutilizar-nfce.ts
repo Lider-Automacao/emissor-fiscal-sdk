@@ -1,5 +1,5 @@
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
-import { EnvioInutilizacao, EnvioInutilizacaoSchema, RetornoInutilizacao, RetornoInutilizacaoSchema } from "../../dtos";
+import { EnvioInutilizacao, EnvioInutilizacaoSchema, RetornoInutilizacao, parseRetornoInutilizacao } from "../../dtos";
 import { EmissorFiscalError } from "../../utils/errors/emissor-fiscal.error";
 
 
@@ -18,6 +18,6 @@ export class InutilizarNfce {
     }
 
     const response = await this.api.post('/nfce/inutilizar', parsedData.data);
-    return RetornoInutilizacaoSchema.parse(response);
+    return parseRetornoInutilizacao(response);
   }
 }
