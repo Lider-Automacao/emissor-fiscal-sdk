@@ -69,26 +69,29 @@ describe.each(casos)('Inutilizar $nome', ({ Classe, rota }) => {
     expect(post.mock.calls[0][1]).toMatchObject({ dados: { numeroInicial: 100, numeroFinal: 99 + quantidade } });
   });
 
+  // Manual de Orientação do Contribuinte: xJust de 15 a 255 caracteres, sem espaços no início/fim
   it.each([
-    ['15 caracteres com acentos', 'Digitação errada'],
-    ['espacos nas pontas', '  Falha na emissao  '],
-    ['255 caracteres', 'a'.repeat(255)],
-  ])('envia a justificativa sem alterar: %s (EF-95)', async (_nome, motivo) => {
+    ['15 caracteres com acentos', 'Digitação errada', 'Digitação errada'],
+    ['espacos nas pontas', '  Falha na emissao  ', 'Falha na emissao'],
+    ['255 caracteres', 'a'.repeat(255), 'a'.repeat(255)],
+    ['255 caracteres com espacos nas pontas', ` ${'a'.repeat(255)} `, 'a'.repeat(255)],
+  ])('envia a justificativa sem espacos nas pontas: %s (EF-95)', async (_nome, motivo, esperado) => {
     const { post, promise } = executa([retornoEmissor], comDados({ motivo }));
 
     await promise;
 
-    expect(post.mock.calls[0][1]).toMatchObject({ dados: { motivo } });
+    expect(post.mock.calls[0][1]).toMatchObject({ dados: { motivo: esperado } });
   });
 
-  it('rejeita sem chamar a API justificativa com menos de 15 ou mais de 255 caracteres', async () => {
-    const curta = executa([retornoEmissor], comDados({ motivo: 'a'.repeat(14) }));
-    const longa = executa([retornoEmissor], comDados({ motivo: 'a'.repeat(256) }));
+  it.each([
+    ['14 caracteres', 'a'.repeat(14)],
+    ['14 caracteres com espacos nas pontas', `  ${'a'.repeat(14)}  `],
+    ['256 caracteres (EF-96)', 'a'.repeat(256)],
+  ])('rejeita sem chamar a API justificativa fora de 15-255: %s', async (_nome, motivo) => {
+    const { post, promise } = executa([retornoEmissor], comDados({ motivo }));
 
-    await expect(curta.promise).rejects.toBeInstanceOf(EmissorFiscalError);
-    await expect(longa.promise).rejects.toBeInstanceOf(EmissorFiscalError);
-    expect(curta.post).not.toHaveBeenCalled();
-    expect(longa.post).not.toHaveBeenCalled();
+    await expect(promise).rejects.toBeInstanceOf(EmissorFiscalError);
+    expect(post).not.toHaveBeenCalled();
   });
 
   it.each([999, 909, 990])('aceita serie %i e devolve a serie como texto (EF-98)', async (serie) => {
