@@ -60,6 +60,26 @@ describe.each(casos)('Inutilizar $nome', ({ Classe, rota }) => {
     expect(result[0].protocolo).toBe('135260000000001');
   });
 
+  it('aceita retorno com varias notas inutilizadas e preserva a ordem (EF-85)', async () => {
+    const { promise } = executa([
+      { ...retornoEmissor, numero: 10, protocolo: '135260000000001' },
+      { ...retornoEmissor, numero: 11, protocolo: '135260000000002' },
+      { ...retornoEmissor, numero: 12, protocolo: '135260000000003' },
+    ]);
+
+    const result = await promise;
+
+    expect(result.map((r) => r.numero)).toEqual(['10', '11', '12']);
+    expect(result.map((r) => r.protocolo)).toEqual(['135260000000001', '135260000000002', '135260000000003']);
+    expect(result.every((r) => r.status === 'I')).toBe(true);
+  });
+
+  it('rejeita o retorno inteiro quando uma das notas vem invalida', async () => {
+    const { promise } = executa([retornoEmissor, { ...retornoEmissor, numero: 11, status: 'XYZ' }]);
+
+    await expect(promise).rejects.toBeInstanceOf(EmissorFiscalError);
+  });
+
   it('continua aceitando status no formato do SDK e numero/serie em texto', async () => {
     const { promise } = executa([{ ...retornoEmissor, status: 'I', numero: '10', serie: '1' }]);
 
