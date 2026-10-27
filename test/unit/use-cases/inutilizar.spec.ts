@@ -41,11 +41,72 @@ const casos = [
 ] as const;
 
 describe.each(casos)('Inutilizar $nome', ({ Classe, rota }) => {
-  const executa = (resposta: unknown) => {
+  const executa = (resposta: unknown, request: EnvioInutilizacao = validRequest) => {
     const api = new EmissorFiscalApi({ url: 'http://localhost', usuario: 'user', senha: 'pass' });
     const post = vi.spyOn(api, 'post').mockResolvedValue(resposta);
-    return { post, promise: new Classe(api).executa(validRequest) };
+    return { post, promise: new Classe(api).executa(request) };
   };
+
+  const comDados = (dados: Partial<EnvioInutilizacao['dados']>): EnvioInutilizacao => ({
+    ...validRequest,
+    dados: { ...validRequest.dados, ...dados },
+  });
+
+  it.each([10, 50])('aceita retorno de faixa com %i numeros (EF-94, EF-102)', async (quantidade) => {
+    const retorno = Array.from({ length: quantidade }, (_, i) => ({
+      ...retornoEmissor,
+      numero: 100 + i,
+      protocolo: String(135260000000000 + i),
+    }));
+
+    const { post, promise } = executa(retorno, comDados({ numeroInicial: 100, numeroFinal: 99 + quantidade }));
+
+    const result = await promise;
+
+    expect(result).toHaveLength(quantidade);
+    expect(result[0].numero).toBe('100');
+    expect(result[quantidade - 1].numero).toBe(String(99 + quantidade));
+    expect(post.mock.calls[0][1]).toMatchObject({ dados: { numeroInicial: 100, numeroFinal: 99 + quantidade } });
+  });
+
+  it.each([
+    ['15 caracteres com acentos', 'Digitação errada'],
+    ['espacos nas pontas', '  Falha na emissao  '],
+    ['255 caracteres', 'a'.repeat(255)],
+  ])('envia a justificativa sem alterar: %s (EF-95)', async (_nome, motivo) => {
+    const { post, promise } = executa([retornoEmissor], comDados({ motivo }));
+
+    await promise;
+
+    expect(post.mock.calls[0][1]).toMatchObject({ dados: { motivo } });
+  });
+
+  it('rejeita sem chamar a API justificativa com menos de 15 ou mais de 255 caracteres', async () => {
+    const curta = executa([retornoEmissor], comDados({ motivo: 'a'.repeat(14) }));
+    const longa = executa([retornoEmissor], comDados({ motivo: 'a'.repeat(256) }));
+
+    await expect(curta.promise).rejects.toBeInstanceOf(EmissorFiscalError);
+    await expect(longa.promise).rejects.toBeInstanceOf(EmissorFiscalError);
+    expect(curta.post).not.toHaveBeenCalled();
+    expect(longa.post).not.toHaveBeenCalled();
+  });
+
+  it.each([999, 909, 990])('aceita serie %i e devolve a serie como texto (EF-98)', async (serie) => {
+    const { post, promise } = executa([{ ...retornoEmissor, serie }], comDados({ serie }));
+
+    const [item] = await promise;
+
+    expect(item.serie).toBe(String(serie));
+    expect(post.mock.calls[0][1]).toMatchObject({ dados: { serie } });
+  });
+
+  it('aceita faixa do ano anterior e envia o ano informado (EF-97)', async () => {
+    const { post, promise } = executa([retornoEmissor], comDados({ ano: 2025 }));
+
+    await promise;
+
+    expect(post.mock.calls[0][1]).toMatchObject({ dados: { ano: 2025 } });
+  });
 
   it('aceita retorno do emissor com numero/serie numericos e status sdInutilizada (EF-83)', async () => {
     const { post, promise } = executa([retornoEmissor]);
