@@ -94,6 +94,9 @@ export const NfceItemSchema = z.object({
     comercial: NumberSchema,
     tributavel: NumberSchema,
   }),
+  valorUnitarioLiquido: NumberSchema.nullish().describe('vUnComLiq (NT 2026.008)'),
+  valorProdutoLiquido: NumberSchema.nullish().describe('vProdLiq (NT 2026.008)'),
+  indicadorBemMovelUsado: z.enum(['bmuNaoInformado', 'bmuBemMovelUsado']).default('bmuNaoInformado').describe('Gera a tag somente na NF-e'),
   informacoesComplementares: z.string().optional().nullable(),
   combustivel: CombustivelSchema.optional().nullable(),
 })

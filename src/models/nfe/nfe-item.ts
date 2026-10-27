@@ -2,6 +2,8 @@ import z from 'zod'
 import { IntSchema, NumberSchema } from '../../types/number-type'
 import { CofinsSchema } from '../auxiliares/cofins'
 import { CombustivelSchema } from '../auxiliares/combustivel'
+import { DFeReferenciadoItemSchema } from '../auxiliares/documento-referenciado'
+import { IpiSchema } from '../auxiliares/ipi'
 import { PartilhaSchema } from '../auxiliares/partilha'
 import { PisSchema } from '../auxiliares/pis'
 import { IbsCbsSchema } from '../ibs_cbs/ibs_cbs'
@@ -76,6 +78,7 @@ export const NfeItemSchema = z.object({
     cofins: CofinsSchema,
     impostoSeletivo: ImpostoSeletivoSchema.optional().nullable(),
     ibscbs: IbsCbsSchema.optional().nullable(),
+    ipi: IpiSchema.optional().nullable(),
     valorAproximadoTributos: NumberSchema,
     valorOutrosSped: NumberSchema.default(0),
     valorIsentoSped: NumberSchema.default(0),
@@ -96,8 +99,13 @@ export const NfeItemSchema = z.object({
     comercial: NumberSchema,
     tributavel: NumberSchema,
   }),
+  valorUnitarioLiquido: NumberSchema.nullish().describe('vUnComLiq (NT 2026.008)'),
+  valorProdutoLiquido: NumberSchema.nullish().describe('vProdLiq (NT 2026.008)'),
+  indicadorBemMovelUsado: z.enum(['bmuNaoInformado', 'bmuBemMovelUsado']).default('bmuNaoInformado').describe('Gera a tag somente na NF-e'),
+  icmsPrevisto: NumberSchema.nullish().describe('vICMSPrevisto; somente com tipoNotaDebito 06'),
   informacoesComplementares: z.string().optional().nullable(),
   combustivel: CombustivelSchema.optional().nullable(),
+  documentoReferenciado: DFeReferenciadoItemSchema.nullish(),
 })
 
 export type NfeItem = z.infer<typeof NfeItemSchema>

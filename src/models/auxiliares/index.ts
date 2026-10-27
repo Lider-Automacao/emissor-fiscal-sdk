@@ -1,4 +1,5 @@
 export * from './codigo-ibge-municipio';
+export * from './cobranca';
 export * from './cofins';
 export * from './combustivel';
 export * from './configuracao-certificado';
@@ -11,14 +12,18 @@ export * from './contato';
 export * from './csosn';
 export * from './cst';
 export * from './destinatario';
+export * from './documento-referenciado';
 export * from './emitente';
 export * from './endereco';
 export * from './indicador-inscricao-estadual';
+export * from './informacoes-adicionais';
+export * from './ipi';
 export * from './pagamento';
 export * from './partilha';
 export * from './pis';
 export * from './status';
 export * from './substituicao-tributaria';
 export * from './total';
+export * from './transporte';
 export * from './ufs';
 

@@ -14,6 +14,8 @@ export const RetornoConsultaSchema = z.object({
   chaveAcesso: z.string(),
   xml: NullishString,
   evento: NullishString,
+  xmlLocalConfere: z.boolean().nullish()
+    .describe('NFC-e com XML local: true se o DigestValue dele é o digVal do protocolo da SEFAZ; ausente sem XML local ou digVal'),
 })
 
 export type RetornoConsulta = z.infer<typeof RetornoConsultaSchema>

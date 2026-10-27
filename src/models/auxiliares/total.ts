@@ -43,6 +43,7 @@ export const TotalSchema = z.object({
   valorIBSMun: NumberSchema.default(0),
   valorCBS: NumberSchema.default(0),
   valorIS: NumberSchema.default(0),
+  valorLiquidoTotal: NumberSchema.nullish(),
   infoComplementar: z.string().nullable().optional(),
 })
 

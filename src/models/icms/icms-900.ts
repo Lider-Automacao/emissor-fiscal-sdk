@@ -13,7 +13,7 @@ export const ICMS900Schema = z.object({
   valor: NumberDefaultZeroSchema,
   substituicaoTributaria: z.object({
     baseCalculo: z.object({
-      modalidadeDeterminacao: IntSchema,
+      modalidadeDeterminacao: IntSchema.pipe(z.number().min(0).max(6)).describe('modBCST de 0 a 6 (MOC 7.0, N18)'),
       valor: NumberDefaultZeroSchema,
       percentualReducao: NumberDefaultZeroSchema,
     }),
