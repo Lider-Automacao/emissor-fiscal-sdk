@@ -8,6 +8,8 @@ export const RetornoEnvioApiSchema = z.object({
   protocolo: z.string(),
   chaveAcesso: z.string(),
   status: StatusRetornoSchema,
+  statusDescricao: z.string().nullish().describe('Texto fixo do status no emissor: autorizada, denegada ou contingencia'),
+  codigoStatus: z.number().int().nullish().describe('cStat devolvido pela SEFAZ no envio; 0 em contingência sem resposta da SEFAZ'),
   xml: z.string(),
   motivo: NullishString.optional(),
   numero: z.number(),

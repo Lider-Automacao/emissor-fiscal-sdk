@@ -85,6 +85,12 @@ export const PedidoItemSchema = z.object({
   percentualReducaoStZerada: z.boolean().nullable().optional(),
   percentualDiferimento: z.number().nonnegative().nullable().optional(),
   aliquotaFcpSt: z.number().nonnegative().nullable().optional(),
+  // ICMS-ST e FCP retidos anteriormente (CST 60 / CSOSN 500): o emissor lê estes campos no cálculo
+  baseCalculoStRetido: z.number().nonnegative().nullable().optional(),
+  aliquotaStRetido: z.number().nonnegative().nullable().optional(),
+  valorIcmsStRetido: z.number().nonnegative().nullable().optional(),
+  baseCalculoFcpStRetido: z.number().nonnegative().nullable().optional(),
+  aliquotaFcpStRetido: z.number().nonnegative().nullable().optional(),
   motivoDesoneracao: z.number().int().nullable().optional(),
   deduzValorDesoneracaoDoItem: z.boolean().nullable().optional(),
 

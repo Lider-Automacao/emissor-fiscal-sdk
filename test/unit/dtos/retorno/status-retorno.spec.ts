@@ -107,3 +107,32 @@ describe('retornos que carregam outros status do documento', () => {
     expect(RetornoCartaCorrecaoSchema.parse(cartaCorrecao('sdEventoRegistrado')).status).toBe('A')
   })
 })
+
+describe('campos de situação que o emissor devolve ao lado do status', () => {
+  it('RetornoEnvioApiSchema preserva codigoStatus (cStat da SEFAZ) e statusDescricao', () => {
+    const result = RetornoEnvioApiSchema.parse({ ...envio('sdAutorizada'), codigoStatus: 100, statusDescricao: 'autorizada' })
+
+    expect(result.codigoStatus).toBe(100)
+    expect(result.statusDescricao).toBe('autorizada')
+  })
+
+  it('RetornoEnvioApiSchema aceita o retorno sem esses campos (emissor anterior)', () => {
+    const result = RetornoEnvioApiSchema.parse(envio('A'))
+
+    expect(result.codigoStatus).toBeUndefined()
+    expect(result.statusDescricao).toBeUndefined()
+  })
+
+  it('RetornoConsultaSchema preserva codigoStatus e statusDescricao', () => {
+    const result = RetornoConsultaSchema.parse({ ...consulta('sdCancelada'), codigoStatus: 101, statusDescricao: 'cancelada' })
+
+    expect(result.codigoStatus).toBe(101)
+    expect(result.statusDescricao).toBe('cancelada')
+  })
+
+  it('RetornoCancelamentoSchema preserva statusDescricao', () => {
+    const result = RetornoCancelamentoSchema.parse({ ...cancelamento('sdCancelada'), statusDescricao: 'cancelada' })
+
+    expect(result.statusDescricao).toBe('cancelada')
+  })
+})

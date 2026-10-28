@@ -74,6 +74,40 @@ describe('PedidoItemSchema', () => {
     expect(result.aliquotaIpi).toBe(5);
   });
 
+  it('preserva os campos de ICMS-ST e FCP retidos anteriormente que o emissor lê no cálculo', () => {
+    const result = PedidoItemSchema.parse({
+      ...baseItem,
+      baseCalculoStRetido: 100,
+      aliquotaStRetido: 18,
+      valorIcmsStRetido: 18,
+      baseCalculoFcpStRetido: 100,
+      aliquotaFcpStRetido: 2,
+    });
+
+    expect(result.baseCalculoStRetido).toBe(100);
+    expect(result.aliquotaStRetido).toBe(18);
+    expect(result.valorIcmsStRetido).toBe(18);
+    expect(result.baseCalculoFcpStRetido).toBe(100);
+    expect(result.aliquotaFcpStRetido).toBe(2);
+  });
+
+  it('aceita null nos campos de ICMS-ST retido', () => {
+    const result = PedidoItemSchema.parse({
+      ...baseItem,
+      baseCalculoStRetido: null,
+      aliquotaStRetido: null,
+      valorIcmsStRetido: null,
+      baseCalculoFcpStRetido: null,
+      aliquotaFcpStRetido: null,
+    });
+
+    expect(result.valorIcmsStRetido).toBeNull();
+  });
+
+  it('rejeita valor negativo nos campos de ICMS-ST retido', () => {
+    expect(PedidoItemSchema.safeParse({ ...baseItem, valorIcmsStRetido: -1 }).success).toBe(false);
+  });
+
   it('rejeita valor de enum fora de PercentualAproveitado/PercentualReduzido', () => {
     const result = PedidoItemSchema.safeParse({
       ...baseItem,

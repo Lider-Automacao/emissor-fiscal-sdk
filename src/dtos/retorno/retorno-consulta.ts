@@ -6,6 +6,8 @@ export const RetornoConsultaSchema = z.object({
   data: z.union([DateNullishSchema, DateTimeNullishSchema]).nullish().catch(undefined),
   protocolo: z.string(),
   status: StatusRetornoSchema,
+  statusDescricao: z.string().nullish().describe('Texto fixo do status no emissor, como autorizada ou cancelada'),
+  codigoStatus: z.number().int().nullish().describe('cStat devolvido pela SEFAZ na consulta'),
   chaveAcesso: z.string(),
   xml: NullishString,
   evento: NullishString,
