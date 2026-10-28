@@ -1,16 +1,11 @@
 import z from 'zod'
 import { DateNullishSchema, DateTimeNullishSchema, NullishString } from '../../types'
+import { StatusRetornoSchema } from '../../models/auxiliares/status'
 
 export const RetornoConsultaSchema = z.object({
   data: z.union([DateNullishSchema, DateTimeNullishSchema]).nullish().catch(undefined),
   protocolo: z.string(),
-  status: z.enum([
-    'A',
-    'C',
-    'D',
-    'I',
-    'O'
-  ]),
+  status: StatusRetornoSchema,
   chaveAcesso: z.string(),
   xml: NullishString,
   evento: NullishString,

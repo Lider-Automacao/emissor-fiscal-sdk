@@ -34,10 +34,30 @@ describe.each(casos)('$nome', ({ rota, Classe }) => {
     const result = await new Classe(api).executa(request);
 
     expect(post).toHaveBeenCalledWith(rota, expect.objectContaining({
-      dados: expect.objectContaining({ xml: '<nfeProc/>', status: 'A' }),
+      dados: expect.objectContaining({ xml: '<nfeProc/>', status: 'sdAutorizada' }),
     }), { responseType: 'arraybuffer' });
     expect(Buffer.isBuffer(result)).toBe(true);
     expect(result.equals(pdf)).toBe(true);
+  });
+
+  it.each([
+    ['A', 'sdAutorizada'],
+    ['C', 'sdCancelada'],
+    ['D', 'sdDenegada'],
+    ['I', 'sdInutilizada'],
+    ['O', 'sdContingencia'],
+    ['G', 'sdNaoDefinido'],
+    ['S', 'sdNaoDefinido'],
+    ['N', 'sdNaoDefinido'],
+  ] as const)('envia ao emissor a letra %s como o enum %s', async (letra, enumDoEmissor) => {
+    const post = vi.fn().mockResolvedValue(pdf);
+    const api = { post } as unknown as EmissorFiscalApi;
+
+    await new Classe(api).executa({ ...request, dados: { xml: '<x/>', status: letra } });
+
+    expect(post).toHaveBeenCalledWith(rota, expect.objectContaining({
+      dados: expect.objectContaining({ status: enumDoEmissor }),
+    }), { responseType: 'arraybuffer' });
   });
 
   it('preserva os bytes do PDF sem acrescentar conteúdo (EF-81)', async () => {

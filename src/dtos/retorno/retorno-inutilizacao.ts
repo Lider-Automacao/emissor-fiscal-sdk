@@ -1,27 +1,7 @@
 import z from 'zod'
 import { DateSchema, DateTimeSchema } from '../../types'
+import { StatusRetornoSchema } from '../../models/auxiliares/status'
 import { EmissorFiscalError } from '../../utils/errors/emissor-fiscal.error'
-
-// O emissor pode devolver o status como código do SDK ('I') ou como o nome do enum do
-// emissor ('sdInutilizada'). Normaliza para o código do SDK.
-const STATUS_EMISSOR_PARA_SDK: Record<string, 'A' | 'C' | 'D' | 'I' | 'O'> = {
-  a: 'A',
-  c: 'C',
-  d: 'D',
-  i: 'I',
-  o: 'O',
-  sdautorizada: 'A',
-  sdcancelada: 'C',
-  sdcanceladaporsubstituicao: 'C',
-  sddenegada: 'D',
-  sdinutilizada: 'I',
-  sdcontingencia: 'O',
-}
-
-const StatusInutilizacaoSchema = z.preprocess(
-  (valor) => typeof valor === 'string' ? STATUS_EMISSOR_PARA_SDK[valor.trim().toLowerCase()] ?? valor : valor,
-  z.enum(['A', 'C', 'D', 'I', 'O'])
-)
 
 // O emissor envia numero/serie como inteiro; o SDK expõe sempre como texto.
 const NumeroComoTextoSchema = z.union([z.string(), z.number()]).transform(String)
@@ -31,7 +11,7 @@ export const InutilizacaoSchema = z.object({
   evento: z.string().nullish(),
   protocolo: z.string(),
   motivo: z.string(),
-  status: StatusInutilizacaoSchema,
+  status: StatusRetornoSchema,
   numero: NumeroComoTextoSchema,
   serie: NumeroComoTextoSchema,
 })
