@@ -7,6 +7,7 @@ export const ConfiguracoesWebServiceSchema = z.object({
   chaveAutoriz: z.string().nullable().optional(),
   chaveAcesso: z.string().nullable().optional(),
   fraseSecr: z.string().nullable().optional(),
+  token: z.string().nullable().optional(),
 });
 
 export type ConfiguracoesWebService = z.infer<typeof ConfiguracoesWebServiceSchema>;
