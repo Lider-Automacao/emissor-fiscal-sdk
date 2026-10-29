@@ -1,6 +1,6 @@
 import { EmissorFiscalApi } from "../api/emissor-fiscal-api.service";
 import { CalculaNfceRequest, EnvioCancelamento, EnvioConsulta, EnvioImpressao, EnvioInutilizacao, EnvioNfceApi } from "../dtos";
-import { CalculaNfce, CancelarNfce, ConsultarNfce, EmitirNfce, GerarNfce, ImprimirNfce, InutilizarNfce } from "../use-cases";
+import { CalculaNfce, CancelarNfce, ConsultarNfce, ContingenciarNfce, EmitirNfce, GerarNfce, ImprimirNfce, InutilizarNfce } from "../use-cases";
 
 export class NfceService {
 
@@ -18,6 +18,11 @@ export class NfceService {
 
   public async consultar(request: EnvioConsulta) {
     const usecase = new ConsultarNfce(this.api)
+    return usecase.executa(request);
+  }
+
+  public async contingenciar(request: EnvioNfceApi) {
+    const usecase = new ContingenciarNfce(this.api)
     return usecase.executa(request);
   }
 
