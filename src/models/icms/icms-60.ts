@@ -17,10 +17,12 @@ export const ICMS60Schema = z.object({
           valor: NumberDefaultZeroSchema,
         })
         .optional(),
-      ufDestino: z.object({
-        valorBaseCalculo: NumberDefaultZeroSchema,
-        valor: NumberDefaultZeroSchema,
-      }),
+      ufDestino: z
+        .object({
+          valorBaseCalculo: NumberDefaultZeroSchema,
+          valor: NumberDefaultZeroSchema,
+        })
+        .optional(),
     })
     .optional(),
   efetivo: z
