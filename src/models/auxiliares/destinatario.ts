@@ -1,4 +1,4 @@
-import { isEmpty } from '@raicamposs/toolkit';
+import { isEmpty } from '@raicampos/toolkit';
 import z from 'zod';
 import { NullishString } from '../../types';
 import { ContatoSchema } from './contato';

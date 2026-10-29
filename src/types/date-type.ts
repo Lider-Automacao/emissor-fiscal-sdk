@@ -1,4 +1,4 @@
-import { isEmpty } from "@raicamposs/toolkit";
+import { isEmpty } from "@raicampos/toolkit";
 import z from "zod";
 
 export const DateSchema = z.union([z.date(), z.iso.date()]).transform(value => new Date(value));

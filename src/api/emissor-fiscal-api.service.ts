@@ -1,5 +1,5 @@
 
-import { isNullOrUndefined } from '@raicamposs/toolkit';
+import { isNullOrUndefined } from '@raicampos/toolkit';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { EmissorFiscalError } from '../utils/errors/emissor-fiscal.error';
 import { Credenciais } from './credenciais-api';

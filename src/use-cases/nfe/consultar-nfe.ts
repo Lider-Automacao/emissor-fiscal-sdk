@@ -1,4 +1,4 @@
-import { coalesce } from "@raicamposs/toolkit";
+import { coalesce } from "@raicampos/toolkit";
 import z from "zod";
 import { EmissorFiscalApi } from "../../api/emissor-fiscal-api.service";
 import { EnvioConsulta, EnvioConsultaSchema, RetornoConsulta, RetornoConsultaSchema } from "../../dtos";
