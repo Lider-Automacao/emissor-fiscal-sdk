@@ -33,6 +33,8 @@ export const NfeSchema = z.object({
   identificacaoDestino: z.union([z.literal(1), z.literal(2), z.literal(3)]),
   codigoMunicipioFatoGerador: IntSchema,
   codigoMunicipioFatoGeradorIbs: IntSchema.nullish().describe('Somente com presencial 5'),
+  codigoNumerico: z.string().regex(/^\d{8}$/, 'O código numérico deve ter 8 dígitos.').nullish()
+    .describe('cNF da chave já gravada, para a emissão manter a chave (rej. 897)'),
   tipoNotaDebito: z.string().nullish(),
   tipoNotaCredito: z.string().nullish(),
   pagamentoAntecipado: z.array(PagamentoAntecipadoSchema).nullish(),

@@ -63,6 +63,16 @@ describe('NfeSchema (documento completo)', () => {
     expect(result.itens[0].indicadorBemMovelUsado).toBe('bmuNaoInformado');
   });
 
+  it('mantém o código numérico da chave para a emissão reaproveitar', () => {
+    const result = NfeSchema.parse({ ...nfe, codigoNumerico: '00012345' });
+
+    expect(result.codigoNumerico).toBe('00012345');
+  });
+
+  it('recusa código numérico fora de 8 dígitos', () => {
+    expect(NfeSchema.safeParse({ ...nfe, codigoNumerico: '123' }).success).toBe(false);
+  });
+
   it('aceita nota de devolução com item referenciado e pagamento 90', () => {
     const result = NfeSchema.safeParse({
       ...nfe,
