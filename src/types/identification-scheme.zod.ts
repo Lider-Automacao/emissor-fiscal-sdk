@@ -1,25 +1,20 @@
-
-import { CNPJ, CPF, isNullOrUndefined } from '@raicamposs/toolkit';
+import { CNPJ, CPF } from '@raicampos/toolkit';
 import z from 'zod';
 
-//O documento (CNPJ/CPF) é obrigatório.
+const TAMANHO_CNPJ = 14;
+const MENSAGEM = 'O documento (CNPJ/CPF) é inválido';
+
+function documentoValido(valor: string): boolean {
+  const cnpj = new CNPJ(valor);
+  if (cnpj.stripped.length === TAMANHO_CNPJ) return cnpj.isValid;
+  return new CPF(valor.replace(/\D/g, '')).isValid;
+}
+
 export const CPF_CNPJ_SCHEME = z
-  .string({ error: 'O documento (CNPJ/CPF) é inválido' })
+  .string({ error: MENSAGEM })
   .trim()
-  .nonempty({ message: 'O documento (CNPJ/CPF) é inválido' })
-  .refine(
-    (value) => {
-      if (isNullOrUndefined(value)) return false;
-      const onlyNumbers = value.trim().replace(/\D/g, "");
-      if (onlyNumbers.length === 14) {
-        return new CNPJ(onlyNumbers).isValid;
-      }
-      return new CPF(onlyNumbers).isValid;
-    },
-    {
-      message: 'O documento (CNPJ/CPF) é inválido',
-      params: {
-        code: 'O documento (CNPJ/CPF) é inválido',
-      },
-    },
-  );
+  .nonempty({ message: MENSAGEM })
+  .refine(documentoValido, {
+    message: MENSAGEM,
+    params: { code: MENSAGEM },
+  });
