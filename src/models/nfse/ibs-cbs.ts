@@ -29,7 +29,7 @@ export const NfseIbsCbsSchema = z.object({
   ibsMunicipal: PercentualSchema.default(0),
   ibsEstadual: PercentualSchema.default(0),
   finalidadeEmissao: z.number().int().nullish(),
-  codigoIndicadorOperacao: z.string().nullish(),
+  codigoIndicadorOperacao: z.string().regex(/^\d{6}$/).nullish(),
   tipoOperacao: z.number().int().nullish(),
   entidadeGovernamental: z.number().int().nullish(),
   imovel: imovelSchema.nullish(),
